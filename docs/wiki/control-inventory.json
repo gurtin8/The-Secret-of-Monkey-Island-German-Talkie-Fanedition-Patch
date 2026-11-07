@@ -1,0 +1,1121 @@
+{
+  "format": "mi1-controls/1",
+  "controls": [
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 14,
+      "tag": "button",
+      "identities": {
+        "data-pick": "root"
+      },
+      "matching_help_ids": [
+        "launcher.game-source",
+        "launcher.manifest",
+        "launcher.recipe",
+        "launcher.work-root"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 15,
+      "tag": "button",
+      "identities": {
+        "data-pick": "game"
+      },
+      "matching_help_ids": [
+        "launcher.game-source",
+        "launcher.manifest",
+        "launcher.recipe",
+        "launcher.work-root"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 16,
+      "tag": "summary",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 16,
+      "tag": "button",
+      "identities": {
+        "data-pick": "manifest"
+      },
+      "matching_help_ids": [
+        "launcher.game-source",
+        "launcher.manifest",
+        "launcher.recipe",
+        "launcher.work-root"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 16,
+      "tag": "button",
+      "identities": {
+        "data-pick": "correction"
+      },
+      "matching_help_ids": [
+        "launcher.game-source",
+        "launcher.manifest",
+        "launcher.recipe",
+        "launcher.work-root"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 16,
+      "tag": "button",
+      "identities": {
+        "id": "clear-correction"
+      },
+      "matching_help_ids": [
+        "launcher.recipe"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 17,
+      "tag": "button",
+      "identities": {
+        "id": "to-consents"
+      },
+      "matching_help_ids": [
+        "launcher.start-navigation"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 19,
+      "tag": "summary",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 20,
+      "tag": "input",
+      "identities": {
+        "id": "packages-consent"
+      },
+      "matching_help_ids": [
+        "launcher.consents"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 21,
+      "tag": "input",
+      "identities": {
+        "id": "wine-consent"
+      },
+      "matching_help_ids": [
+        "launcher.consents"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 22,
+      "tag": "input",
+      "identities": {
+        "id": "game-consent"
+      },
+      "matching_help_ids": [
+        "launcher.consents"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 22,
+      "tag": "button",
+      "identities": {
+        "data-back": "0"
+      },
+      "matching_help_ids": [
+        "launcher.start-navigation"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 22,
+      "tag": "button",
+      "identities": {
+        "id": "to-downloads"
+      },
+      "matching_help_ids": [
+        "launcher.start-navigation"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 23,
+      "tag": "button",
+      "identities": {
+        "data-back": "1"
+      },
+      "matching_help_ids": [
+        "launcher.start-navigation"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 23,
+      "tag": "button",
+      "identities": {
+        "id": "start-downloads"
+      },
+      "matching_help_ids": [
+        "launcher.download-start"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 25,
+      "tag": "button",
+      "identities": {
+        "id": "toggle-log"
+      },
+      "matching_help_ids": [
+        "launcher.console"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/native/start.html",
+      "line": 25,
+      "tag": "button",
+      "identities": {
+        "id": "export-log"
+      },
+      "matching_help_ids": [
+        "launcher.console-export"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 653,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 653,
+      "tag": "summary",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 654,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 654,
+      "tag": "textarea",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 654,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 654,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 654,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 654,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 655,
+      "tag": "select",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 655,
+      "tag": "input",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 655,
+      "tag": "select",
+      "identities": {
+        "data-help-id": "launcher.render-list"
+      },
+      "matching_help_ids": [
+        "launcher.render-list"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 655,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 655,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 655,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 656,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 656,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 656,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 656,
+      "tag": "summary",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 657,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 657,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 657,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 657,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 657,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 657,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 657,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 657,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 421,
+      "tag": "button",
+      "identities": {
+        "data-help-id": "review.status-signs",
+        "data-review-status": "${status.kind}"
+      },
+      "matching_help_ids": [
+        "review.status-signs"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 537,
+      "tag": "summary",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 557,
+      "tag": "button",
+      "identities": {
+        "data-player-key": "${esc(playerKey)}",
+        "data-player-src": "${esc(src)}",
+        "data-player-label": "${esc(label)}",
+        "data-player-role": "${esc(role)}",
+        "data-player-dialog": "${esc(dialogId)}",
+        "data-player-output": "${esc(outputId)}"
+      },
+      "matching_help_ids": [
+        "review.audio"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 654,
+      "tag": "summary",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 719,
+      "tag": "summary",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 734,
+      "tag": "button",
+      "identities": {
+        "data-release": "${esc(row.dialog_id)}",
+        "data-candidate": "${esc(candidate.id)}"
+      },
+      "matching_help_ids": [
+        "review.adopt"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 735,
+      "tag": "summary",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 756,
+      "tag": "summary",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 777,
+      "tag": "button",
+      "identities": {
+        "data-audition-queue": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.queue"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 777,
+      "tag": "button",
+      "identities": {
+        "data-audition": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.audition",
+        "review.queue"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 777,
+      "tag": "button",
+      "identities": {
+        "data-audition": "${esc(id)}",
+        "data-new-seed": "true"
+      },
+      "matching_help_ids": [
+        "review.audition",
+        "review.queue",
+        "review.seed"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 777,
+      "tag": "input",
+      "identities": {
+        "data-audition-cpu": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.audition"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 781,
+      "tag": "button",
+      "identities": {
+        "data-restore-previous": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.restore"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 782,
+      "tag": "button",
+      "identities": {
+        "data-good": "${esc(id)}",
+        "data-good-value": "true"
+      },
+      "matching_help_ids": [
+        "review.good"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 785,
+      "tag": "textarea",
+      "identities": {
+        "data-note": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.note"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 790,
+      "tag": "input",
+      "identities": {
+        "data-select": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.batch"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 790,
+      "tag": "textarea",
+      "identities": {
+        "data-tts": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.text"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 790,
+      "tag": "summary",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 790,
+      "tag": "select",
+      "identities": {
+        "data-anchor": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.anchor"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 790,
+      "tag": "select",
+      "identities": {
+        "data-prewarm": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.prewarm"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 790,
+      "tag": "select",
+      "identities": {
+        "data-backend": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.backend"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 790,
+      "tag": "select",
+      "identities": {
+        "data-generation-mode": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.mode"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 826,
+      "tag": "input",
+      "identities": {
+        "id": "pr-build-game-root"
+      },
+      "matching_help_ids": [
+        "review.build"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 826,
+      "tag": "button",
+      "identities": {
+        "id": "pr-choose-game-root"
+      },
+      "matching_help_ids": [
+        "review.build"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 826,
+      "tag": "input",
+      "identities": {
+        "id": "pr-build-output-root"
+      },
+      "matching_help_ids": [
+        "review.build"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 826,
+      "tag": "button",
+      "identities": {
+        "id": "pr-choose-output-root"
+      },
+      "matching_help_ids": [
+        "review.build"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 830,
+      "tag": "select",
+      "identities": {
+        "id": "pr-replace-output"
+      },
+      "matching_help_ids": [
+        "review.build"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 830,
+      "tag": "button",
+      "identities": {
+        "id": "pr-export-cancel"
+      },
+      "matching_help_ids": [
+        "review.build"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 830,
+      "tag": "button",
+      "identities": {
+        "id": "pr-export-replace"
+      },
+      "matching_help_ids": [
+        "review.build"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 830,
+      "tag": "button",
+      "identities": {
+        "id": "pr-export-new"
+      },
+      "matching_help_ids": [
+        "review.build"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 964,
+      "tag": "button",
+      "identities": {
+        "id": "pr-show-confirmed",
+        "data-confirmed-row": "${esc(messageRowId)}"
+      },
+      "matching_help_ids": [
+        "review.good"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1013,
+      "tag": "button",
+      "identities": {
+        "id": "pr-show-confirmed",
+        "data-confirmed-row": "${esc(messageRowId)}"
+      },
+      "matching_help_ids": [
+        "review.good"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1014,
+      "tag": "button",
+      "identities": {
+        "data-worklist": "${key}"
+      },
+      "matching_help_ids": [
+        "review.filters"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1015,
+      "tag": "input",
+      "identities": {
+        "id": "pr-query"
+      },
+      "matching_help_ids": [
+        "review.filters"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1015,
+      "tag": "select",
+      "identities": {
+        "id": "pr-status"
+      },
+      "matching_help_ids": [
+        "review.filters"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1015,
+      "tag": "select",
+      "identities": {
+        "id": "pr-sort"
+      },
+      "matching_help_ids": [
+        "review.sort"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1015,
+      "tag": "select",
+      "identities": {
+        "id": "pr-pagesize"
+      },
+      "matching_help_ids": [
+        "review.sort"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1015,
+      "tag": "button",
+      "identities": {
+        "id": "pr-export-recipe"
+      },
+      "matching_help_ids": [
+        "review.recipe"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1015,
+      "tag": "input",
+      "identities": {
+        "id": "pr-import"
+      },
+      "matching_help_ids": [
+        "review.workstate"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1015,
+      "tag": "input",
+      "identities": {
+        "data-category": "${esc(c.id)}"
+      },
+      "matching_help_ids": [
+        "review.filters"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1016,
+      "tag": "button",
+      "identities": {
+        "id": "pr-select-matches"
+      },
+      "matching_help_ids": [
+        "review.batch"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1016,
+      "tag": "button",
+      "identities": {
+        "id": "pr-clear-selection"
+      },
+      "matching_help_ids": [
+        "review.batch"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1016,
+      "tag": "select",
+      "identities": {
+        "id": "pr-batch-backend"
+      },
+      "matching_help_ids": [
+        "review.batch"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1016,
+      "tag": "input",
+      "identities": {
+        "id": "pr-confirm-cpu"
+      },
+      "matching_help_ids": [
+        "review.backend"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1016,
+      "tag": "button",
+      "identities": {
+        "id": "pr-start"
+      },
+      "matching_help_ids": [
+        "review.batch"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1016,
+      "tag": "button",
+      "identities": {
+        "data-queue-remove": "${esc(id)}"
+      },
+      "matching_help_ids": [
+        "review.queue"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1016,
+      "tag": "button",
+      "identities": {},
+      "matching_help_ids": [],
+      "needs_context_validation": true
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1016,
+      "tag": "button",
+      "identities": {
+        "id": "pr-audition-queue-start"
+      },
+      "matching_help_ids": [
+        "review.queue"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1017,
+      "tag": "button",
+      "identities": {
+        "id": "pr-prev"
+      },
+      "matching_help_ids": [
+        "review.navigation"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1017,
+      "tag": "button",
+      "identities": {
+        "id": "pr-next"
+      },
+      "matching_help_ids": [
+        "review.navigation"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1017,
+      "tag": "button",
+      "identities": {
+        "id": "pr-prev-bottom"
+      },
+      "matching_help_ids": [
+        "review.navigation"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/app.js",
+      "line": 1017,
+      "tag": "button",
+      "identities": {
+        "id": "pr-next-bottom"
+      },
+      "matching_help_ids": [
+        "review.navigation"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/index.html",
+      "line": 17,
+      "tag": "button",
+      "identities": {
+        "id": "pr-back-render"
+      },
+      "matching_help_ids": [
+        "review.exit-navigation"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/index.html",
+      "line": 18,
+      "tag": "button",
+      "identities": {
+        "id": "pr-finish-global"
+      },
+      "matching_help_ids": [
+        "review.build"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/index.html",
+      "line": 21,
+      "tag": "button",
+      "identities": {
+        "id": "pr-back-review"
+      },
+      "matching_help_ids": [
+        "review.exit-navigation"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/index.html",
+      "line": 22,
+      "tag": "button",
+      "identities": {
+        "id": "pr-build-start"
+      },
+      "matching_help_ids": [
+        "review.build"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/index.html",
+      "line": 25,
+      "tag": "button",
+      "identities": {
+        "id": "pr-success-back-review"
+      },
+      "matching_help_ids": [
+        "review.exit-navigation",
+        "review.finish"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/index.html",
+      "line": 27,
+      "tag": "button",
+      "identities": {
+        "id": "pr-quit-app"
+      },
+      "matching_help_ids": [
+        "review.finish"
+      ],
+      "needs_context_validation": false
+    },
+    {
+      "source": "patch_review/index.html",
+      "line": 28,
+      "tag": "button",
+      "identities": {
+        "id": "pr-open-output-quit"
+      },
+      "matching_help_ids": [
+        "review.finish"
+      ],
+      "needs_context_validation": false
+    }
+  ],
+  "limits": "Lexikalische Zuordnung über IDs/data-Attribute; DOM-Hierarchie, deaktivierte Controls, native Menüs und dynamische Strukturen müssen bei Appintegration gerendert geprüft werden."
+}

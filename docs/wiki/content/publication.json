@@ -1,0 +1,147 @@
+{
+  "topics": [
+    {
+      "id": "publication.license",
+      "title": "Lizenz und Rechteumfang",
+      "category": "Veröffentlichung",
+      "summary": "Die Projektlizenz gilt für die eigenen Bestandteile; für Spielinhalte und verwendete Werkzeuge gelten deren jeweilige Rechte.",
+      "body": [
+        "Für die eigenen rechteverfügbaren Projektbestandteile gilt die PolyForm Noncommercial License 1.0.0. Den vollständigen Text findest du unter LICENSE im Patch-Paket und im Quellprojekt. Drittcode und daraus abgeleitete Quelltextanteile, insbesondere in den Transformationsrezepten für ScummTR und llama.cpp-omni / VoxCPM2, sind von einer ausschließlich eigenen PolyForm-Lizenzierung ausgenommen. Ihre MIT- beziehungsweise Apache-2.0-Bedingungen bleiben erhalten.",
+        "Die [Drittanbieter-Lizenztexte](publication.licenses) kannst du direkt in dieser lokalen Hilfe lesen. Die vollständigen Hinweise stehen in THIRD_PARTY_NOTICES.md; docs/THIRD_PARTY_COMPONENTS.md nennt Versionen, Bezugsquellen und lokale Änderungen. Programme und Modellgewichte werden separat bezogen und sind nicht im Patch-Paket enthalten. Die Originaldownloads behalten ihre jeweiligen Lizenz-, Copyright- und gegebenenfalls NOTICE-Dateien. Projektlinks ersetzen diese Texte nicht und geben keine pauschale Zusicherung für eine Weitergabe beliebiger daraus erzeugter Pakete.",
+        "Wenn du Dateien oder Ergebnisse weitergeben möchtest, beachte auch die Rechte an den enthaltenen Spielinhalten und Stimmen. Die Projektlizenz gibt fremde Spielinhalte, Aufnahmen oder erzeugte Sprachfassungen nicht pauschal zur Weitergabe frei. Für Originalstimmanker brauchst du das [Einverständnis der jeweiligen Synchronsprecher](launcher.original-voice)."
+      ],
+      "steps": [],
+      "related": [
+        "publication.licenses",
+        "publication.credits",
+        "publication.privacy",
+        "launcher.original-voice",
+        "wiki.start"
+      ],
+      "links": [
+        {
+          "title": "Vollständiger offizieller PolyForm-Lizenztext",
+          "url": "https://polyformproject.org/licenses/noncommercial/1.0.0"
+        }
+      ]
+    },
+    {
+      "id": "publication.credits",
+      "title": "Verwendete Patches und Credits",
+      "category": "Veröffentlichung",
+      "summary": "Hinter der Fanedition stehen viele Vorarbeiten aus der Adventure- und Werkzeug-Community.",
+      "body": [
+        "Die Ultimate Talkie Edition, kurz UTE, stammt von Marek Roth (LogicDeLuxe) und Mitwirkenden. Ihre Tabelle monster.tbl ist LogicDeLuxe zugeschrieben und wurde über SCUMMKit mit Erlaubnis bereitgestellt. Für die deutsche Spielbasis kommt der Patch v1.01 von la-patches / gandimann und Mitwirkenden hinzu.",
+        "Bei der Zuordnung der Dialoge helfen ScummTR und ScummRP von Thomas Combeleran und Donovan Watteau. Die lokale Anpassung ergänzt den Actor-ID-Export. Die Werkzeuge stehen unter MIT.",
+        "Die Spracherzeugung baut auf llama.cpp-omni von tc-mb und den ggml-Autoren unter MIT sowie VoxCPM2 von OpenBMB und Mitwirkenden unter Apache-2.0 auf. Danke auch an 0seba / seba für VoxCPMANE und die ANE-Konvertierungen sowie an DennisHuang648 für VoxCPM2-GGUF.",
+        "Weitere Aufgaben übernehmen FFmpeg, SoX, whisper.cpp von ggml-org, Whisper von OpenAI, Wine mit den Bestandteilen seiner macOS-Distribution einschließlich Wine Mono und MoltenVK, CPython, python-build-standalone, CMake, Search von driceroland, innoextract, Boost, Zstandard, XZ Utils, Core ML Tools und weitere Python-Bibliotheken.",
+        "Danke an das ScummVM-Team, das die fertige Fassung auf heutigen Rechnern spielbar macht, und an alle, die mit Hörtests, Fehlersuche und Korrekturen beitragen.",
+        "Die vollständigen Quellenangaben stehen in THIRD_PARTY_NOTICES.md und docs/THIRD_PARTY_COMPONENTS.md im Patch-Paket und Quellprojekt. Die [Drittanbieter-Lizenztexte](publication.licenses) sind auch hier in der lokalen Hilfe lesbar. Sie bleiben neben der Projektlizenz erhalten; Quellenlinks ersetzen die Lizenztexte nicht."
+      ],
+      "steps": [],
+      "related": [
+        "publication.licenses",
+        "publication.license",
+        "publication.architecture",
+        "launcher.preparation-workflow",
+        "wiki.start"
+      ],
+      "links": [
+        {
+          "title": "Original-UTE-Builder und Projektseite",
+          "url": "https://www.gratissaugen.de/ultimatetalkies/monkey1.html"
+        },
+        {
+          "title": "Deutscher UTE-Patch von la-patches",
+          "url": "https://www.la-patches.de/p_mi1_ute_us-de.php"
+        },
+        {
+          "title": "SCUMMKit: Herkunft der LogicDeLuxe-Tabelle",
+          "url": "https://github.com/jmnunezizu/scummkit/blob/a6ec88b02c97e66ce1c57069814c971248e62566/third_party/ultimate-talkie/README.md"
+        },
+        {
+          "title": "Originale UTE-Bedingungen bei SCUMMKit",
+          "url": "https://github.com/jmnunezizu/scummkit/blob/a6ec88b02c97e66ce1c57069814c971248e62566/licenses/original_ute_builder.txt"
+        },
+        {
+          "title": "ScummTR: verwendeter Upstream-Stand",
+          "url": "https://github.com/dwatteau/scummtr/tree/a50c6f4bf03566721b3f2c00df257a41a82e22ed"
+        },
+        {
+          "title": "llama.cpp-omni: verwendeter Upstream-Stand",
+          "url": "https://github.com/tc-mb/llama.cpp-omni/tree/64d092c60db4b4ee45768476bd752f03fdcc98ea"
+        },
+        {
+          "title": "OpenBMB/VoxCPM",
+          "url": "https://github.com/OpenBMB/VoxCPM"
+        },
+        {
+          "title": "VoxCPMANE / 0seba",
+          "url": "https://github.com/0seba/VoxCPMANE"
+        },
+        {
+          "title": "ANE-Konvertierungen / seba",
+          "url": "https://huggingface.co/seba"
+        },
+        {
+          "title": "VoxCPM2-GGUF / DennisHuang648",
+          "url": "https://huggingface.co/DennisHuang648/VoxCPM2-GGUF"
+        },
+        {
+          "title": "ScummVM",
+          "url": "https://www.scummvm.org/"
+        }
+      ]
+    },
+    {
+      "id": "publication.privacy",
+      "title": "Datenschutz und lokale Verarbeitung",
+      "category": "Veröffentlichung",
+      "summary": "Deine Sprachaufnahmen werden auf deinem Mac erzeugt und geprüft; für die Einrichtung lädt der Patch die benötigten Dateien herunter.",
+      "body": [
+        "Während der Einrichtung bezieht der Patch Werkzeuge und Sprachmodelle von den angezeigten externen Quellen. Die anschließende Spracherzeugung und Spracherkennung laufen lokal auf deinem Mac.",
+        "Im [Arbeitsordner](launcher.work-root) bleiben dabei unter anderem deine Sprechproben, bearbeiteten Texte und neuen Aufnahmen gespeichert. Auch Protokolle können Texte und private Dateipfade enthalten. Wenn du eine Fehlermeldung oder [Rezept](review.recipe) mit anderen teilst, sieh dir deshalb vorher an, welche Angaben die Datei enthält."
+      ],
+      "steps": [],
+      "related": [
+        "wiki.start",
+        "wiki.glossary",
+        "launcher.workflow",
+        "publication.license",
+        "publication.credits"
+      ]
+    },
+    {
+      "id": "publication.architecture",
+      "title": "Welche Daten entstehen bei der Arbeit?",
+      "category": "Veröffentlichung",
+      "summary": "Wenn du später weiterarbeiten möchtest, bewahrst du den Arbeitsordner mit seinen zusammengehörigen Dateien auf.",
+      "body": [
+        "Im Laufe der Arbeit wächst dein Projekt: Zuerst lädt der Patch Programme und Sprachmodelle herunter, dann legt er Arbeitskopien deiner Spielbasis an. Bei der Spracherzeugung kommen die gewählten Stimmproben, deutschen Aufnahmen und Prüfergebnisse hinzu. Deine Entscheidungen und Änderungen aus der [Review](review.workflow) gehören ebenfalls zu diesem Arbeitsstand.",
+        "Beim [Fertigstellen](review.build) entsteht zusätzlich der fertige Spielordner, den du mit [ScummVM](review.finish) spielen kannst. Behalte daneben auch deinen gesamten Arbeitsordner, wenn du später Dialoge oder Stimmen verbessern möchtest. Deine Bearbeitungen und Reviewentscheidungen werden dort [automatisch gespeichert](review.workstate)."
+      ],
+      "steps": [],
+      "related": [
+        "launcher.work-root",
+        "review.workstate",
+        "review.build"
+      ]
+    },
+    {
+      "id": "publication.contributing",
+      "title": "Fehler melden und Korrekturen teilen",
+      "category": "Veröffentlichung",
+      "summary": "Mit einer genauen Spielstelle und einer Beschreibung des Hörproblems können andere deine Korrektur leichter nachvollziehen.",
+      "body": [
+        "Wenn dir eine Aufnahme auffällt, notiere ihre [Dialog-ID](wiki.glossary), die Patchversion und den verwendeten [Rendermodus](launcher.render-mode). Beschreibe, was du hörst, etwa einen englischen Akzent, ein fehlendes Wort oder eine wechselnde Stimmfarbe. Bei einem technischen Abbruch helfen außerdem das [exportierte Protokoll](launcher.console-export) und die zuletzt gestartete Aktion.",
+        "Hast du die Stelle bereits verbessert, kannst du die verwendeten Einstellungen als [Rezept](review.recipe) teilen. Andere können deine Versuche dann auf ihrem Rechner nachvollziehen und weiterbearbeiten. Achte beim Weitergeben darauf, dass private Sprechproben, Spielinhalte und vollständige Arbeitsordner nur mit den erforderlichen Rechten geteilt werden."
+      ],
+      "steps": [],
+      "related": [
+        "review.recipe",
+        "launcher.console-export",
+        "publication.license"
+      ]
+    }
+  ]
+}

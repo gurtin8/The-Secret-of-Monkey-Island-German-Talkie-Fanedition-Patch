@@ -1,0 +1,44 @@
+# Copy to .github/workflows/wiki-pages.yml in the application repository.
+name: Wiki on GitHub Pages
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/wiki/**'
+      - 'tools/wiki/**'
+      - 'generator_launcher/**'
+      - 'patch_review/**'
+      - 'mi1_patcher.py'
+      - 'tools/patch_mi1_intro.py'
+      - '.github/workflows/wiki-pages.yml'
+permissions:
+  contents: read
+concurrency:
+  group: wiki-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python3 tools/wiki/build.py --check
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs/wiki/site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

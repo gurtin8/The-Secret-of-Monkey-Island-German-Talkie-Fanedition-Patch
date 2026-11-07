@@ -1,0 +1,1982 @@
+{
+  "topics": [
+    {
+      "id": "launcher.workflow",
+      "title": "Den Ablauf im Blick behalten",
+      "category": "Start",
+      "summary": "Von den ersten Einstellungen bis zur Hörkontrolle begleitet dich der Patch durch die Neuvertonung.",
+      "body": [
+        "Die Fortschrittsleiste hilft dir, dich zwischen Einrichtung, Spielvorbereitung und Stimmenwahl zurechtzufinden. Wenn du wissen möchtest, was als Nächstes ansteht und wie daraus am Ende ein spielbares Monkey Island wird, folge der Anleitung [Vom ersten Start zum spielbaren Monkey Island](wiki.start). Sie verbindet die einzelnen Schritte mit der anschließenden [Review](review.workflow), in der du die Aufnahmen anhörst und verbesserst."
+      ],
+      "steps": [],
+      "related": [
+        "wiki.start",
+        "launcher.host-navigation"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#paths"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#downloads-page"
+        }
+      ],
+      "sources": [
+        "FANEDITION.md"
+      ]
+    },
+    {
+      "id": "launcher.requirements",
+      "title": "Was du vor dem Start brauchst",
+      "category": "Start",
+      "summary": "Ein Mac mit Apple-Chip ab M1, macOS 14 oder neuer und etwa 30 GB freier Platz bilden die Grundlage.",
+      "body": [
+        "Der Patch benötigt mindestens 8 GB RAM, also Arbeitsspeicher für die KI-Berechnung; ab 16 GB kannst du angenehmer arbeiten. Für die ANE-Modi brauchst du macOS 15 oder neuer, für ANE+GPU außerdem mindestens 16 GB. Welcher [Rendermodus](launcher.render-mode) zu deinem Mac und deiner Arbeitsweise passt, kannst du vor der Spracherzeugung entscheiden.",
+        "Plane für die neuen Dialogaufnahmen mehrere Stunden ein und halte auch auf dem Systemlaufwerk Platz frei. Wenn du mehrere Audiofassungen vergleichst, wächst der Platzbedarf zusätzlich. Zum anschließenden Spielen brauchst du separat [ScummVM](review.finish), ein Programm zum Ausführen klassischer Adventures."
+      ],
+      "related": [
+        "wiki.start",
+        "launcher.render-mode",
+        "launcher.low-ram"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#start-info-title"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#setup-requirements"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#platform"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#start-project-info"
+        }
+      ],
+      "sources": [
+        "FANEDITION.md"
+      ],
+      "steps": [],
+      "navigation_order": 1
+    },
+    {
+      "id": "launcher.work-root",
+      "title": "Den Arbeitsordner wählen",
+      "category": "Start",
+      "summary": "Der Arbeitsordner ist der gemeinsame Aufbewahrungsort für deine Neuvertonung.",
+      "body": [
+        "Wähle mit „Auswählen …“ den übergeordneten Ordner, in dem Downloads, Modelle, Stimmen und Ergebnisse liegen sollen. Zum Weiterarbeiten verwendest du wieder diese Auswahl. Der intern angelegte Datenordner „MI1 Generator“ behält seinen Namen auch mit dem neuen Patchnamen; du musst nichts umbenennen oder neu beginnen.",
+        "Zum Weiterarbeiten wählst du wieder denselben übergeordneten Ordner. Lass das Laufwerk angeschlossen und bewahre den Datenordner zusammen auf. Deine [Fassungen](launcher.render-list) bleiben darin getrennt erhalten.",
+        "Den Speicherort eines fertigen Spielordners bestimmst du später beim [Export](review.build) gesondert. Du musst dafür den Arbeitsordner nicht wechseln."
+      ],
+      "related": [
+        "launcher.resume-entry",
+        "diagnosis.disk"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#root-path"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#data-root"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "[data-pick=\"root\"]"
+        }
+      ],
+      "messages": [
+        "Kein Arbeitsordner gewählt",
+        "Der Datenordner „MI1 Generator“ wird in deiner Auswahl angelegt."
+      ],
+      "steps": [],
+      "navigation_order": 2,
+      "sources": [
+        "docs/launcher/fassungen-workflow.md"
+      ]
+    },
+    {
+      "id": "launcher.game-source",
+      "title": "Die richtige Spielquelle auswählen",
+      "category": "Start",
+      "summary": "Als Ausgangspunkt dient deine Windows-Ausgabe der Special Edition oder ihr GOG-Offline-Installer.",
+      "body": [
+        "Ist The Secret of Monkey Island: Special Edition bereits installiert, wählst du über „Auswählen …“ den Ordner mit „Monkey1.pak“ und „audio“. Beim GOG-Offline-Installer wählst du dessen Setup-EXE; die übrigen zugehörigen Dateien eines mehrteiligen Downloads müssen daneben liegen.",
+        "Aus dieser Quelle baut der Patch in Schritt 4 seine eigene deutsche Spielbasis auf. Beim späteren [Export](review.build) verwendet er die verifizierte Vorbereitung automatisch. Nur wenn diese Zuordnung fehlt, musst du dort den vorbereiteten UTE-Spielordner zusätzlich wählen."
+      ],
+      "related": [
+        "launcher.preparation-workflow"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#game-path"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#game-kind"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "[data-pick=\"game\"]"
+        }
+      ],
+      "messages": [
+        "Keine Spielquelle gewählt",
+        "Die Auswahl prüft noch keine Spielinhalte."
+      ],
+      "sources": [
+        "docs/launcher/gog-extractor.md",
+        "docs/launcher/fassungen-workflow.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.manifest",
+      "title": "Die Dialogvorgaben in den erweiterten Einstellungen",
+      "category": "Start",
+      "summary": "Die erweiterten Einstellungen erlauben dir, andere Vorgaben für die Aussprache zu laden.",
+      "body": [
+        "Unter „Dialogvorgaben“ findest du die mitgelieferten Texte und Einstellungen für die Spracherzeugung. Die zugehörige Datei heißt technisch Manifest. Für den Einstieg lässt du die Auswahl unverändert; die mitgelieferten Aussprachekorrekturen sind auf GPU abgestimmt.",
+        "ANE+GPU erzeugt die Dialoge am schnellsten, liefert aber eine etwas andere Sprachausgabe. Dafür gibt es bisher keine eigene abgestimmte Fassung der Aussprachevorgaben. Über [gemeinsame Rezepte](review.recipe) kann die Community solche Verbesserungen erarbeiten.",
+        "Mit „Ändern …“ wählst du bewusst eine andere Vorgabendatei aus. Um einzelne Dialoge zu verbessern, brauchst du diese Datei nicht von Hand zu bearbeiten: Das erledigst du in der [Review](review.workflow)."
+      ],
+      "related": [
+        "launcher.recipe",
+        "wiki.glossary"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#manifest-path"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "[data-pick=\"manifest\"]"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#selection"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#preparation"
+        }
+      ],
+      "messages": [
+        "Manifest fehlt",
+        "Manifest wählen und das Projekt speichern.",
+        "Recipe fehlt in dieser Manifestfassung:",
+        "Dialogvorgaben auswählen",
+        "Dialogvorgaben fehlen"
+      ],
+      "sources": [
+        "docs/launcher/render-control-manifest.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.recipe",
+      "title": "Ein Rezept laden",
+      "category": "Start",
+      "summary": "Mit einem Rezept kannst du erprobte Einstellungen anderer Nutzer übernehmen.",
+      "body": [
+        "Mit „Rezept laden“ wählst du auf der Startseite eine passende Datei. Sie enthält die Einstellungen für die erneute Erzeugung bestimmter Dialoge. Du kannst sie direkt laden, ohne ihren Inhalt selbst bearbeiten zu müssen. Auch in der Review steht „Rezept laden“ zur Verfügung; unter [Rezept speichern](review.recipe) erfährst du, wie du eigene Verbesserungen weitergibst.",
+        "Achte darauf, für welche Spiel- oder Dialogfassung und welchen [GPU-/ANE-Modus](launcher.render-mode) das Rezept erprobt wurde, denn dieselben Einstellungen können auf ANE anders klingen als auf GPU. Das Laden erzeugt noch keine Aufnahmen: Auf der Startseite startest du anschließend ausdrücklich das Rendering, in der Review die Verarbeitung der ausgewählten Dialoge. Ohne zusätzliches Rezept gelten die mitgelieferten GPU-Aussprachevorgaben; „Entfernen“ hebt lediglich die zusätzliche Auswahl auf und lässt die Datei auf dem Laufwerk."
+      ],
+      "related": [
+        "review.recipe",
+        "launcher.render-mode"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#correction-path"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "[data-pick=\"correction\"]"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#clear-correction"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#correction-pipeline"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#render-recipe-hint"
+        }
+      ],
+      "messages": [
+        "Kein Rezept gewählt",
+        "Das Rezept verwendet einen unbekannten Rendermodus. Bitte prüfe die Datei.",
+        "Rezept konnte nicht als JSON gelesen werden.",
+        "Rezept geladen. Die App übernimmt die darin vorgesehene Rechenweise",
+        "Rezept geladen · Verarbeitung",
+        "Rezept geladen. Für die neuen Aufnahmen übernimmt der Patch den gespeicherten Rendermodus"
+      ],
+      "sources": [
+        "FANEDITION.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.audio-mode",
+      "title": "Wie der Patch die Spielbasis vorbereitet",
+      "category": "Spielvorbereitung",
+      "summary": "Der Patch bereitet die Audiodaten für die Ultimate Talkie Edition direkt auf macOS auf.",
+      "body": [
+        "Aus der PC-Special-Edition bereitet der Patch die Ultimate Talkie Edition (UTE) als Grundlage deiner Sprachfassung vor.",
+        "Für die Audioarbeit verwendet der Patch native Werkzeuge auf dem Mac. Der deutsche Patch läuft anschließend mit [Wine](launcher.wine)."
+      ],
+      "related": [
+        "launcher.preparation-workflow",
+        "launcher.render-mode"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#builder-info"
+        }
+      ],
+      "messages": [],
+      "sources": [
+        "docs/launcher/ute-native-audio.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.start-navigation",
+      "title": "Von der Pfadauswahl zu den Downloads",
+      "category": "Start",
+      "summary": "Nach der Pfadauswahl führt dich „Weiter“ zu den Bedingungen und Downloads.",
+      "body": [
+        "Sobald Arbeitsordner und Spielquelle vollständig angegeben sind, wird „Weiter“ aktiv. Auf der nächsten Seite liest und bestätigst du die Bedingungen; erst mit „Downloads starten“ beginnt die Einrichtung.",
+        "Bleibt eine Taste grau, hilft dir der Hinweis darunter zusammen mit dem aktuellen Status in der Konsole. Läuft gerade eine Startprüfung, warte deren Abschluss ab, bevor du die Angaben erneut änderst."
+      ],
+      "related": [
+        "launcher.consents",
+        "launcher.download-start"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#to-consents"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#to-downloads"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "[data-back=\"0\"]"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "[data-back=\"1\"]"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#path-help"
+        }
+      ],
+      "messages": [
+        "Wähle Arbeitsordner und Spielquelle, um fortzufahren."
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.consents",
+      "title": "Die Einrichtung bestätigen",
+      "category": "Einrichtung",
+      "summary": "Vor den Downloads bestätigst du die Bedingungen der benötigten Programme und Modelle.",
+      "body": [
+        "Öffne die verlinkten Texte und setze nach dem Lesen die passenden Häkchen für Hilfsprogramme, KI-Modelle, Wine und die Vorbereitung deiner Spielkopie. [Wine](launcher.wine) wird gebraucht, um die benötigten Windows-Programme auf deinem Mac auszuführen.",
+        "Wähle anschließend „Weiter zu den Downloads“."
+      ],
+      "related": [
+        "launcher.download-start"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#package-terms"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#packages-consent"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#wine-consent"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#game-consent"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#consents-status"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#consents > details > summary"
+        }
+      ],
+      "messages": [
+        "Die Bestätigungen aus dem Startschritt wurden übernommen.",
+        "Öffne die Generator-App und bestätige die erforderlichen Einrichtungsaussagen vor dem Download.",
+        "Native Bestätigungen nicht verfügbar"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.download-start",
+      "title": "Downloads starten",
+      "category": "Einrichtung",
+      "summary": "Sind Pfade und Bestätigungen vollständig, kann die Einrichtung beginnen.",
+      "body": [
+        "Klicke auf „Downloads starten“. Der Patch richtet zuerst Python ein und lädt danach im selben Fenster die übrigen Pakete und Modelle. In der Konsole unten kannst du verfolgen, wie weit er mit Laden und Einrichten ist.",
+        "Sollte die Verbindung abbrechen, behalte denselben Arbeitsordner bei. So kann der Patch bereits geprüfte Dateien beim nächsten Start weiterverwenden, statt alles erneut herunterzuladen."
+      ],
+      "related": [
+        "launcher.setup-dashboard",
+        "launcher.download-recovery"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#bootstrap-size"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#download-root"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#start-downloads"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#downloads"
+        }
+      ],
+      "messages": [
+        "Launcherstart: Python prüfen …",
+        "Projektserver starten …",
+        "Python 3.12 fehlt."
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.setup-dashboard",
+      "title": "Werkzeuge vollständig einrichten",
+      "category": "Einrichtung",
+      "summary": "Nach den Downloads braucht der Patch noch Zeit, um die geladenen Bestandteile einzurichten.",
+      "body": [
+        "Die Einrichtung stellt die Programme und KI-Dateien bereit, mit denen du später Spieldaten vorbereitest, Sprache erzeugst und Aufnahmen prüfst. Wenn Tasten oder Meldungen von „Runtimes“ sprechen, sind damit diese benötigten Programmumgebungen gemeint.",
+        "Erscheint eine macOS-Abfrage zu den Command Line Tools, folge ihr: Das ist Apples Werkzeugpaket zum Einrichten weiterer Programme. Musst du die Einrichtung starten oder wiederholen, verwende „Alle Pakete laden und Runtimes einrichten“. Warte anschließend auch nach dem letzten Download noch darauf, dass Entpacken und Einrichten vollständig abgeschlossen sind."
+      ],
+      "related": [
+        "launcher.package-table",
+        "launcher.download-recovery"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#acquire"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#runtime-status"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#setup-summary"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#downloads-title"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#downloads-page > details > summary"
+        }
+      ],
+      "messages": [
+        "Gemeinsamer Auftrag gestartet. Fortschritt und Protokoll werden live aktualisiert.",
+        "Lies die Originalbedingungen und bestätige sie zuerst.",
+        "Paketstatus nicht verfügbar",
+        "Pakete und Runtime vorbereitet"
+      ],
+      "sources": [
+        "docs/launcher/setup-dashboard.md",
+        "docs/launcher/runtime-sources-setup.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.package-table",
+      "title": "Die Paketübersicht lesen",
+      "category": "Einrichtung",
+      "summary": "In der Paketübersicht siehst du, was der Patch bereits verwenden kann und was noch Arbeit braucht.",
+      "body": [
+        "Ein Eintrag mit „Vorhanden“ bedeutet zunächst nur, dass Dateien auf dem Laufwerk liegen. Erst „Geprüft“ oder „Wiederverwendet“ bestätigt ihre erfolgreiche Prüfung. Steht dort „Wird installiert“, richtet der Patch das Paket noch ein und braucht etwas Zeit.",
+        "Bei „Fehlgeschlagen“ findest du den konkreten Grund in der Konsole. Wenn du die Herkunft oder Bedingungen eines Pakets nachlesen möchtest, stehen die entsprechenden Links direkt in seiner Tabellenzeile."
+      ],
+      "related": [
+        "launcher.download-recovery"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#setup-packages"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#package-table"
+        }
+      ],
+      "messages": [
+        "Vorhanden · noch nicht geprüft",
+        "Teilweise vorhanden",
+        "Downloadbatch geprüft · Einrichtung folgt"
+      ],
+      "sources": [
+        "docs/launcher/setup-dashboard.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.download-recovery",
+      "title": "Nach einem Einrichtungsfehler fortfahren",
+      "category": "Diagnose",
+      "summary": "Nach einem Einrichtungsfehler kannst du im vorhandenen Arbeitsordner ansetzen.",
+      "body": [
+        "Prüfe zunächst deine Verbindung und den freien Platz, bevor du die Einrichtung erneut startest. Ein abgebrochener Download kann fortgesetzt werden, und bereits geprüfte Dateien werden wiederverwendet.",
+        "Tritt der Fehler beim Entpacken oder Einrichten eines Werkzeugs auf, sichere zuerst das Protokoll und den genannten Logpfad, also den Speicherort der ausführlicheren Fehlermeldungen. Damit lässt sich die Ursache gezielt untersuchen. Deine Stimmenwahl brauchst du wegen eines solchen Einrichtungsfehlers nicht zu ändern."
+      ],
+      "related": [
+        "diagnosis.download",
+        "launcher.console-export"
+      ],
+      "bindings": [],
+      "messages": [
+        "Download/Hashprüfung für",
+        "unvollständige Datei bleibt fortsetzbar.",
+        "Die geprüfte Python-Runtime ist unvollständig.",
+        "Entpacken von",
+        "P17-Bootstraprezept ist unvollständig."
+      ],
+      "sources": [
+        "docs/launcher/setup-recovery.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.host-navigation",
+      "title": "Zurück und Weiter verwenden",
+      "category": "Start",
+      "summary": "Mit „Zurück“ und „Weiter“ wechselst du zwischen den Schritten deiner Arbeit.",
+      "body": [
+        "„Weiter“ wird freigegeben, sobald der erforderliche Teil des aktuellen Schritts abgeschlossen ist. Ist die Taste noch gesperrt, erklärt der Hinweis daneben, was fehlt oder worauf der Patch wartet.",
+        "Ein laufender Auftrag arbeitet auch dann weiter, wenn du eine andere Seite öffnest. Möchtest du die Spracherzeugung unterbrechen, verwende deshalb [„Anhalten“](launcher.pause) und warte auf die bestätigte Pause."
+      ],
+      "related": [
+        "launcher.pause",
+        "wiki.start"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#wizard-back"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#wizard-next"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#wizard-next-hint"
+        }
+      ],
+      "messages": [
+        "Du kannst zur bereits geöffneten Seite zurückkehren. Der Auftrag bleibt unverändert.",
+        "Der laufende Auftrag wird hier weiter angezeigt.",
+        "Downloads und lokale Einrichtung müssen abgeschlossen sein.",
+        "Schließe die Vorbereitung ab."
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.wine",
+      "title": "Rosetta prüfen und bei Bedarf installieren",
+      "category": "Spielvorbereitung",
+      "summary": "Vor der Spielvorbereitung prüfst du, ob dein Mac die benötigten Windows-Werkzeuge ausführen kann.",
+      "body": [
+        "Dafür arbeiten zwei Hilfen zusammen: Wine führt Windows-Programme auf macOS aus, und Rosetta übersetzt Programme mit Intel-Prozessorbefehlen für deinen Apple-Chip. Für diesen Vorbereitungsschritt brauchst du beide auch beim empfohlenen [nativen Weg](launcher.audio-mode).",
+        "Klicke auf „Rosetta prüfen“. Fehlt Rosetta, öffnet sich Apples Installation in einem Terminalfenster. Folge den dort angezeigten Bedingungen und macOS-Abfragen und klicke nach dem Abschluss erneut auf die Prüftaste. Sobald die Prüfung erfolgreich ist, kannst du die Spielvorbereitung starten."
+      ],
+      "related": [
+        "launcher.preparation-workflow"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#wine"
+        }
+      ],
+      "messages": [
+        "Rosetta ist verfügbar. Du kannst mit der Vorbereitung fortfahren.",
+        "Du musst Rosetta installieren und danach auf „Rosetta prüfen“ klicken",
+        "Rosetta-Installation wurde abgeschlossen. Klicke jetzt erneut auf „Rosetta prüfen“, damit die Verfügbarkeit bestätigt wird.",
+        "Die Rosetta-Installation ist fehlgeschlagen oder wurde nicht gestartet. Du musst Rosetta installieren. Öffne Terminal und führe „/usr/sbin/softwareupdate --install-rosetta“ aus; klicke nach dem Abschluss erneut auf „Rosetta prüfen“.",
+        "Bestätige zuerst die Wine-Bedingungen im Startschritt."
+      ],
+      "sources": [
+        "docs/launcher/voice-choices-repair.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.preparation-workflow",
+      "title": "Schritt 4: die Spielbasis vorbereiten",
+      "category": "Spielvorbereitung",
+      "summary": "In Schritt 4 entsteht die Spielbasis, in die später deine neuen Aufnahmen kommen.",
+      "body": [
+        "Als Grundlage dient die Ultimate Talkie Edition, kurz UTE. Bei der [Spielvorbereitung](launcher.audio-mode) verarbeitet der Patch das Audio direkt auf deinem Mac und startet anschließend den deutschen Patch.",
+        "Während der Vorbereitung öffnen sich auch Windows-Dialoge. Lass diese Fenster geöffnet und folge ihnen bis zum Abschluss des deutschen Patches; die gesamte Vorbereitung ist erst mit der entsprechenden Konsolenmeldung fertig."
+      ],
+      "steps": [
+        "Prüfe Rosetta mit „Rosetta prüfen“. Falls eine Installation nötig ist, führe die Prüfung anschließend erneut aus.",
+        "Starte „Spieldaten vorbereiten und Patch starten“ und warte, bis die App eine Eingabe im geöffneten Wine-Fenster verlangt.",
+        "Verwende im deutschen Patch den hervorgehobenen [Windows-Zielordner](launcher.patch-target) und schließe die Patchdialoge ab.",
+        "Warte auf „Vorbereitung abgeschlossen“ in der Konsole und gehe dann weiter zu „Sprachausgabe rendern“."
+      ],
+      "related": [
+        "launcher.patch-target",
+        "launcher.preparation-failure"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#game"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#preparation-title"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#builder-info"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#builder-action-note"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#preparation-help"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#preparation-help-steps"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#preparation-help > h4"
+        }
+      ],
+      "messages": [
+        "Spieldaten vorbereiten und Patch starten",
+        "Vorbereitung abgeschlossen",
+        "Vorbereitung fehlgeschlagen"
+      ],
+      "sources": [
+        "docs/launcher/preparation-sources.md",
+        "docs/launcher/local-preparation-binding.md"
+      ],
+      "navigation_order": 3
+    },
+    {
+      "id": "launcher.patch-target",
+      "title": "Den Zielordner im deutschen Patch einsetzen",
+      "category": "Spielvorbereitung",
+      "summary": "Der deutsche Patch muss genau die Spielkopie treffen, die der Patch vorbereitet hat.",
+      "body": [
+        "Den passenden Windows-Zielordner hebt der Patch hervor und kopiert ihn beim Patchstart automatisch. Falls du ihn erneut brauchst, kannst du ihn im Pfadfeld mit Command+C kopieren. Klicke dann im Wine-Patch ins Ordnerfeld und füge ihn dort mit Control+V oder über Rechtsklick → Einfügen ein.",
+        "Ist das Patchfenster hinter anderen Fenstern verschwunden, holst du es mit „Patchfenster in den Vordergrund holen“ oder über das Wine-Symbol im Dock zurück. Folge danach den Dialogen bis zur Abschlussmeldung."
+      ],
+      "related": [
+        "launcher.preparation-workflow"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#patch-assistant"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#patch-target-path"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#patch-focus"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#patch-copy"
+        }
+      ],
+      "messages": [
+        "Patchfenster im separaten Wine-Programm bedienen.",
+        "Windows-Zielordner wird in die Zwischenablage kopiert …",
+        "Deutschen Patch im separaten Wine-Fenster öffnen. Den Zielordner mit dem Kopierknopf kopieren.",
+        "Windows-Zielordner in die Zwischenablage kopiert.",
+        "Laufwerk Z: führt im vorhandenen Wine-Profil nicht zum Zielordner.",
+        "Der Z:-Pfad setzt Wines übliche Zuordnung von Z: zur macOS-Wurzel voraus."
+      ],
+      "sources": [
+        "docs/launcher/voice-choices-repair.md",
+        "docs/launcher/patch-window.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.game-progress",
+      "title": "Wartet die Vorbereitung auf mich?",
+      "category": "Spielvorbereitung",
+      "summary": "Manchmal läuft die Vorbereitung weiter, manchmal wartet ein geöffnetes Fenster auf deine Eingabe.",
+      "body": [
+        "Die Konsole hilft dir, beides zu unterscheiden. Bei „Wine-Konsole bedienen“ oder „Originaldialog bedienen“ schaust du in das geöffnete Wine-Fenster und folgst der dortigen Anleitung.",
+        "Auch wenn der englische Builder seine Arbeit bereits beendet hat, kann der deutsche Patch noch fehlen. Warte deshalb auf „Vorbereitung abgeschlossen“: Erst diese Meldung bestätigt, dass die gesamte Spielbasis bereit ist."
+      ],
+      "related": [
+        "launcher.preparation-workflow",
+        "launcher.patch-target"
+      ],
+      "bindings": [],
+      "messages": [
+        "GOG-Installer prüfen",
+        "Benötigte Dateien ermitteln",
+        "Monkey1.pak und audio extrahieren",
+        "UTE-Extraktion · Wine-Konsole bedienen",
+        "Deutscher Patch · Originaldialog bedienen",
+        "Vorbereitung abgeschlossen",
+        "Vorbereitung fehlgeschlagen",
+        "Voriger Versuch aufgehoben:"
+      ],
+      "sources": [
+        "docs/launcher/patch-navigation-recovery.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.preparation-failure",
+      "title": "Bei einem Fehler im Builder oder Patch",
+      "category": "Diagnose",
+      "summary": "Wenn Builder oder Patch scheitern, ist die erste konkrete Fehlermeldung der beste Ausgangspunkt.",
+      "body": [
+        "Exportiere das Protokoll und notiere den darin genannten Logpfad, bevor du Fenster schließt oder einen neuen Versuch beginnst. Prüfe danach, ob der Patch den richtigen [Zielordner](launcher.patch-target) verwendet und ob das Originalfenster vielleicht noch auf eine Eingabe wartet.",
+        "Beginne die Neuvertonung erst, wenn die Vorbereitung erfolgreich abgeschlossen ist. Falls ein Neubeginn nötig wird, kannst du gezielt die [Spielvorbereitung zurücksetzen](launcher.preparation-restart); dafür musst du nicht den gesamten Arbeitsordner löschen."
+      ],
+      "related": [
+        "launcher.preparation-restart",
+        "launcher.console-export"
+      ],
+      "bindings": [],
+      "messages": [
+        "Originalwerkzeug fehlgeschlagen",
+        "Vorbereitungsstufe",
+        "PC-Special-Edition-Ordner wurde in der nativen Launcher-App nicht gewählt",
+        "Pakete für die gewählte Spielbasis zuerst gemeinsam einrichten"
+      ],
+      "sources": [
+        "docs/launcher/setup-recovery.md",
+        "docs/launcher/ute-native-audio.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.preparation-restart",
+      "title": "Die Spielvorbereitung neu beginnen",
+      "category": "Spielvorbereitung",
+      "summary": "Eine fehlerhafte Spielvorbereitung lässt sich gezielt neu aufbauen.",
+      "body": [
+        "Wenn die Fehlersuche einen Neubeginn der Vorbereitung nahelegt, sichere zuerst die noch benötigten Protokolle. „Vorbereitung löschen und neu beginnen“ entfernt die bisherigen Vorbereitungskopien einschließlich ihrer Protokolle; danach startest du die Spielvorbereitung erneut.",
+        "Downloads, Modelle, erzeugte Sprachausgaben und Reviewdaten bleiben dabei erhalten. So kannst du die Spielbasis neu aufbauen, ohne die übrige Arbeit zu verwerfen."
+      ],
+      "related": [
+        "launcher.preparation-workflow"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#preparation-restart"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#preparation-restart-panel"
+        }
+      ],
+      "messages": [
+        "Alte Vorbereitungskopien gelöscht",
+        "Neubeginn der Vorbereitung ausdrücklich bestätigen"
+      ],
+      "sources": [
+        "docs/launcher/setup-recovery.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.voices",
+      "title": "Schritt 5: eine Stimme für jede Rolle wählen",
+      "category": "Stimmen",
+      "summary": "Mit einer Sprechprobe gibst du jeder Rolle ihr Klangvorbild für die neuen Dialoge.",
+      "body": [
+        "Bevor du die Sprachausgabe erzeugst, wählst du für alle angebotenen Rollen eine Stimme. Verwende möglichst klare eigene Aufnahmen, in denen jeweils nur die gewünschte Person zu hören ist. Eine [zweite Probe derselben Stimme](launcher.alternative-sample) kannst du später für einen ausdrücklich gestarteten automatischen Reparaturversuch hinterlegen."
+      ],
+      "related": [
+        "launcher.anchor",
+        "launcher.original-voice",
+        "launcher.render-mode"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#voice-selection"
+        },
+        {
+          "source": "generator_launcher/launcher_flow.js",
+          "selector": "#voice-roles"
+        },
+        {
+          "source": "generator_launcher/launcher_flow.js",
+          "selector": "#voice-roles details summary"
+        }
+      ],
+      "messages": [
+        "Alle Rollen gewählt",
+        "Stimmwahl unvollständig"
+      ],
+      "sources": [
+        "docs/launcher/voice-choices-repair.md"
+      ],
+      "steps": [
+        "Öffne die Rolle und wähle eine eigene WAV-, FLAC- oder OGG-Aufnahme mit 3–15 Sekunden Dateidauer und höchstens 20 MiB.",
+        "Gib die tatsächlich gesprochene Sprache und den genauen Wortlaut der Aufnahme an.",
+        "Bestätige mindestens drei Sekunden tatsächliche Sprache und speichere mit „Als eigene Stimme verwenden“.",
+        "Wiederhole die Auswahl für die übrigen Rollen. Sobald alle besetzt sind, wählst du den [Rendermodus](launcher.render-mode) und startest mit „Rendering starten“."
+      ],
+      "navigation_order": 4
+    },
+    {
+      "id": "launcher.original-voice",
+      "title": "Die Originalstimme als Tech-Demo wählen",
+      "category": "Stimmen",
+      "summary": "Die Originalstimmen stehen als Tech-Demo zur Verfügung, wenn die jeweiligen Sprecher ihrer KI-Nutzung zustimmen.",
+      "body": [
+        "Mit „Originalstimme wählen · Tech-Demo“ ordnest du der geöffneten Rolle ihre Originalreferenz zu. Möchtest du alle Rollen so besetzen, gibt es dafür „Originalstimmen für alle Rollen wählen · Tech-Demo“. Nutze diese Möglichkeiten nur mit dem Einverständnis der jeweiligen Synchronsprecher; der Patch prüft die Einwilligung nicht für dich.",
+        "Für deine eigene Neuvertonung verwendest du vorzugsweise [eigene Sprechproben](launcher.custom-audio). So kannst du die Rollen mit den Stimmen besetzen, die du bewusst für diese Fassung ausgewählt hast."
+      ],
+      "related": [
+        "launcher.voices",
+        "publication.license"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#voices-demo"
+        },
+        {
+          "source": "generator_launcher/launcher_flow.js",
+          "selector": "#voice-roles details > button:nth-of-type(1)"
+        }
+      ],
+      "sources": [
+        "docs/launcher/voice-choices-repair.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.custom-audio",
+      "title": "Eine eigene Sprechprobe auswählen",
+      "category": "Stimmen",
+      "summary": "Eine klare Aufnahme ohne Musik und lange Stille hilft der KI, die gewünschte Stimme zu übernehmen.",
+      "body": [
+        "Wähle im Formular der Rolle eine WAV-, FLAC- oder OGG-Datei mit 3–15 Sekunden Dateidauer und höchstens 20 MiB. Darin muss mindestens drei Sekunden lang tatsächlich gesprochen werden; eine lange Datei mit nur einem kurzen Wort reicht dafür nicht.",
+        "Gib anschließend die [Sprache](launcher.sample-language) und den [genauen Wortlaut](launcher.sample-transcript) dieser Aufnahme an. Mit „Als eigene Stimme verwenden“ speicherst du die Probe für die gewählte Rolle."
+      ],
+      "related": [
+        "launcher.voices",
+        "launcher.sample-transcript"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/launcher_flow.js",
+          "selector": "#voice-roles input[type=\"file\"]"
+        }
+      ],
+      "messages": [
+        "Wähle zuerst eine Sprechprobe.",
+        "Die Sprechprobe darf höchstens 20 MiB groß sein.",
+        "Sprechprobe nicht lesbar"
+      ],
+      "sources": [
+        "docs/launcher/voice-choices-repair.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.sample-language",
+      "title": "Die Sprache der Probe angeben",
+      "category": "Stimmen",
+      "summary": "Die Sprachangabe beschreibt deine Sprechprobe und hilft der KI, sie richtig zuzuordnen.",
+      "body": [
+        "Wähle die Sprache, die du in der Aufnahme tatsächlich hörst: Bei einer englischen Probe ist das Englisch, bei einer deutschen Deutsch. Auch mit einer englischen Sprechprobe erzeugt der Patch anschließend deutsche Spieldialoge."
+      ],
+      "related": [
+        "launcher.sample-transcript"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/launcher_flow.js",
+          "selector": "#voice-roles select"
+        }
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.sample-transcript",
+      "title": "Den Wortlaut der Probe eintragen",
+      "category": "Stimmen",
+      "summary": "Der Wortlaut hilft der KI, die gehörte Stimme mit dem gesprochenen Text zu verbinden.",
+      "body": [
+        "Trage genau das ein, was in deiner Sprechprobe zu hören ist. Lautet die Aufnahme zum Beispiel „Hallo, hier spricht Guybrush“, gehört dieser Satz ins Feld; den späteren Spieltext brauchst du hier nicht.",
+        "Höre die Probe bei Unsicherheit noch einmal an. Wenn Wörter fehlen oder zusätzliche Textteile eingetragen sind, passen Aufnahme und Text nicht mehr gut zusammen und erschweren der KI die Zuordnung."
+      ],
+      "related": [
+        "launcher.custom-save"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/launcher_flow.js",
+          "selector": "#voice-roles textarea"
+        }
+      ],
+      "messages": [
+        "Trage den gesprochenen Text ein."
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.sample-confirm",
+      "title": "Den tatsächlichen Sprachanteil bestätigen",
+      "category": "Stimmen",
+      "summary": "Mit dem Häkchen bestätigst du, dass in der Probe ausreichend lang gesprochen wird.",
+      "body": [
+        "Höre deine Aufnahme an und achte auf den tatsächlichen Sprachanteil. Der Patch prüft zwar die Dateidauer, doch du bestätigst, dass darin mindestens drei Sekunden hörbare Sprache enthalten sind. Eine zehn Sekunden lange Datei mit nur einem kurzen Wort erfüllt diese Voraussetzung deshalb nicht."
+      ],
+      "related": [
+        "launcher.custom-audio"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/launcher_flow.js",
+          "selector": "#voice-roles input[type=\"checkbox\"]"
+        }
+      ],
+      "messages": [
+        "Bestätige mindestens drei Sekunden gesprochene Sprache."
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.custom-save",
+      "title": "Die eigene Stimme speichern",
+      "category": "Stimmen",
+      "summary": "Wenn alle Angaben passen, kannst du die Probe der geöffneten Rolle zuordnen.",
+      "body": [
+        "Prüfe noch einmal die Datei, ihre Sprache und den eingetragenen Wortlaut und setze die Bestätigung zur Sprachdauer. Mit „Als eigene Stimme verwenden“ speicherst du die Auswahl; nach erfolgreichem Speichern ist die Rolle besetzt.",
+        "Damit hast du ihr Klangvorbild festgelegt. Die eigentlichen Sprachausgaben entstehen später, wenn du für die gewählten Rollen „Rendering starten“ anklickst."
+      ],
+      "related": [
+        "launcher.voices"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/launcher_flow.js",
+          "selector": "#voice-roles details > button:nth-of-type(2)"
+        }
+      ],
+      "messages": [
+        "Sprechprobe wird lokal geprüft und gespeichert …"
+      ],
+      "sources": [
+        "docs/launcher/voice-choices-repair.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.alternative-sample",
+      "title": "Eine zweite Probe hinzufügen",
+      "category": "Stimmen",
+      "summary": "Optional kannst du eine andere Aufnahme derselben Stimme für Reparaturen hinterlegen.",
+      "body": [
+        "Manchmal passt die Stimme einer Rolle grundsätzlich, während einzelne Sätze mit der gewählten Aufnahme trotzdem einen störenden Akzent oder eine unpassende Stimmfarbe bekommen. Für solche Fälle kannst du eine zweite Probe derselben Person hinterlegen. Bei einem ausdrücklich gestarteten automatischen Reparaturversuch kann der Patch dann eine andere Referenz versuchen, ohne die Figur gleich mit einer anderen Stimme zu besetzen.",
+        "Wähle dafür die weitere Aufnahme, trage deren Sprache und genauen Wortlaut ein und verwende „Diese Datei als zweite Probe hinzufügen“. Deine Hauptprobe bleibt erhalten. In der [Aussprachehilfe](review.pronunciation) erfährst du, wann sich vorher ein einfacherer Versuch mit Prewarm, Anker oder neuem Seed lohnt."
+      ],
+      "related": [
+        "launcher.voices",
+        "launcher.repair-workflow"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/launcher_flow.js",
+          "selector": "#voice-roles details > button:nth-of-type(3)"
+        }
+      ],
+      "messages": [
+        "Zweite eigene Probe vorhanden.",
+        "Für die Reparatur kannst du nach dem Speichern hier eine zweite eigene Probe hinzufügen."
+      ],
+      "sources": [
+        "docs/launcher/voice-choices-repair.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.anchor",
+      "title": "Was ein Stimmanker praktisch bewirkt",
+      "category": "Stimmen",
+      "summary": "Bei kurzen Dialogen hilft ein Stimmanker, die Klangfarbe der Figur beizubehalten.",
+      "body": [
+        "Die Sprechprobe deiner Rolle dient als Klangvorbild für die neuen deutschen Zeilen. Ein Stimmanker hilft besonders dann, wenn eine erzeugte Zeile kürzer als drei Sekunden ist und die Stimme zwischen den Sätzen schwankt.",
+        "In der Review entscheidest du mit „An“, „Beibehalten“ oder „Aus“, wie der vorhandene Anker verwendet wird; eine andere Aufnahmedatei kannst du dort nicht wählen. Möchtest du bei der automatischen Reparatur eine andere Referenz derselben Stimme versuchen lassen, hinterlegst du bei der Rolle eine [zweite Probe](launcher.alternative-sample). Wann zusätzlich ein Prewarm oder ein neuer Seed sinnvoll ist, erklärt die [Aussprachehilfe](review.pronunciation)."
+      ],
+      "related": [
+        "launcher.voices",
+        "launcher.prewarm"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/launcher_flow.js",
+          "selector": "#voice-roles details"
+        }
+      ],
+      "sources": [
+        "docs/launcher/stimmanker-prototyp-vergleich-2026-10-12.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.prewarm",
+      "title": "Was der Prewarm praktisch bewirkt",
+      "category": "Stimmen",
+      "summary": "Wenn die deutsche Aufnahme einen englischen Akzent hat, lohnt sich ein Versuch mit eingeschaltetem Prewarm.",
+      "body": [
+        "Ein Prewarm gibt der KI vor dem Dialog ein kurzes Beispiel für deutsche Sprache. Der Patch erzeugt dieses Beispiel selbst, damit du keine zusätzliche Aufnahme dafür vorbereiten musst. Im fertigen Spiel wird es nicht als weiterer Satz abgespielt.",
+        "Um seine Wirkung zu hören, schaltest du in der Review den Prewarm ein und erzeugst zunächst eine Vorschau mit demselben [Seed](review.seed). So vergleichst du die Aussprache bei möglichst unveränderten übrigen Einstellungen. Bleibt der Akzent, kannst du den Prewarm mit einem eingeschalteten [Stimmanker](review.anchor) und anschließend einem neuen Seed kombinieren. Den genauen Ablauf findest du in der [Aussprachehilfe](review.pronunciation).",
+        "Bei der ersten Vorbereitung kann die Konsole dafür GPU-Arbeit melden, obwohl du später auf der ANE erzeugen lässt. Das gehört zur Stimmvorbereitung. Das ebenfalls angezeigte „Modell aufwärmen“ meint das Bereitmachen des Rechenmodells und hat eine andere Aufgabe als dieses Sprachbeispiel."
+      ],
+      "related": [
+        "wiki.glossary",
+        "review.prewarm",
+        "launcher.prewarm-error"
+      ],
+      "sources": [
+        "docs/launcher/prewarm-validation.md",
+        "FANEDITION.md"
+      ],
+      "bindings": [],
+      "steps": []
+    },
+    {
+      "id": "launcher.render-workflow",
+      "title": "Schritt 5: die Sprachausgabe erzeugen",
+      "category": "Rendering",
+      "summary": "Sobald Rollen und Modus feststehen, kann der erste vollständige Durchlauf beginnen.",
+      "body": [
+        "Wähle den [Rendermodus](launcher.render-mode) und unter [Fassung](launcher.render-list) den gewünschten Durchlauf. Die Auswahl und eine geänderte Moduswahl starten noch keine Arbeit. „Rendering starten“ steht unten neben den Navigationstasten.",
+        "Bei einer neuen Fassung bereitet der Patch Stimmreferenzen und kurze [deutsche Sprachbeispiele, die Prewarms](launcher.prewarm), vor und erzeugt und prüft die Dialoge. Eine pausierte oder unterbrochene Fassung wird mit derselben Starttaste weitergeführt.",
+        "Eine fertige Fassung bleibt fertig. Wenn du dafür erneut „Rendering starten“ wählst, entscheidest du erst im Dialog, ob du sie ersetzen oder eine weitere Fassung erstellen möchtest. Zum Anhören wählst du direkt „Zur Review“."
+      ],
+      "steps": [],
+      "related": [
+        "launcher.voices",
+        "launcher.render-mode",
+        "launcher.render-progress",
+        "launcher.pause"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#render-title"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#render-page"
+        }
+      ],
+      "sources": [
+        "docs/launcher/first-pass-repair.md",
+        "docs/launcher/fassungen-workflow.md"
+      ],
+      "navigation_order": 5
+    },
+    {
+      "id": "launcher.render-mode",
+      "title": "GPU oder ANE: den Rendermodus wählen",
+      "category": "Rendering",
+      "summary": "GPU passt zu den aktuellen Aussprachekorrekturen; ANE+GPU erzeugt am schnellsten und benötigt eigene Hörkorrekturen.",
+      "body": [
+        "GPU ist der Grafikprozessor deines Macs. ANE steht für Apple Neural Engine, einen weiteren Rechenteil für KI. Der Modus bestimmt, wie die neuen deutschen Aufnahmen entstehen. Er ist unabhängig von der [nativen Spielvorbereitung](launcher.audio-mode)."
+      ],
+      "related": [
+        "launcher.audio-mode",
+        "launcher.ultra-fast",
+        "launcher.mode-switch",
+        "review.recipe"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#render-mode"
+        }
+      ],
+      "sources": [
+        "FANEDITION.md",
+        "docs/launcher/render-mode-resume.md"
+      ],
+      "steps": [],
+      "sections": [
+        {
+          "title": "Langsam · GPU · höchst · abgestimmter Einstieg",
+          "body": [
+            "Wähle diesen Modus, wenn du die mitgelieferten Aussprachekorrekturen so nutzen möchtest, wie sie derzeit abgestimmt sind. Er ist langsamer als ANE+GPU und funktioniert ab macOS 14. „Höchst“ ist der Name des verwendeten Erzeugungsprofils."
+          ]
+        },
+        {
+          "title": "Schnell · ANE + GPU gleichzeitig · kürzeste Erzeugungszeit",
+          "body": [
+            "Beide Rechenteile erzeugen gleichzeitig Aufnahmen. Das ist der schnellste Weg für die Spracherzeugung. Er benötigt macOS 15 oder neuer und mindestens 16 GB RAM (Arbeitsspeicher).",
+            "Die Sprachausgabe fällt etwas anders aus als bei GPU. Die aktuellen Aussprachevorgaben sind auf GPU optimiert; eine eigene ANE+GPU-Abstimmung fehlt noch. Wähle diesen Modus, wenn dir die Zeitersparnis wichtig ist und du in der [Review](review.workflow) zusätzlich nachhören und korrigieren möchtest."
+          ]
+        },
+        {
+          "title": "Mittel · ANE · mittel · ANE allein ausprobieren",
+          "body": [
+            "Hier erzeugt nur der KI-Rechenteil die Dialoge. Das benötigt macOS 15 oder neuer. Wähle diesen Modus, wenn du die ANE-Ausgabe gezielt testen oder mit der GPU-Fassung vergleichen möchtest. Für die kürzeste Erzeugungszeit steht ANE+GPU zur Verfügung."
+          ]
+        },
+        {
+          "title": "Gemeinsam eine ANE+GPU-Abstimmung schaffen",
+          "body": [
+            "Gesucht sind Mitwirkende, die auffällige Dialoge mit ANE+GPU verbessern, ihre Vorschauen anhören und die Einstellungen als [Rezept speichern](review.recipe). Gib dabei an, für welchen Modus und welche Fassung die Korrekturen gedacht sind. So können andere sie auf dem eigenen Rechner erproben und weiterverbessern."
+          ]
+        }
+      ],
+      "navigation_order": 6
+    },
+    {
+      "id": "launcher.ultra-fast",
+      "title": "Ultra Fast einschalten",
+      "category": "Rendering",
+      "summary": "Mit Ultra Fast kann der Patch weitere ANE-Aufgaben gleichzeitig bearbeiten.",
+      "body": [
+        "Wenn dein Mac genügend freien Arbeitsspeicher hat, kann diese Option die Modi „Mittel“ und „Schnell“ weiter beschleunigen. Der Patch misst dazu selbst, wie viele gleichzeitige Erzeugungen sinnvoll sind, und begrenzt ihre Zahl automatisch.",
+        "Für den Einstieg kannst du Ultra Fast ausgeschaltet lassen; die gewählte Qualitätsstufe bleibt davon unberührt. Wenn du ein [Rezept](review.recipe) für ANE+GPU erprobst und deine Ergebnisse teilst, gib auch die verwendete Moduswahl an, damit andere den Vergleich nachvollziehen können.",
+        "In der Fassungsübersicht bleibt die Kategorie ANE oder ANE+GPU. Ultra Fast erscheint als zusätzliche Einstellung und bildet keine eigene Kategorie."
+      ],
+      "related": [
+        "launcher.render-mode",
+        "launcher.low-ram"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#render-ultra-fast"
+        }
+      ],
+      "sources": [
+        "docs/launcher/adaptive-ane.md",
+        "FANEDITION.md",
+        "docs/launcher/fassungen-workflow.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.mode-switch",
+      "title": "Eine Fassung fortsetzen oder eine weitere erstellen",
+      "category": "Rendering",
+      "summary": "Moduswahl und Fassungswahl werden erst durch deinen ausdrücklichen Start wirksam.",
+      "body": [
+        "Bei einer unfertigen Fassung erzeugt „Rendering starten“ die noch fehlenden Aufnahmen mit der gewählten Einstellung. Ist sie in dem laufenden Patch pausiert, wird derselbe Auftrag fortgesetzt; bei geändertem Modus wartet der Patch zuvor einen sicheren Arbeitsschritt ab. Bereits gültige fertige Aufnahmen bleiben erhalten. Innerhalb der Fassung können dadurch verschiedene Methoden zusammenkommen.",
+        "Eine fertige Fassung beginnt durch einen Klick auf „Rendering starten“ keinen neuen Durchlauf. Im Dialog wählst du „Weitere Fassung erstellen“, „Ausgewählte Fassung ersetzen“ oder „Abbrechen“. Eine weitere Fassung besitzt eigene Aufnahmen und ihre eigene Review.",
+        "Beim Ersetzen bleiben die bisherige Fassung und ihre Review erhalten, bis die neue vollständig fertig ist. Bei Fehler oder Abbruch kannst du weiterhin auf die alte Fassung zugreifen. Erst der erfolgreiche Abschluss ersetzt sie in der Auswahl."
+      ],
+      "related": [
+        "launcher.render-list"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#fassung-restart-dialog"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#fassung-replace"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#fassung-new"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#fassung-cancel"
+        }
+      ],
+      "sources": [
+        "docs/launcher/render-mode-resume.md",
+        "docs/launcher/fassungen-workflow.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.render-list",
+      "title": "Eine Fassung auswählen",
+      "category": "Rendering",
+      "summary": "Jede Fassung besitzt ihren eigenen Fortschritt, ihre Aufnahmen und ihre Review.",
+      "body": [
+        "Im Feld „Fassung“ findest du neue, laufende, pausierte, unterbrochene und fertige Durchläufe. Wähle beispielsweise eine fertige GPU-Fassung, um sie mit einer ANE+GPU-Fassung zu vergleichen. Die Auswahl allein startet, prüft oder rendert nichts.",
+        "Die Angaben zeigen die ursprüngliche Startzeit, den Fortschritt und die Kategorie GPU, ANE, ANE+GPU oder CPU. Bei einer fertigen Fassung erscheint zusätzlich ihre Abschlusszeit. CPU bezeichnet gegebenenfalls einen vorhandenen Bestand; der aktuelle Mac-Patch bietet dafür keinen neuen Erzeugungsmodus.",
+        "Wenn gerade eine andere Fassung rendert, kannst du eine fertige auswählen und ihre [Review](launcher.open-review) anhören. Änderungen, Vorschauen und Exporte warten bis zum Ende des laufenden Auftrags."
+      ],
+      "related": [
+        "launcher.mode-switch",
+        "launcher.open-review"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#render-list"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#fassung-details"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#fassung-progress"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#fassung-mode-note"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#fassung-message"
+        }
+      ],
+      "sources": [
+        "docs/launcher/render-mode-resume.md",
+        "docs/launcher/fassungen-workflow.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.render-start",
+      "title": "Rendering starten",
+      "category": "Rendering",
+      "summary": "Mit den gewählten Stimmen und Einstellungen erzeugt der Patch nun die Dialogaufnahmen.",
+      "body": [
+        "„Rendering starten“ steht unten in der Navigationsleiste. Es verwendet die gewählte Fassung und Moduswahl. Ist es noch gesperrt, prüfe die Rollenbesetzung, Einrichtung und Spielvorbereitung; die Konsole nennt fehlende Voraussetzungen.",
+        "Bei einer pausierten Fassung wird derselbe Auftrag fortgesetzt. Bei einer unterbrochenen Fassung prüft der Patch gespeicherte Ergebnisse und führt die fehlende Arbeit weiter. Die ursprüngliche Startzeit bleibt erhalten. Eine Cacheprüfung bedeutet nicht, dass alle Aufnahmen erneut erzeugt wurden.",
+        "Ist die ausgewählte Fassung fertig, führt der Klick nur zum Entscheidungsdialog für eine weitere Fassung oder das Ersetzen. „Abbrechen“ lässt den fertigen Stand unverändert. Zum Hören verwendest du „Zur Review“."
+      ],
+      "related": [
+        "launcher.render-workflow",
+        "launcher.pause"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#render-start"
+        }
+      ],
+      "messages": [
+        "Kein Renderauftrag gestartet."
+      ],
+      "sources": [
+        "docs/launcher/setup-recovery.md",
+        "docs/launcher/fassungen-workflow.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.role-preparation",
+      "title": "Warum zunächst noch keine Dialoge fertig sind",
+      "category": "Rendering",
+      "summary": "Am Anfang bereitet der Patch die Stimmen vor, bevor die ersten Spielzeilen entstehen.",
+      "body": [
+        "Meldungen wie „Originalquellen vorbereiten“, „Rollen vorbereiten“ und „[Prewarm](launcher.prewarm) vorbereiten“ gehören zu diesem Vorschritt. Die angezeigten Zähler beziehen sich deshalb noch auf Quellen oder Rollen und lassen sich nicht als Zahl fertiger Dialoge lesen.",
+        "Warte, bis der Patch zur Dialogerzeugung übergeht. Wenn eine passende Stimmvorbereitung bereits vorhanden ist, kann er diese wiederverwenden."
+      ],
+      "related": [
+        "launcher.prewarm",
+        "launcher.render-progress"
+      ],
+      "bindings": [],
+      "messages": [
+        "Originalquellen vorbereiten",
+        "Rollen vorbereiten",
+        "Prewarm vorbereiten · GPU (auch im ANE-Modus)"
+      ],
+      "sources": [
+        "docs/launcher/prewarm-validation.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.prewarm-error",
+      "title": "Ein Prewarm ist zu kurz oder zu lang",
+      "category": "Diagnose",
+      "summary": "Ein ungeeignet langes Sprachbeispiel kann die Stimmvorbereitung stoppen.",
+      "body": [
+        "Der [Prewarm](launcher.prewarm) muss 2–5 Sekunden lang sein. Liegen auch die weiteren Versuche außerhalb dieses Bereichs, beendet der Patch die Stimmvorbereitung mit einer Meldung. Sichere dann die genannte Rolle, die gemessene Dauer und den Versuchspfad aus der Konsole.",
+        "Ein unveränderter Neustart behebt die Ursache nicht. Für eine gezielte Korrektur werden die betroffene Probe und der verwendete Prewarmtext gebraucht; halte diese Angaben zusammen mit der Fehlermeldung bereit. Die Spielvorbereitung musst du wegen dieses Stimmproblems nicht neu beginnen."
+      ],
+      "related": [
+        "diagnosis.prewarm"
+      ],
+      "sources": [
+        "docs/launcher/prewarm-validation.md"
+      ],
+      "bindings": [],
+      "steps": []
+    },
+    {
+      "id": "launcher.first-pass",
+      "title": "Den ersten vollständigen Durchlauf abwarten",
+      "category": "Rendering",
+      "summary": "Im ersten Durchlauf erhält jeder vorgesehene Dialog seine Aufnahme und eine automatische Prüfung.",
+      "body": [
+        "Wenn dabei Warnungen entstehen, bleiben die betroffenen Aufnahmen zum Anhören erhalten. Du kannst den Erstlauf deshalb weiterarbeiten lassen, statt ihn bei jeder Warnung zu unterbrechen.",
+        "Nach seinem Abschluss entscheidest du, ob du einen eigenen [automatischen Reparaturversuch](launcher.repair-workflow) starten möchtest. In der [Review](review.workflow) hörst du anschließend selbst nach, ob Aussprache, Stimme und Betonung zu deiner Fassung passen."
+      ],
+      "related": [
+        "launcher.repair-workflow",
+        "review.qa"
+      ],
+      "sources": [
+        "docs/launcher/first-pass-repair.md",
+        "FANEDITION.md"
+      ],
+      "bindings": [],
+      "steps": []
+    },
+    {
+      "id": "launcher.render-progress",
+      "title": "Den Renderfortschritt lesen",
+      "category": "Rendering",
+      "summary": "Der Fortschritt umfasst sowohl die Spracherzeugung als auch die anschließende automatische Prüfung.",
+      "body": [
+        "Unter der Fassungswahl siehst du den Fortschritt und die ursprüngliche Startzeit der ausgewählten Fassung. Ein fertiger Durchlauf zeigt zusätzlich „Fertig“ und seine Abschlusszeit. Eine daneben ausgewählte fertige Fassung verändert den tatsächlich laufenden Auftrag nicht.",
+        "Wenn die Konsole einen „QA-Rückstand“ meldet, warten diese Aufnahmen noch auf ihre automatische Prüfung. Bei einem Mac mit 8 GB [RAM](diagnosis.memory) beginnt diese erst nach der Spracherzeugung. Fertiges Audio allein bedeutet deshalb noch keinen vollständigen Abschluss.",
+        "Bei „Hält nach aktuellem Schritt an“ speichert der Patch noch sicher. Erst die bestätigte Pause wartet auf deinen nächsten Start. Übersprungene Dialoge und technische Fehler bleiben als unvollständiger Stand sichtbar."
+      ],
+      "related": [
+        "launcher.pause",
+        "launcher.manual-review"
+      ],
+      "bindings": [],
+      "messages": [
+        "Hält nach aktuellem Schritt an",
+        "Angehalten · mit Rendering starten weiterarbeiten",
+        "Übrige Dialoge verarbeitet",
+        "QA-Rückstand"
+      ],
+      "sources": [
+        "docs/launcher/render-failure-isolation.md",
+        "docs/launcher/fassungen-workflow.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.workers",
+      "title": "Was die aktiven Arbeiter anzeigen",
+      "category": "Rendering",
+      "summary": "Die Liste der aktiven Arbeiter zeigt dir, woran der Patch gerade rechnet.",
+      "body": [
+        "Jeder Arbeiter steht für eine laufende Spracherzeugung oder automatische Prüfung. Die Konsole nennt dazu die [Dialog-ID](wiki.glossary), also die eindeutige Kennung der Spielzeile, sowie Rolle und Text. Mehrere Einträge zeigen parallele Arbeit; „[QA](review.qa)“ kennzeichnet die Prüfung.",
+        "Sind zeitweise weniger ANE-Arbeiter aktiv, kann der Patch auf knappen [Arbeitsspeicher](diagnosis.memory) oder seine Geschwindigkeitsmessung reagieren. Allein eine kleinere Zahl bedeutet daher noch nicht, dass der Auftrag stehen geblieben ist."
+      ],
+      "related": [
+        "launcher.render-progress"
+      ],
+      "bindings": [],
+      "sources": [
+        "docs/launcher/adaptive-ane.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.pause",
+      "title": "Rendering pausieren und fortsetzen",
+      "category": "Rendering",
+      "summary": "Eine sichere Pause gibt dem Patch Zeit, die laufende Arbeit fertig zu speichern.",
+      "body": [
+        "Klicke unten auf „Anhalten“ und warte auf die bestätigte Pause. Laufende Erzeugungen und Prüfungen werden zuvor noch abgeschlossen und gespeichert; der Patch steht deshalb nicht immer sofort still.",
+        "Wähle zum Weiterarbeiten dieselbe Fassung und klicke „Rendering starten“. Solange der Patch geöffnet ist, läuft derselbe Auftrag weiter. Nach einem Neustart wird gespeicherter, gültiger Fortschritt wieder aufgenommen; die ursprüngliche Startzeit bleibt erhalten."
+      ],
+      "related": [
+        "launcher.resume-entry",
+        "launcher.app-quit"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#render-pause"
+        }
+      ],
+      "messages": [
+        "Hält nach aktuellem Schritt an",
+        "Angehalten · mit Rendering starten weiterarbeiten"
+      ],
+      "sources": [
+        "docs/launcher/render-control-manifest.md",
+        "docs/launcher/fassungen-workflow.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.render-reuse",
+      "title": "Fertige Aufnahmen weiterverwenden",
+      "category": "Rendering",
+      "summary": "Dein Arbeitsordner bewahrt die fertigen Aufnahmen für spätere Sitzungen auf.",
+      "body": [
+        "Öffne wieder denselben Arbeitsordner und wähle die vorhandene Fassung. Ist sie fertig, kannst du unmittelbar ihre Review öffnen. Ein neuer Renderstart ist dafür nicht nötig.",
+        "Eine unterbrochene Fassung setzt du ausdrücklich über „Rendering starten“ fort. Der Patch prüft und verwendet passende gespeicherte Ergebnisse weiter. Diese Prüfung erzeugt nicht automatisch alle Aufnahmen erneut. Bewahre deshalb deinen gesamten Arbeitsordner auf.",
+        "Gespeicherte Warnungen bleiben erhalten. Wenn du mit anderen Eingaben eine weitere vollständige Fassung möchtest, wähle bewusst eine neue Fassung oder bestätige das [Ersetzen](launcher.mode-switch)."
+      ],
+      "related": [
+        "launcher.resume-entry"
+      ],
+      "sources": [
+        "docs/launcher/render-mode-resume.md",
+        "docs/launcher/render-failure-isolation.md",
+        "docs/launcher/fassungen-workflow.md"
+      ],
+      "bindings": [],
+      "steps": []
+    },
+    {
+      "id": "launcher.low-ram",
+      "title": "Mit 8 GB RAM arbeiten",
+      "category": "Rendering",
+      "summary": "Auch mit 8 GB Arbeitsspeicher kannst du die Neuvertonung erzeugen; der Patch verteilt die Arbeit dafür auf zwei Phasen.",
+      "body": [
+        "Zuerst entstehen die Aufnahmen, danach folgt ihre automatische Prüfung. Wenn die Spracherzeugung schon fertig ist, kann der Patch deshalb noch eine Weile weiterprüfen. Warte das Ende beider Phasen ab, bevor du in die [Review](review.workflow) gehst.",
+        "Schließe währenddessen andere speicherintensive Programme und halte auf dem Systemlaufwerk Platz frei. Für den Einstieg kannst du „Langsam · [GPU](launcher.render-mode) · höchst“ beibehalten."
+      ],
+      "related": [
+        "diagnosis.memory"
+      ],
+      "sources": [
+        "docs/launcher/low-ram-qa.md",
+        "FANEDITION.md"
+      ],
+      "bindings": [],
+      "steps": []
+    },
+    {
+      "id": "launcher.manual-review",
+      "title": "Wenn einzelne Dialoge technisch scheitern",
+      "category": "Diagnose",
+      "summary": "Bei technischen Fehlern kann der Patch die übrigen Dialoge zunächst weiterverarbeiten.",
+      "body": [
+        "Die betroffenen Spielzeilen können dabei als „Manuelle [Review](review.workflow)“ erscheinen. Dieser Status beschreibt einen offenen Fehlerfall und garantiert noch keine hörbare Aufnahme. Notiere deshalb die zugehörigen Dialogkennungen und Fehlermeldungen.",
+        "Wenn Audio oder Prüfung fehlen, kann die vollständige Review gesperrt bleiben. Der Patch wiederholt dokumentierte Fehlerfälle bei einem unveränderten Neustart nicht endlos; sichere die Fehlerliste, damit sich die Ursache gezielt beheben lässt."
+      ],
+      "related": [
+        "launcher.console-export",
+        "diagnosis.general"
+      ],
+      "bindings": [],
+      "messages": [
+        "Manuelle Review erforderlich",
+        "Übersprungene Dialoge · manuelle Review",
+        "für manuelle Review gespeichert"
+      ],
+      "sources": [
+        "docs/launcher/render-failure-isolation.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.restart-required",
+      "title": "Einem Neustarthinweis folgen",
+      "category": "Diagnose",
+      "summary": "Ein Neustarthinweis führt dich zurück zur gespeicherten Arbeitsfassung.",
+      "body": [
+        "Sichere zunächst das Protokoll und beende den Patch, wenn die Konsole dazu auffordert. Öffne ihn danach mit demselben Arbeitsordner und starte die Fassung ausdrücklich erneut. Passende fertige Ergebnisse kann der Patch dabei weiterverwenden.",
+        "Behalte auch die genannten Dialogfehler im Blick. Ein Neustart stellt den Arbeitsablauf wieder her, behebt aber allein noch keine fehlenden Aufnahmen."
+      ],
+      "related": [
+        "launcher.render-reuse"
+      ],
+      "bindings": [],
+      "messages": [
+        "KI oder Whisper benötigt einen Neustart. Beende den Launcher, öffne ihn erneut mit demselben Arbeitsordner und starte dieselbe Fassung erneut. Gesicherte Ergebnisse bleiben erhalten."
+      ],
+      "sources": [
+        "docs/launcher/render-failure-isolation.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.benchmark",
+      "title": "Die Geschwindigkeit auf deinem Mac messen",
+      "category": "Rendering",
+      "summary": "Ein kurzer Geschwindigkeitsvergleich hilft dem Patch, passende Rechenvarianten für deinen Mac zu finden.",
+      "body": [
+        "Beim ersten Rendering kann dieser Benchmark automatisch laufen. Dafür erzeugt der Patch eine kleine Dialogauswahl und vergleicht die benötigte Zeit. Warte den Abschluss ab; anschließend geht der Auftrag innerhalb deiner Moduswahl weiter.",
+        "Der Patch kümmert sich selbst um den Start der Messung und verwendet später passende gespeicherte Ergebnisse weiter. Während eines laufenden Vergleichs kannst du mit „Benchmark abbrechen“ zur bisherigen Verarbeitung zurückkehren. Der Test ist von deinen Sprachausgaben getrennt; seine Ergebnisse und mögliche Fehler erscheinen in der Konsole."
+      ],
+      "related": [
+        "launcher.benchmark-results",
+        "launcher.render-mode"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#benchmark-cancel"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#benchmark-panel"
+        }
+      ],
+      "messages": [
+        "Noch kein Benchmark vorgemerkt.",
+        "Aktive Dialoge abschließen und pausieren",
+        "Verfügbare Stimmreferenzen prüfen"
+      ],
+      "sources": [
+        "docs/launcher/benchmark.md",
+        "FANEDITION.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.benchmark-results",
+      "title": "Die Benchmark-Ergebnisse verstehen",
+      "category": "Rendering",
+      "summary": "Die Messung zeigt, welche der getesteten Varianten auf deinem Mac schnell und fehlerfrei arbeitet.",
+      "body": [
+        "Vergleiche Laufzeit und Fehlerzahl der vollständig gemessenen Varianten. Die Konsole nennt dazu den Rechenweg und die Zahl gleichzeitiger Aufgaben. Der Patch verwendet die schnellste gültige Variante innerhalb deiner Auswahl und kann passende gespeicherte Messungen später erneut nutzen.",
+        "Die kleine Stichprobe hilft beim Vergleich, ist aber keine Zeitvorhersage für das ganze Spiel. Maßgeblich bleibt außerdem dein gewählter [GPU-/ANE-Modus](launcher.render-mode) mit seinem Qualitätsprofil."
+      ],
+      "related": [
+        "launcher.render-mode"
+      ],
+      "bindings": [],
+      "messages": [
+        "Gespeicherte Maschinenmessung",
+        "RAM-Budget prüfen",
+        "Frische Vergleichsdialoge erzeugen",
+        "Vergleich abgeschlossen",
+        "Geschwindigkeit (unter 1 = langsamer)",
+        "Messbericht:"
+      ],
+      "sources": [
+        "docs/launcher/benchmark.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.repair-workflow",
+      "title": "Schritt 6: automatische Reparatur ausprobieren",
+      "category": "Rendering",
+      "summary": "Nach dem Erstlauf kannst du offene Warnfälle automatisch noch einmal bearbeiten lassen.",
+      "body": [
+        "Wenn du diesen zusätzlichen Versuch möchtest, klicke „Automatischen Reparaturversuch starten“ und bestätige mit „Ja, automatischen Reparaturversuch starten“. Mit „Abbrechen“ kehrst du ohne Reparatur zurück; du kannst die Aufnahmen auch direkt anhören.",
+        "Der Patch versucht für geeignete offene Fälle andere Einstellungen und kann dabei eine bei der Rolle hinterlegte [zweite Probe derselben Stimme](launcher.alternative-sample) verwenden. Unauffällige neue Ergebnisse können automatisch ausgewählt werden. Höre sie anschließend in der [Review](review.workflow) an, bevor du über einen weiteren Durchlauf entscheidest. Die [Aussprachehilfe](review.pronunciation) erklärt, welche Versuche bei Akzent oder wechselnder Stimmfarbe helfen können."
+      ],
+      "steps": [],
+      "related": [
+        "launcher.open-review",
+        "review.status-signs"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#repair-start"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#repair-confirm-panel"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#repair-confirm"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#repair-cancel"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#repair-title"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#repair-section > details > summary"
+        }
+      ],
+      "messages": [
+        "Zusätzliche Reparaturversuche für Warnungen und QA-Fehler starten? Vorhandene Auswahl und Audios bleiben erhalten.",
+        "Weiteren Reparaturversuch starten"
+      ],
+      "sources": [
+        "docs/launcher/first-pass-repair.md",
+        "FANEDITION.md"
+      ]
+    },
+    {
+      "id": "launcher.repair-progress",
+      "title": "Die automatische Reparatur verfolgen",
+      "category": "Rendering",
+      "summary": "Während der Reparatur zeigen Status und „Reparaturdetails“, welche Dialoge bearbeitet werden.",
+      "body": [
+        "Nicht jede Warnung führt zu einem weiteren Versuch: Der Patch berücksichtigt auch deine bereits bestätigten Fassungen und offenen Bearbeitungen. In den Reparaturdetails kannst du nachvollziehen, welche Dialoge er bearbeitet und welche er auslässt.",
+        "Warte auf das Ende des Durchlaufs und öffne danach die vollständige [Review](review.workflow). Dort hörst du selbst, ob die neuen Ergebnisse besser zum Dialog und zur Figur passen."
+      ],
+      "related": [
+        "launcher.open-review"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#repair-status"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#repair-log"
+        }
+      ],
+      "messages": [
+        "Noch kein Reparaturversuch gestartet."
+      ],
+      "sources": [
+        "docs/launcher/voice-choices-repair.md",
+        "FANEDITION.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.open-review",
+      "title": "Die vollständige Review öffnen",
+      "category": "Rendering",
+      "summary": "Die fertige ausgewählte Fassung öffnet ihre eigene Review.",
+      "body": [
+        "Wähle die fertige Fassung und klicke unten „Zur Review“. Der Patch prüft dafür die gespeicherten Quellen, Belege und Dialoge; bei einem großen Bestand kann das etwas dauern. Der Fortschritt erscheint in der Konsole. Während die Review geladen wird, ist „Rendering starten“ gesperrt. Bei einem Ladefehler kannst du es wieder verwenden. Das Öffnen startet keine Spracherzeugung.",
+        "Während eine andere Fassung rendert, kannst du die fertige Review lesen und ihre Aufnahmen anhören. Änderungen, Vorschauen und Export sind dann gesperrt. Nach Ende des laufenden Auftrags kannst du die ausgewählte Review wieder bearbeiten.",
+        "Wenn deine Auswahl passt, führt dich „Patch fertigstellen“ zur [Spieleerzeugung](review.build)."
+      ],
+      "related": [
+        "review.workflow",
+        "review.build"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#review-open"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#review-status"
+        }
+      ],
+      "messages": [
+        "Vollständige Review wird geprüft und geladen …",
+        "Review ist bereit.",
+        "Review öffnen · Fehler:"
+      ],
+      "sources": [
+        "docs/launcher/version-render-review.md",
+        "docs/launcher/fassungen-workflow.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.console",
+      "title": "Die Konsole verwenden",
+      "category": "Diagnose",
+      "summary": "Die Konsole erzählt dir, was der Patch gerade tut und wann er deine Hilfe braucht.",
+      "body": [
+        "Hier findest du Fortschritt, Eingabeaufforderungen und Fehlermeldungen der aktuellen Arbeit. Mit „Protokoll ausblenden“ schaffst du Platz, während der Auftrag weiterläuft; blende es wieder ein, wenn du Details oder einen genannten Logpfad nachlesen möchtest.",
+        "Bei einem Problem speicherst du den Verlauf mit [„Protokoll exportieren“](launcher.console-export), bevor du neu beginnst. So bleiben die Meldungen für eine spätere Fehlersuche erhalten."
+      ],
+      "related": [
+        "launcher.console-export"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#toggle-log"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#start-log"
+        },
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#current-status"
+        },
+        {
+          "source": "generator_launcher/launcher_console.js",
+          "selector": "#launcher-console"
+        },
+        {
+          "source": "generator_launcher/launcher_console.js",
+          "selector": "#launcher-console-details"
+        },
+        {
+          "source": "generator_launcher/launcher_console.js",
+          "selector": "#launcher-console-current"
+        },
+        {
+          "source": "generator_launcher/launcher_console.js",
+          "selector": "#launcher-console-current-text"
+        },
+        {
+          "source": "generator_launcher/host.py",
+          "selector": "#setup-log"
+        }
+      ],
+      "messages": [
+        "Protokoll ausblenden",
+        "Protokoll anzeigen",
+        "Bereit · Status wird geladen …"
+      ],
+      "sources": [
+        "docs/launcher/progress-console.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.console-export",
+      "title": "Ein Protokoll für die Fehlersuche speichern",
+      "category": "Diagnose",
+      "summary": "Ein gespeichertes Protokoll macht einen Fehler auch später noch nachvollziehbar.",
+      "body": [
+        "Klicke „Protokoll exportieren“ und wähle im Speicherdialog einen erreichbaren Ordner. Der Patch speichert den vorgehaltenen Konsolenverlauf als Textdatei. Ergänze für die Fehlersuche deine letzte Aktion, die betroffene [Dialog-ID](wiki.glossary) und den in der Konsole genannten Logpfad.",
+        "Die ausführlichen Protokolle einzelner Werkzeuge werden dabei nicht automatisch mit exportiert. Falls du den Verlauf weitergeben möchtest, prüfe vorher, ob private Pfade oder Texte darin stehen."
+      ],
+      "related": [
+        "launcher.start-diagnostics"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#export-log"
+        },
+        {
+          "source": "generator_launcher/launcher_console.js",
+          "selector": "#launcher-log-export"
+        }
+      ],
+      "messages": [
+        "Launcherprotokoll exportieren",
+        "Protokoll konnte nicht gespeichert werden",
+        "Patch-Protokoll exportieren"
+      ],
+      "sources": [
+        "docs/launcher/progress-console.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.terminal-markers",
+      "title": "RUN, OK und FEHLER lesen",
+      "category": "Diagnose",
+      "summary": "Die Nummer hinter RUN, OK oder FEHLER verbindet einen Befehl mit seinem Ergebnis.",
+      "body": [
+        "Bei „RUN #12“ läuft Befehl 12. Später meldet „OK #12“ seinen Erfolg oder „FEHLER #12“ einen Fehler. Da mehrere Befehle gleichzeitig arbeiten können, stehen ihre Meldungen nicht immer unmittelbar untereinander.",
+        "Suche bei einem Problem nach der ersten konkreten Fehlermeldung zum betroffenen Befehl und dem dazugehörigen Logpfad. Diese Angaben helfen mehr als die abschließende Fehlermarkierung allein."
+      ],
+      "related": [
+        "launcher.console-export"
+      ],
+      "bindings": [],
+      "messages": [
+        "[RUN #",
+        "[OK #",
+        "[FEHLER #"
+      ],
+      "sources": [
+        "docs/launcher/progress-console.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.status-ring",
+      "title": "Den Statusring einordnen",
+      "category": "Diagnose",
+      "summary": "Der Statusring gibt dir einen schnellen Eindruck; den genauen Zustand nennt der Text daneben.",
+      "body": [
+        "Ein bewegter Ring zeigt, dass der Patch arbeitet. Meldet er eine Warnung oder einen Fehler, lies die Einzelheiten in der Konsole nach. Auch wenn die Ringfarbe später wieder neutral erscheint, bleibt eine gespeicherte Warnung offen.",
+        "Steht dort „Bereit“, wartet der Patch auf deine nächste Aktion. Klicke die angebotene Taste, sobald du mit dem nächsten Arbeitsschritt beginnen möchtest."
+      ],
+      "related": [
+        "launcher.console"
+      ],
+      "bindings": [
+        {
+          "source": "generator_launcher/native/start.html",
+          "selector": "#status-ring"
+        },
+        {
+          "source": "generator_launcher/launcher_console.js",
+          "selector": "#launcher-status-ring"
+        }
+      ],
+      "sources": [
+        "docs/launcher/progress-console.md"
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.startup-check",
+      "title": "Die Startprüfung abwarten",
+      "category": "Diagnose",
+      "summary": "Beim Öffnen verschafft sich der Patch zunächst einen Überblick über deinen gespeicherten Stand.",
+      "body": [
+        "Dazu prüft er vorhandene Pakete und den bisherigen Renderstand. Warte auf „Pakete und Renderstand geprüft“; während dieser Startprüfung entstehen noch keine neuen Sprachaufnahmen.",
+        "Bleibt die Prüfung unvollständig, lies den genannten Teilfehler und prüfe zuerst, ob dein Arbeitslaufwerk verbunden ist. So lässt sich ein nicht erreichbarer Datenordner erkennen, bevor du weitere Einstellungen änderst."
+      ],
+      "related": [
+        "launcher.resume-entry",
+        "launcher.host-errors"
+      ],
+      "messages": [
+        "Pakete und Renderstand prüfen …",
+        "Noch prüfen:",
+        "Pakete und Renderstand geprüft.",
+        "Startprüfung nicht vollständig:"
+      ],
+      "bindings": [],
+      "steps": []
+    },
+    {
+      "id": "launcher.resume-entry",
+      "title": "Später am Projekt weiterarbeiten",
+      "category": "Start",
+      "summary": "Deine gespeicherte Fassung findest du über denselben Arbeitsordner wieder.",
+      "body": [
+        "Wähle nach dem Patchstart denselben übergeordneten Arbeitsordner. Findet der Patch einen passenden Stand, kann er direkt „Sprachausgabe rendern“ öffnen; andernfalls führt er dich durch noch nötige Einrichtungsschritte.",
+        "Wähle dort deine vorhandene Fassung. Eine fertige öffnest du mit „Zur Review“. Eine pausierte oder unterbrochene setzt du mit „Rendering starten“ fort. Allein die Auswahl einer Fassung startet keine Arbeit."
+      ],
+      "related": [
+        "launcher.render-reuse",
+        "launcher.pause"
+      ],
+      "messages": [
+        "Vorhandenen Renderauftrag und lokale Pakete prüfen …",
+        "Direkter Wiedereinstieg nicht verfügbar:",
+        "Bereit · Einrichtung auswählen oder bestätigen"
+      ],
+      "sources": [
+        "docs/launcher/server-lifecycle.md",
+        "docs/launcher/fassungen-workflow.md"
+      ],
+      "bindings": [],
+      "steps": [],
+      "navigation_order": 9
+    },
+    {
+      "id": "launcher.server-restart",
+      "title": "Ein vorhandener Patch läuft bereits",
+      "category": "Diagnose",
+      "summary": "Der Hinweis erscheint, wenn der zu deinem Projekt gehörende Patch im Hintergrund noch läuft.",
+      "body": [
+        "Dieser Hintergrunddienst wird im Dialog als Projektserver bezeichnet. Wenn gerade kein Auftrag läuft, kannst du „Server stoppen und neu starten“ wählen und mit dem aktuellen Patch weiterarbeiten. Deine Arbeitsdaten bleiben dabei erhalten.",
+        "Mit „Abbrechen“ lässt du den vorhandenen Dienst weiterlaufen. Solange er aktiv an einem Auftrag arbeitet, ist der Neustart gesperrt."
+      ],
+      "related": [
+        "launcher.app-quit"
+      ],
+      "bindings": [],
+      "messages": [
+        "Ein eigener Launcher-Server läuft bereits",
+        "Server stoppen und neu starten",
+        "Neustart abgebrochen; bestehender Server läuft weiter.",
+        "Eigener Launcher läuft bereits auf Port",
+        "Ein eigener Patch-Server läuft bereits",
+        "Eigener Patch läuft bereits auf Port"
+      ],
+      "sources": [
+        "docs/launcher/server-lifecycle.md"
+      ],
+      "native_bindings": [
+        {
+          "source": "generator_launcher/native/Launcher.swift",
+          "action": "server-restart"
+        }
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.web-reload",
+      "title": "Eine leere oder hängende Oberfläche neu laden",
+      "category": "Diagnose",
+      "summary": "Eine leere oder festhängende Anzeige lässt sich über die angebotene Neuladetaste erneut öffnen.",
+      "body": [
+        "Wenn der Patch „Oberfläche erneut laden“ anbietet, kannst du damit die Anzeige neu aufrufen. Ein bereits gestarteter Auftrag wird dadurch nicht ein zweites Mal gestartet.",
+        "Bleibt die Oberfläche auch danach leer, sichere das [Startprotokoll](launcher.start-diagnostics). Öffne den Patch anschließend erneut und wähle denselben Arbeitsordner, um deinen gespeicherten Stand wiederzufinden."
+      ],
+      "related": [
+        "launcher.start-diagnostics"
+      ],
+      "bindings": [],
+      "messages": [
+        "Oberfläche erneut laden",
+        "Die Startseite fehlt oder ist nicht lesbar. Entpacke die vollständige App erneut.",
+        "WebKit hat die Oberfläche nicht geladen. Lade sie erneut; falls das nicht hilft, starte die App neu.",
+        "Der WebKit-Anzeigeprozess wurde beendet. Lade die Oberfläche erneut. Bereits gestartete Aufträge werden dadurch nicht neu gestartet."
+      ],
+      "sources": [
+        "docs/launcher/webkit-review-diagnosis.md"
+      ],
+      "native_bindings": [
+        {
+          "source": "generator_launcher/native/Launcher.swift",
+          "action": "web-reload"
+        }
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.start-diagnostics",
+      "title": "Das Startprotokoll finden",
+      "category": "Diagnose",
+      "summary": "Das Startprotokoll hilft, wenn du die normale Oberfläche gar nicht erreichst.",
+      "body": [
+        "Wähle im Patchmenü „Startprotokoll im Finder zeigen“, wenn der Patch nicht startet oder die Oberfläche leer bleibt. Dieses Protokoll ergänzt den Konsolenexport, den du während der eigentlichen Arbeit erstellen kannst.",
+        "Wenn du das Problem meldest, notiere außerdem die Patchversion und den letzten sichtbaren Schritt. Zusammen mit dem Protokoll lässt sich damit besser eingrenzen, wo der Start stehen geblieben ist."
+      ],
+      "related": [
+        "launcher.host-errors"
+      ],
+      "bindings": [],
+      "messages": [
+        "Startprotokoll im Finder zeigen"
+      ],
+      "sources": [
+        "FANEDITION.md",
+        "docs/launcher/webkit-review-diagnosis.md"
+      ],
+      "native_bindings": [
+        {
+          "source": "generator_launcher/native/Launcher.swift",
+          "action": "start-diagnostics"
+        }
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.app-quit",
+      "title": "Den Patch beenden",
+      "category": "Start",
+      "summary": "Vor dem Beenden gibst du einem laufenden Renderauftrag Zeit zum sicheren Speichern.",
+      "body": [
+        "Klicke auf „Anhalten“ und warte, bis der Patch die Pause bestätigt. Danach kannst du ihn mit Command+Q oder durch Schließen des Hauptfensters beenden.",
+        "Deine fertig gespeicherten Ergebnisse bleiben im Arbeitsordner. Wähle diesen beim nächsten Start erneut aus, damit du an der vorhandenen Fassung weiterarbeiten kannst."
+      ],
+      "related": [
+        "launcher.pause",
+        "launcher.resume-entry"
+      ],
+      "bindings": [],
+      "messages": [
+        "Monkey Island German Talkie Fanedition beenden",
+        "Eigene Startprozesse beenden …",
+        "Start wurde beim Beenden der App abgebrochen.",
+        "MI German Talkie Patch beenden",
+        "Patch beenden",
+        "Start wurde beim Beenden des Patches abgebrochen."
+      ],
+      "sources": [
+        "docs/launcher/server-lifecycle.md"
+      ],
+      "native_bindings": [
+        {
+          "source": "generator_launcher/native/Launcher.swift",
+          "action": "app-quit"
+        }
+      ],
+      "steps": []
+    },
+    {
+      "id": "launcher.host-errors",
+      "title": "Der Patch startet nicht",
+      "category": "Diagnose",
+      "summary": "Wenn der Patch nicht startet, helfen der genaue Fehler und das Startprotokoll bei der Eingrenzung.",
+      "body": [
+        "Prüfe zunächst, ob das Arbeitslaufwerk verbunden und der Patch vollständig entpackt ist. Öffne für den Wiedereinstieg den nativen Patch; ein alter Browser-Tab kann noch zu einer Sitzung gehören, die inzwischen beendet wurde.",
+        "Die Meldung „Der laufende Server konnte nicht sicher diesem Arbeitslaufwerk zugeordnet werden“ betrifft die Wiedererkennung des Hintergrunddienstes. Sie sagt nicht, dass deine gespeicherten Aufnahmen fehlen. Beende den bisherigen Patch und öffne die aktuelle Fassung mit demselben Arbeitsordner. Bewahre dessen Inhalt dabei auf.",
+        "Bei einem reinen Anzeigeproblem verwende die angebotene Taste „Oberfläche erneut laden“. Ist der Projektserver, also der zugehörige Hintergrunddienst, beendet, öffnest du den Patch erneut mit derselben Arbeitsordnerwahl. Sichere außerdem das [Startprotokoll](launcher.start-diagnostics) und die genaue Fehlermeldung für eine weitere Untersuchung."
+      ],
+      "related": [
+        "launcher.start-diagnostics",
+        "launcher.web-reload"
+      ],
+      "messages": [
+        "Launcher konnte nicht starten",
+        "Start fehlgeschlagen:",
+        "Projektserver unerwartet beendet",
+        "Launcherstatus nicht verfügbar:",
+        "Arbeitslaufwerk ist nicht verfügbar.",
+        "Status nicht verfügbar",
+        "Schritt fehlgeschlagen",
+        "Der laufende Server konnte nicht sicher diesem Arbeitslaufwerk zugeordnet werden. Es wurde kein Prozess beendet.",
+        "Patch konnte nicht starten",
+        "Patchstatus nicht verfügbar:"
+      ],
+      "sources": [
+        "docs/launcher/server-lifecycle.md",
+        "docs/launcher/native-start.md"
+      ],
+      "bindings": [],
+      "steps": []
+    },
+    {
+      "id": "launcher.text-reconstruction",
+      "title": "Woher kommen die Dialogtexte?",
+      "category": "Patch",
+      "summary": "Die Dialogtexte stammen aus deiner lokal vorbereiteten Spielkopie.",
+      "body": [
+        "Beim Renderstart liest der Patch die englischen und deutschen Texte aus dieser Kopie und ergänzt die mitgelieferten Korrekturen. Du musst die Spieltexte deshalb nicht selbst importieren.",
+        "Wenn dabei ein Fehler erscheint, prüfe, ob du die richtige Spielquelle gewählt und die Vorbereitung einschließlich des deutschen Patches abgeschlossen hast. Bewahre die genaue Meldung auf, bevor du die Spielvorbereitung neu beginnst, damit die Ursache nachvollziehbar bleibt."
+      ],
+      "steps": [],
+      "related": [
+        "launcher.preparation-workflow",
+        "diagnosis.manifest"
+      ],
+      "bindings": []
+    }
+  ]
+}

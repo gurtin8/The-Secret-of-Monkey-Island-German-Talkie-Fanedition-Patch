@@ -1,0 +1,1122 @@
+{
+  "schema_version": 1,
+  "package_content": "own code/recipes only; no third-party payload or audio",
+  "preparation_recipe": "preparation.json unchanged P01 ready",
+  "artifacts": [
+    {
+      "id": "python",
+      "delivery": "file",
+      "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260901/cpython-3.12.14%2B20260901-aarch64-apple-darwin-install_only.tar.gz",
+      "revision": "20260901",
+      "bytes": 25135464,
+      "hash": "3ee3ee547cedfeb7c2b16b2b7156039f7b470bb8f857e226fd3d2eb11db83c76",
+      "integrity_kind": "sha256",
+      "terms": {
+        "description": "CPython PSF/historical terms; original distribution licenses retained. Distribution build scripts MPL2, not a blanket interpreter license.",
+        "url": "https://github.com/python/cpython/blob/v3.12.14/LICENSE",
+        "evidence_sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+      },
+      "status": "direct_source_bound"
+    },
+    {
+      "id": "search",
+      "delivery": "file",
+      "url": "https://github.com/driceroland/Search/releases/download/v1.0.4/Search.zip",
+      "revision": "v1.0.4",
+      "bytes": 3160932,
+      "hash": "ceaf6502df3cae70b3f13880aace9261237718576f17209a09ec52f75746976b",
+      "integrity_kind": "sha256",
+      "terms": {
+        "description": "MIT; use unchanged original Search.app, retain original name/icon; no branding rights inferred.",
+        "url": "https://github.com/driceroland/Search/blob/cddb9cdd19e64321c95d5e733217799908ad3b52/LICENSE",
+        "evidence_sha256": "ecb889fb5ba7a5687cef8f06cbd1ae4473a771947ad9c8e14532e191188886a6"
+      },
+      "status": "direct_source_bound"
+    },
+    {
+      "id": "cmake",
+      "delivery": "file",
+      "url": "https://github.com/Kitware/CMake/releases/download/v4.1.2/cmake-4.1.2-macos-universal.tar.gz",
+      "revision": "v4.1.2",
+      "bytes": 80750689,
+      "hash": "3be85f5b999e327b1ac7d804cbc9acd767059e9f603c42ec2765f6ab68fbd367",
+      "integrity_kind": "sha256",
+      "terms": {
+        "description": "BSD3 direct CMake terms; preserve complete original bundle and notices.",
+        "url": "https://github.com/Kitware/CMake/blob/v4.1.2/LICENSE.rst",
+        "evidence_sha256": "1e0d48f16c60f400838a96989684ae12cec35cb96688db11e8cb0204058cf4b8"
+      },
+      "status": "direct_source_bound"
+    },
+    {
+      "id": "vox-source",
+      "delivery": "git",
+      "url": "https://github.com/tc-mb/llama.cpp-omni.git",
+      "revision": "64d092c60db4b4ee45768476bd752f03fdcc98ea",
+      "hash": "64d092c60db4b4ee45768476bd752f03fdcc98ea",
+      "integrity_kind": "git-commit-sha1",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "MIT; preserve LICENSE and licenses directory; transform locally",
+        "url": "https://github.com/tc-mb/llama.cpp-omni/tree/64d092c60db4b4ee45768476bd752f03fdcc98ea"
+      }
+    },
+    {
+      "id": "whisper-source",
+      "delivery": "git",
+      "url": "https://github.com/ggml-org/whisper.cpp.git",
+      "revision": "d09f61a708f3487afa956ff578e60eae5e7a233c",
+      "hash": "d09f61a708f3487afa956ff578e60eae5e7a233c",
+      "integrity_kind": "git-commit-sha1",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "MIT; preserve LICENSE; original GGML conversion code",
+        "url": "https://github.com/ggml-org/whisper.cpp/tree/d09f61a708f3487afa956ff578e60eae5e7a233c"
+      }
+    },
+    {
+      "id": "scummtr-source",
+      "delivery": "git",
+      "url": "https://github.com/dwatteau/scummtr.git",
+      "revision": "a50c6f4bf03566721b3f2c00df257a41a82e22ed",
+      "hash": "a50c6f4bf03566721b3f2c00df257a41a82e22ed",
+      "integrity_kind": "git-commit-sha1",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "MIT COPYING; own actor-export transformation locally",
+        "url": "https://github.com/dwatteau/scummtr/tree/a50c6f4bf03566721b3f2c00df257a41a82e22ed"
+      }
+    },
+    {
+      "id": "ffmpeg-source",
+      "delivery": "git",
+      "url": "https://github.com/FFmpeg/FFmpeg.git",
+      "revision": "b08d7969c550a804a59511c7b83f2dd8cc0499b8",
+      "hash": "b08d7969c550a804a59511c7b83f2dd8cc0499b8",
+      "integrity_kind": "git-commit-sha1",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "FFmpeg7.1 LGPL2.1-or-later minimal default build without external autodetection, GPL/nonfree/version3 flags; preserve original licenses. Historical USB binary not reused",
+        "url": "https://github.com/FFmpeg/FFmpeg/tree/b08d7969c550a804a59511c7b83f2dd8cc0499b8"
+      }
+    },
+    {
+      "id": "whisper-base",
+      "delivery": "file",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-base.bin",
+      "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+      "bytes": 147951465,
+      "hash": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+      "integrity_kind": "sha256",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "OpenAI Whisper code and weights MIT; GGML conversion source/model card bound.",
+        "url": "https://github.com/openai/whisper/blob/v20250625/LICENSE",
+        "evidence_sha256": "b5d65a59060e68c4ff940e1eddfa6f94b2d68fdf58ed7f4dd57721c997e35e9d"
+      }
+    },
+    {
+      "id": "whisper-medium",
+      "delivery": "file",
+      "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/5359861c739e955e79d9a303bcbc70fb988958b1/ggml-medium.bin",
+      "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+      "bytes": 1533763059,
+      "hash": "6c14d5adee5f86394037b4e4e8b59f1673b6cee10e3cf0b11bbdbee79c156208",
+      "integrity_kind": "sha256",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "OpenAI Whisper code and weights MIT; GGML conversion source/model card bound.",
+        "url": "https://github.com/openai/whisper/blob/v20250625/LICENSE",
+        "evidence_sha256": "b5d65a59060e68c4ff940e1eddfa6f94b2d68fdf58ed7f4dd57721c997e35e9d"
+      }
+    },
+    {
+      "id": "vox-baselm",
+      "delivery": "file",
+      "url": "https://huggingface.co/DennisHuang648/VoxCPM2-GGUF/resolve/f8934b10e3635b1fd35b03654ec0d2be45077e58/VoxCPM2-BaseLM-F16.gguf",
+      "revision": "f8934b10e3635b1fd35b03654ec0d2be45077e58",
+      "bytes": 3247980544,
+      "hash": "8be62e899f8f32b3c2109c99950b46671135a8f40b27b1df720f6823d36cc59e",
+      "integrity_kind": "sha256",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "Pinned converter card Apache2 and upstream terms. Upstream card at 32279effe8c19989596f05d353d1447f51d9e915 forbids impersonation/fraud/disinformation and calls for AI labeling. Exact original conversion-input revision is not claimed.",
+        "url": "https://huggingface.co/DennisHuang648/VoxCPM2-GGUF/blob/f8934b10e3635b1fd35b03654ec0d2be45077e58/README.md",
+        "evidence_sha256": "f02b61749ff417aa30f82cd041bbbc130e1c388fef94d068e249126964b2b061"
+      },
+      "user_notice": "Artificially generated game speech; no impersonation, fraud or disinformation"
+    },
+    {
+      "id": "vox-acoustic",
+      "delivery": "file",
+      "url": "https://huggingface.co/DennisHuang648/VoxCPM2-GGUF/resolve/f8934b10e3635b1fd35b03654ec0d2be45077e58/VoxCPM2-Acoustic-F16.gguf",
+      "revision": "f8934b10e3635b1fd35b03654ec0d2be45077e58",
+      "bytes": 1825096352,
+      "hash": "5bde898488ad635ff55d24da53543768fa33d5e5cdc538ce190e5ef831038e85",
+      "integrity_kind": "sha256",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "Pinned converter card Apache2 and upstream terms. Upstream card at 32279effe8c19989596f05d353d1447f51d9e915 forbids impersonation/fraud/disinformation and calls for AI labeling. Exact original conversion-input revision is not claimed.",
+        "url": "https://huggingface.co/DennisHuang648/VoxCPM2-GGUF/blob/f8934b10e3635b1fd35b03654ec0d2be45077e58/README.md",
+        "evidence_sha256": "f02b61749ff417aa30f82cd041bbbc130e1c388fef94d068e249126964b2b061"
+      },
+      "user_notice": "Artificially generated game speech; no impersonation, fraud or disinformation"
+    },
+    {
+      "id": "ane-wheel",
+      "delivery": "file",
+      "url": "https://files.pythonhosted.org/packages/c1/7f/50d8334bdd41bcab0d72ba72586a49dfd36528171c90d957377927a9e06f/voxcpmane2-0.1.3b1-py3-none-any.whl",
+      "revision": "0.1.3b1",
+      "bytes": 71952,
+      "hash": "88998a020f67c6b4f6391da5112fb7dd56ceca42886ebea9e1ebca4274f42a59",
+      "integrity_kind": "sha256",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "MIT runtime code only; CoreMLTools 9 BSD3. These code licenses do not label the separate converted weights.",
+        "url": "https://pypi.org/project/voxcpmane2/0.1.3b1/"
+      }
+    },
+    {
+      "id": "ane-preview/audio_vae_decoder_lf4.mlmodelc/analytics/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/audio_vae_decoder_lf4.mlmodelc/analytics/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 243,
+      "hash": "80433465ac6586223d87c0f1949bb8afda666ade71a6533f790b66aab512fa4a",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/audio_vae_decoder_lf4.mlmodelc/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/audio_vae_decoder_lf4.mlmodelc/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 1162,
+      "hash": "c54e37d43090e73b2aa38d7b67fd50f9a088c1352ac46702b0968c4a7b2e59d6",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/audio_vae_decoder_lf4.mlmodelc/metadata.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/audio_vae_decoder_lf4.mlmodelc/metadata.json?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 10391,
+      "hash": "5c4f0fd1fd6cf6c0f6b4854faa8ac7099532739a",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/audio_vae_decoder_lf4.mlmodelc/model.mil",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/audio_vae_decoder_lf4.mlmodelc/model.mil?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 175073,
+      "hash": "ee1c2781c100b377556e5f1116ffa68dfc8fbf45",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/audio_vae_decoder_lf4.mlmodelc/weights/weight.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/audio_vae_decoder_lf4.mlmodelc/weights/weight.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 91508928,
+      "hash": "6ae6c42806a29cb06485b388ddce932dbe4c708540b7e31f018df543d2797196",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/audio_vae_encoder.mlmodelc/analytics/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/audio_vae_encoder.mlmodelc/analytics/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 243,
+      "hash": "43f69560bc49e541e647a2420b043d723d41a3d39922ca72485007e1a9deccf6",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/audio_vae_encoder.mlmodelc/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/audio_vae_encoder.mlmodelc/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 690,
+      "hash": "81b1dbaefa389a871fd68144ce3f19a8f0b85dda18619395191b79a85b896a92",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/audio_vae_encoder.mlmodelc/metadata.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/audio_vae_encoder.mlmodelc/metadata.json?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 5470,
+      "hash": "5fdbc72d1fd3cc9ab57773217b6a16c6e4b815fb",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/audio_vae_encoder.mlmodelc/model.mil",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/audio_vae_encoder.mlmodelc/model.mil?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 110353,
+      "hash": "80251279d97ec2b0ccd911edd7dd0ab007faf49d",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/audio_vae_encoder.mlmodelc/weights/weight.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/audio_vae_encoder.mlmodelc/weights/weight.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 96086720,
+      "hash": "cf5a692b0a22a8a69af83702b0aa8856282b5e56b393be06963fbaec827c0265",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/base_lm_multifunction.mlmodelc/analytics/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/base_lm_multifunction.mlmodelc/analytics/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 243,
+      "hash": "a8cf2f7abd1916e124090a7928d7e6f2fc90b19aee817fe561781d67c9761717",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/base_lm_multifunction.mlmodelc/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/base_lm_multifunction.mlmodelc/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 1784,
+      "hash": "ece0dc9f466ad4fac3d84a8281cce5ec8153ef3094b99315e1b14f4d3068d260",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/base_lm_multifunction.mlmodelc/metadata.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/base_lm_multifunction.mlmodelc/metadata.json?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 25554,
+      "hash": "57abdfd154fd5e52a484a120a41004f0e6f3e3ef",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/base_lm_multifunction.mlmodelc/model.mil",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/base_lm_multifunction.mlmodelc/model.mil?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 6267617,
+      "hash": "8e252e4937c90bc16a6c50c85d64e1eabbe6f443",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/base_lm_multifunction.mlmodelc/weights/weight.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/base_lm_multifunction.mlmodelc/weights/weight.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 1704015296,
+      "hash": "1f8dbf76fe3ad9bbc7f4cf99c479905018d93d2505b8536758c3e0ff679775e9",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/config.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/config.json?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 4336,
+      "hash": "792f1c223ed607f9e508c0a0deb15dd9532483be",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/embed_tokens.npy",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/embed_tokens.npy?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 300843136,
+      "hash": "58a17a4bdb47b56424da982b78f1266f3a49f3a4895ee831784e5997e9367c76",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/feat_encoder.mlmodelc/analytics/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/feat_encoder.mlmodelc/analytics/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 243,
+      "hash": "1a895804852b54497b0a4be52e754657e13b05d4a5ef966c9e3afb1c44ae10ac",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/feat_encoder.mlmodelc/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/feat_encoder.mlmodelc/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 390,
+      "hash": "6309ec6c7cd08b68ed7fa767ca3185ed935c19101a85cb00bbe0172d60692880",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/feat_encoder.mlmodelc/metadata.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/feat_encoder.mlmodelc/metadata.json?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 2023,
+      "hash": "f1180f5f6c3ebd8d564fd0e9912a1fea5acac3bc",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/feat_encoder.mlmodelc/model.mil",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/feat_encoder.mlmodelc/model.mil?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 261454,
+      "hash": "7e3e229efbfd0e372957596b3fa0aa1948597194",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/feat_encoder.mlmodelc/weights/weight.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/feat_encoder.mlmodelc/weights/weight.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 419682112,
+      "hash": "bc86bc4a3db4119c52bb57ec6456a7ff5339e98913a195ee995f1f0a6e010f21",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/fsq_s4.mlmodelc/analytics/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/fsq_s4.mlmodelc/analytics/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 243,
+      "hash": "c7cbe5b2065ae32def741656cd270567c6457f3976ece9f91ee3c32f65664c8d",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/fsq_s4.mlmodelc/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/fsq_s4.mlmodelc/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 394,
+      "hash": "fcef5f666331f8509c7fea28b67067f47b0c1f9de5d0e7894f16f6b13a33a3d4",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/fsq_s4.mlmodelc/metadata.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/fsq_s4.mlmodelc/metadata.json?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 1870,
+      "hash": "9b9f9b47bf4cbfbe13f85a79a3409697db27a24a",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/fsq_s4.mlmodelc/model.mil",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/fsq_s4.mlmodelc/model.mil?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 3194,
+      "hash": "10921f7d0969af5a8388d3a1df17c028c59cd425",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/fsq_s4.mlmodelc/weights/weight.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/fsq_s4.mlmodelc/weights/weight.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 8399168,
+      "hash": "66d70746a5d511b220e1f57d504ab05512b31d22dd890cb425606aa26ec75411",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/locdit_p4_c4.mlmodelc/analytics/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/locdit_p4_c4.mlmodelc/analytics/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 243,
+      "hash": "ea57e0443169d07b68fe3cbfea2275d027d5a3abbd2fa81b3f41ded4bcb7c7ac",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/locdit_p4_c4.mlmodelc/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/locdit_p4_c4.mlmodelc/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 461,
+      "hash": "eb871acaad21c82b5528c4bf1e96c10048f202aa0fc6408f032bd745ff642e31",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/locdit_p4_c4.mlmodelc/metadata.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/locdit_p4_c4.mlmodelc/metadata.json?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 3195,
+      "hash": "7d1ad5c3c6d0137797b3b020a39a81ee0814aec8",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/locdit_p4_c4.mlmodelc/model.mil",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/locdit_p4_c4.mlmodelc/model.mil?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 299569,
+      "hash": "95e997880060d6d13695512628e3b46609affc38",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/locdit_p4_c4.mlmodelc/weights/weight.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/locdit_p4_c4.mlmodelc/weights/weight.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 259906624,
+      "hash": "78d9487e1f794f436e8ce1daa12eb8b04d4e07017d74c980d4636c2d848060cd",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/projections.mlmodelc/analytics/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/projections.mlmodelc/analytics/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 243,
+      "hash": "1d9d50ed16253dfdd91dc6cfe7dd37e6a52402c386ffba71873c3fdaa9093789",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/projections.mlmodelc/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/projections.mlmodelc/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 444,
+      "hash": "a14fd688974de2526a698c3509ee56b769f9c95836b3455d0eb117a5fcdfe5ca",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/projections.mlmodelc/metadata.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/projections.mlmodelc/metadata.json?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 2355,
+      "hash": "c6f573b928f0e6dea15c73cd0fb6db029b9e8709",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/projections.mlmodelc/model.mil",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/projections.mlmodelc/model.mil?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 5608,
+      "hash": "ffc2fa71ceb4facf9270cda0f48d253f17af523b",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/projections.mlmodelc/weights/weight.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/projections.mlmodelc/weights/weight.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 16794112,
+      "hash": "a6c69993d73b4ab3dce43927de742388666737f6709698faf40fb6f9312706ec",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/residual_lm_fused_multifunction.mlmodelc/analytics/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/residual_lm_fused_multifunction.mlmodelc/analytics/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 243,
+      "hash": "e1dd7cb3c97bc674697e875d6674480f8234f0ee08b5c97199e8713d3114b5d7",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/residual_lm_fused_multifunction.mlmodelc/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/residual_lm_fused_multifunction.mlmodelc/coremldata.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 1784,
+      "hash": "7c3935cfc9117e95167c40d483e3cb260e73dc62199628ae0eb1abad051f2164",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/residual_lm_fused_multifunction.mlmodelc/metadata.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/residual_lm_fused_multifunction.mlmodelc/metadata.json?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 24884,
+      "hash": "38f211129bb0105fa6679c780ed59402a36ed337",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/residual_lm_fused_multifunction.mlmodelc/model.mil",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/residual_lm_fused_multifunction.mlmodelc/model.mil?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 1596923,
+      "hash": "3e24f3580bbabad8968077a11505be553fa2117c",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-preview/residual_lm_fused_multifunction.mlmodelc/weights/weight.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/resolve/def350ecae1aa3e4028970a5eae8faa7b3800d40/residual_lm_fused_multifunction.mlmodelc/weights/weight.bin?download=true",
+      "revision": "def350ecae1aa3e4028970a5eae8faa7b3800d40",
+      "bytes": 613231424,
+      "hash": "86a86badc6712de17986139445dfcafd8aab9db5d8ed71a6d837b70534048095",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPM2ANE-Preview/tree/def350ecae1aa3e4028970a5eae8faa7b3800d40"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-split/base_lm_multifunction_part0_of_2.mlmodelc/analytics/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/resolve/3a33ff35d350da2ac3d562dafc8e930faeeae59f/base_lm_multifunction_part0_of_2.mlmodelc/analytics/coremldata.bin?download=true",
+      "revision": "3a33ff35d350da2ac3d562dafc8e930faeeae59f",
+      "bytes": 243,
+      "hash": "fec99270a48a065d2e8bd269a3de18756544cfc8359cc51b102b300479b3ba2b",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/tree/3a33ff35d350da2ac3d562dafc8e930faeeae59f"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-split/base_lm_multifunction_part0_of_2.mlmodelc/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/resolve/3a33ff35d350da2ac3d562dafc8e930faeeae59f/base_lm_multifunction_part0_of_2.mlmodelc/coremldata.bin?download=true",
+      "revision": "3a33ff35d350da2ac3d562dafc8e930faeeae59f",
+      "bytes": 1784,
+      "hash": "c5b8725ef122ccb50b4a943a7947ef9707da37aa042132de416441401ff082d3",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/tree/3a33ff35d350da2ac3d562dafc8e930faeeae59f"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-split/base_lm_multifunction_part0_of_2.mlmodelc/metadata.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/resolve/3a33ff35d350da2ac3d562dafc8e930faeeae59f/base_lm_multifunction_part0_of_2.mlmodelc/metadata.json?download=true",
+      "revision": "3a33ff35d350da2ac3d562dafc8e930faeeae59f",
+      "bytes": 25509,
+      "hash": "98fe323c3be9d549f64698137c8c8664ec36bba6",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/tree/3a33ff35d350da2ac3d562dafc8e930faeeae59f"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-split/base_lm_multifunction_part0_of_2.mlmodelc/model.mil",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/resolve/3a33ff35d350da2ac3d562dafc8e930faeeae59f/base_lm_multifunction_part0_of_2.mlmodelc/model.mil?download=true",
+      "revision": "3a33ff35d350da2ac3d562dafc8e930faeeae59f",
+      "bytes": 3128124,
+      "hash": "199bdafaee447e51e5141f8a2c7e4fdb1327eb7c",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/tree/3a33ff35d350da2ac3d562dafc8e930faeeae59f"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-split/base_lm_multifunction_part0_of_2.mlmodelc/weights/weight.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/resolve/3a33ff35d350da2ac3d562dafc8e930faeeae59f/base_lm_multifunction_part0_of_2.mlmodelc/weights/weight.bin?download=true",
+      "revision": "3a33ff35d350da2ac3d562dafc8e930faeeae59f",
+      "bytes": 906733056,
+      "hash": "ddbf2d38412dbe764c8dc1bf97c76b9b35b90677112e15b776347c4f1b3e32d6",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/tree/3a33ff35d350da2ac3d562dafc8e930faeeae59f"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-split/base_lm_multifunction_part1_of_2.mlmodelc/analytics/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/resolve/3a33ff35d350da2ac3d562dafc8e930faeeae59f/base_lm_multifunction_part1_of_2.mlmodelc/analytics/coremldata.bin?download=true",
+      "revision": "3a33ff35d350da2ac3d562dafc8e930faeeae59f",
+      "bytes": 243,
+      "hash": "69a8e791cc2bf9b0ac10bbc05a7894f10eca5bdd6f2924110626b90db9e036df",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/tree/3a33ff35d350da2ac3d562dafc8e930faeeae59f"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-split/base_lm_multifunction_part1_of_2.mlmodelc/coremldata.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/resolve/3a33ff35d350da2ac3d562dafc8e930faeeae59f/base_lm_multifunction_part1_of_2.mlmodelc/coremldata.bin?download=true",
+      "revision": "3a33ff35d350da2ac3d562dafc8e930faeeae59f",
+      "bytes": 1784,
+      "hash": "0d1523d946b22394896dfd32da442cd2c3fe35a51de54d65aea37f9049483a1f",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/tree/3a33ff35d350da2ac3d562dafc8e930faeeae59f"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-split/base_lm_multifunction_part1_of_2.mlmodelc/metadata.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/resolve/3a33ff35d350da2ac3d562dafc8e930faeeae59f/base_lm_multifunction_part1_of_2.mlmodelc/metadata.json?download=true",
+      "revision": "3a33ff35d350da2ac3d562dafc8e930faeeae59f",
+      "bytes": 25509,
+      "hash": "93c6e0a3f902af2daef10a0d8badc1426266c25d",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/tree/3a33ff35d350da2ac3d562dafc8e930faeeae59f"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-split/base_lm_multifunction_part1_of_2.mlmodelc/model.mil",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/resolve/3a33ff35d350da2ac3d562dafc8e930faeeae59f/base_lm_multifunction_part1_of_2.mlmodelc/model.mil?download=true",
+      "revision": "3a33ff35d350da2ac3d562dafc8e930faeeae59f",
+      "bytes": 3171416,
+      "hash": "0dffa68b88a1970065353eacb2287ac38e63f4ff",
+      "integrity_kind": "gitblob",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/tree/3a33ff35d350da2ac3d562dafc8e930faeeae59f"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-split/base_lm_multifunction_part1_of_2.mlmodelc/weights/weight.bin",
+      "delivery": "file",
+      "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/resolve/3a33ff35d350da2ac3d562dafc8e930faeeae59f/base_lm_multifunction_part1_of_2.mlmodelc/weights/weight.bin?download=true",
+      "revision": "3a33ff35d350da2ac3d562dafc8e930faeeae59f",
+      "bytes": 814067904,
+      "hash": "ef005e4b596596056240059cc78679ba8980736e99c21c9c4e5f46ba2838fadb",
+      "integrity_kind": "sha256",
+      "status": "source_download_ready",
+      "terms": {
+        "description": "No explicit license or direct terms for these converted weights are identified in this catalog. This records an information gap, not a demonstrated prohibition; applicable upstream terms and notices remain relevant.",
+        "url": "https://huggingface.co/seba/VoxCPMANE2-Debug-Models/tree/3a33ff35d350da2ac3d562dafc8e930faeeae59f"
+      },
+      "terms_status": "unverified"
+    },
+    {
+      "id": "ane-tokenizer/config.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/openbmb/VoxCPM2/resolve/32279effe8c19989596f05d353d1447f51d9e915/config.json?download=true",
+      "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+      "bytes": 4336,
+      "hash": "792f1c223ed607f9e508c0a0deb15dd9532483be",
+      "integrity_kind": "gitblob",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "Apache2 pinned original tokenizer/card",
+        "url": "https://huggingface.co/openbmb/VoxCPM2/tree/32279effe8c19989596f05d353d1447f51d9e915"
+      }
+    },
+    {
+      "id": "ane-tokenizer/special_tokens_map.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/openbmb/VoxCPM2/resolve/32279effe8c19989596f05d353d1447f51d9e915/special_tokens_map.json?download=true",
+      "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+      "bytes": 1632,
+      "hash": "8619dda6f3eb6d60d0a1bb274820054e46f41699",
+      "integrity_kind": "gitblob",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "Apache2 pinned original tokenizer/card",
+        "url": "https://huggingface.co/openbmb/VoxCPM2/tree/32279effe8c19989596f05d353d1447f51d9e915"
+      }
+    },
+    {
+      "id": "ane-tokenizer/tokenization_voxcpm2.py",
+      "delivery": "file",
+      "url": "https://huggingface.co/openbmb/VoxCPM2/resolve/32279effe8c19989596f05d353d1447f51d9e915/tokenization_voxcpm2.py?download=true",
+      "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+      "bytes": 2895,
+      "hash": "e7d768677298d058fa6ef8b160e3ca4430997fad",
+      "integrity_kind": "gitblob",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "Apache2 pinned original tokenizer/card",
+        "url": "https://huggingface.co/openbmb/VoxCPM2/tree/32279effe8c19989596f05d353d1447f51d9e915"
+      }
+    },
+    {
+      "id": "ane-tokenizer/tokenizer.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/openbmb/VoxCPM2/resolve/32279effe8c19989596f05d353d1447f51d9e915/tokenizer.json?download=true",
+      "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+      "bytes": 3676772,
+      "hash": "41a5c2a8dba4058dd1ad73fb898abf5e4f64f0f9",
+      "integrity_kind": "gitblob",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "Apache2 pinned original tokenizer/card",
+        "url": "https://huggingface.co/openbmb/VoxCPM2/tree/32279effe8c19989596f05d353d1447f51d9e915"
+      }
+    },
+    {
+      "id": "ane-tokenizer/tokenizer_config.json",
+      "delivery": "file",
+      "url": "https://huggingface.co/openbmb/VoxCPM2/resolve/32279effe8c19989596f05d353d1447f51d9e915/tokenizer_config.json?download=true",
+      "revision": "32279effe8c19989596f05d353d1447f51d9e915",
+      "bytes": 5059,
+      "hash": "fecf4cdae73b57053cac2ad34c67febbe4e4f08b",
+      "integrity_kind": "gitblob",
+      "status": "direct_source_bound",
+      "terms": {
+        "description": "Apache2 pinned original tokenizer/card",
+        "url": "https://huggingface.co/openbmb/VoxCPM2/tree/32279effe8c19989596f05d353d1447f51d9e915"
+      }
+    }
+  ],
+  "bootstrap": {
+    "requires_python": false,
+    "native_owner": "P18",
+    "system_native": [
+      "URLSession with range request",
+      "CryptoKit SHA256",
+      "Foundation FileManager staging/rename",
+      "/usr/bin/tar",
+      "/usr/bin/ditto",
+      "/usr/bin/xcode-select --install",
+      "/usr/bin/xcrun --find clang",
+      "/usr/bin/xcrun --sdk macosx --show-sdk-path"
+    ],
+    "python": {
+      "artifact": "python",
+      "extract": "/usr/bin/tar -xzf {download} -C {staging}",
+      "executable": "{staging}/python/bin/python3.12",
+      "verify": "version must be3.12.14, arch arm64 before any Python recipe"
+    },
+    "search": {
+      "artifact": "search",
+      "extract": "/usr/bin/ditto -x -k {download} {staging}",
+      "install": "Keep unchanged Search.app and original notices; same-volume directory activation",
+      "min_macos": "14"
+    },
+    "toolchain": {
+      "source": "Apple OS-managed Command Line Tools with compiler, Git, make and macOS SDK",
+      "install_dialog": "/usr/bin/xcode-select --install",
+      "acceptance": "User accepts Apple terms/OS credentials; never autoaccept EULA",
+      "verify": [
+        "/usr/bin/xcrun --find clang",
+        "/usr/bin/xcrun --find swift",
+        "/usr/bin/xcrun --sdk macosx --show-sdk-path"
+      ],
+      "metal": "Embed source shader; runtime compilation; no preinstalled full Xcode/metal compiler demanded",
+      "cmake": "pinned cmake artifact unpacked original CMake.app; executable Contents/bin/cmake"
+    },
+    "ane_min_macos": "15",
+    "target_os_baseline": "not decided here"
+  },
+  "recipes": {
+    "python": {
+      "kind": "native-bootstrap"
+    },
+    "search": {
+      "kind": "native-bootstrap",
+      "unchanged": true
+    },
+    "cmake": {
+      "kind": "native-unpack"
+    },
+    "ffmpeg": {
+      "source": "ffmpeg-source",
+      "function": "build_tool",
+      "name": "ffmpeg"
+    },
+    "whisper": {
+      "source": "whisper-source",
+      "function": "build_tool",
+      "name": "whisper",
+      "weights": [
+        "whisper-base",
+        "whisper-medium"
+      ]
+    },
+    "vox": {
+      "source": "vox-source",
+      "function": "build_tool",
+      "name": "vox",
+      "transformation": "vox-combined-speed.json",
+      "weights": [
+        "vox-baselm",
+        "vox-acoustic"
+      ]
+    },
+    "scummtr": {
+      "source": "scummtr-source",
+      "function": "build_tool",
+      "name": "scummtr",
+      "transformation": "scummtr-actor.json"
+    },
+    "ane": {
+      "function": "tools.setup_ane_runtime.install_venv",
+      "wheel": "ane-wheel",
+      "constraints": "ane-constraints.txt",
+      "min_macos": "15",
+      "status": "source_download_ready",
+      "model_transfer": "generator_launcher.setup_recipes.transfer; gated per artifact",
+      "terms_status": "unverified",
+      "terms_description": "Converted-weight terms are not explicitly bound in this catalog; no prohibition is inferred. Download readiness means source and integrity metadata only."
+    }
+  }
+}

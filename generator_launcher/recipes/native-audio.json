@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "name": "sox",
+  "version": "14.3.1",
+  "build_revision": "mi1-native-sox-14.3.1-r1",
+  "source": {
+    "url": "https://downloads.sourceforge.net/project/sox/sox/14.3.1/sox-14.3.1.tar.gz",
+    "bytes": 1044595,
+    "sha256": "c4be9ebdb1e77a3bc9f3ee1f3fd274a1fe7b162a174fcc74874b231f3f1ace54",
+    "directory": "sox-14.3.1",
+    "max_unpacked_bytes": 8388608,
+    "max_members": 512
+  },
+  "license": {
+    "application": "GPL-2.0-or-later",
+    "library": "LGPL-2.1-or-later",
+    "files": {
+      "COPYING": "8608e7b3443f479a2c63d38d5364c2a511fd46edb980b4ec3fc01c12750aec24",
+      "LICENSE.GPL": "ab15fd526bd8dd18a9e77ebc139656bf4d33e97fc7238cd11bf60e2b9b8666c6",
+      "LICENSE.LGPL": "5df07007198989c622f5d41de8d703e7bef3d0e79d62e24332ee739a452af62a"
+    }
+  },
+  "configure_flags": [
+    "--disable-shared",
+    "--enable-static",
+    "--disable-gomp",
+    "--disable-symlinks",
+    "--without-libltdl",
+    "--without-magic",
+    "--without-png",
+    "--without-ladspa",
+    "--without-mad",
+    "--without-id3tag",
+    "--without-lame",
+    "--without-oggvorbis",
+    "--without-flac",
+    "--without-amrwb",
+    "--without-amrnb",
+    "--without-wavpack",
+    "--without-sndio",
+    "--without-coreaudio",
+    "--without-alsa",
+    "--without-ao",
+    "--without-pulseaudio",
+    "--without-waveaudio",
+    "--without-sndfile",
+    "--without-ffmpeg",
+    "--without-oss",
+    "--without-sunaudio",
+    "--without-mp3",
+    "--without-gsm",
+    "--without-lpc10"
+  ],
+  "cflags": "-O2",
+  "portability_patch": {
+    "path": "config.sub",
+    "input_sha256": "4a52601f4d439a2407b455ae539a1347d545af057087dfb6591572be4ce9bb4a",
+    "output_sha256": "7286c7cb42b93bcbe83af7c9499271729c0b9bcb8d233d3997006941ea10d098",
+    "offset": 9765,
+    "insert": "aarch64-* | "
+  },
+  "limitations": [
+    "Native macOS arm64/x86_64 only; no external codecs or device drivers.",
+    "WAV/raw and upstream built-in formats; effects and dither unchanged.",
+    "Build uses system clang/make and system libraries; no Homebrew or system installation."
+  ]
+}

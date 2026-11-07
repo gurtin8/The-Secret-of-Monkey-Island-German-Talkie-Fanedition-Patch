@@ -1,0 +1,193 @@
+{
+  "format": "mi1-wiki-coverage/1",
+  "app_version": "0.26.10",
+  "topic_count": 125,
+  "binding_count": 198,
+  "message_count": 1086,
+  "source_sha256": {
+    "generator_launcher/__init__.py": "eeb2a1c37d14afcef15ad703434dad00792abbe75cd32045af9b48e2e2701d4f",
+    "generator_launcher/benchmark.py": "9f15e7cb3f51cd45519f289d7d2382023ea906eb85fc356e2fcb261ccfc769a9",
+    "generator_launcher/contracts.py": "7171818a7cc286ec8681fab745bbd3f5b9796c17c2688c3549b768913625e285",
+    "generator_launcher/fassungen.js": "5d4c9a9c2cb41ec83f28e86acfae6397c6299af1ab0c33862c7d6c679ad6d0ea",
+    "generator_launcher/gog_input.py": "d92850fc700fc3773b0e1a94cdb6a327d381f4586a64985432915315b874e396",
+    "generator_launcher/gog_tool.py": "9efc15724b64f8f7961cd26358755aaf5d85a8757bde5f776c6dccac3ee17218",
+    "generator_launcher/host.py": "b8fd1eeb779bf908d4eb1b9992ac0e5c86fcd04476da9898740a88ce3cffb9c5",
+    "generator_launcher/launcher_console.js": "b603dfcb6abcfa35fbd3112b09764d4c31cbf78eed55b66d3065b2b74dc38a94",
+    "generator_launcher/launcher_flow.js": "481e18f45416829cbdb7175a13b969cc4e016ec6d9fea5c7eb6e61d296e0b084",
+    "generator_launcher/launcher_terminal.js": "c75836507959ca9afc0e7a77b5050b37b504e329310d9f9241b9efd5aa4eeadb",
+    "generator_launcher/launcher_wizard.js": "f815a944a5c8069d533df0123d99f7d90fd93d18c301f2c0462cb59f9e1231a0",
+    "generator_launcher/lifetime.py": "4fcd8c56388c495816f448a9a3e2cf349fb2027995cad08634aedfbee4eb680d",
+    "generator_launcher/local_ane.py": "c39c343d5abed3d1068b1ddf747bb34ed0b9646c2245e52e199628f19daa809a",
+    "generator_launcher/local_preparation.py": "76e4c8acea2ce66081d1867674d7106651902b5bd0c4117ed8bb5a77e07d2356",
+    "generator_launcher/metadata_projection.py": "d781b7c6635e95aafe716b26f5fca6ee80feda14716fddccf39a2a03bcbb03dd",
+    "generator_launcher/native/ExistingServer.swift": "e311e446d93890a0396e2f32401bb23876fd9bd3cad3339fe2b665156620a30b",
+    "generator_launcher/native/Launcher.swift": "076856a349ed50e2f4290655b68cebb7e69c5d75b6792399e3fa21257d96cedf",
+    "generator_launcher/native/PatchWindowDock.swift": "f9f38fe6df929a61d0709a17a08f6d4b26b2391568a5210abb7e860786181e3c",
+    "generator_launcher/native/start.html": "9d87206754883ac4f181bf4440b65e7f2233ef196b27b51137ed522b496c43a8",
+    "generator_launcher/native/start.js": "e10c5a0282bb0729304e7112ac833a3d5af7533c32a5ff333966b28f3c76c90c",
+    "generator_launcher/native_audio_tools.py": "0b9edb918d42ded8a5c11260a279e6d9a36318f4880c5e7fe6ca22bb380a7401",
+    "generator_launcher/original_audio.py": "e75f83b6af239ccc38f41b27dbb8e0728a317b219e9fc360f6c4ae05f1fb981c",
+    "generator_launcher/package_native.py": "389af6fd043ec76a69acd39a2f93b4919b43ea1493b4f54135b6e535f895a4b5",
+    "generator_launcher/patch_interaction.py": "6cf910a874dc979d721a6409580e53c4593a546045dcb34e63f6fabd8ff55f2b",
+    "generator_launcher/patch_window.js": "0ce6650b4cb16ea57a19ed7a42e7f0cd7c65940cfd75922461bdb5dbbeea79c4",
+    "generator_launcher/preparation_help.py": "429afa78fcf453bdc6608a51032187ef56855167f0b1b368a07eb31ef8871c61",
+    "generator_launcher/project_defaults.py": "219640ada13d67dc6d26a79d917e853a98f055b1cded8be1395db533a4d08f81",
+    "generator_launcher/reconstruction_runtime.py": "a7e9b5a29b20a608f4c0aa961cfe7f11b70f6eed26bf27245f0e5f1672cf4bc7",
+    "generator_launcher/render.py": "5dd9d77371e64c1cd33bf8d93e24699cf591c37fca01b3c5cc4c97c65928024a",
+    "generator_launcher/render_preparation.py": "c010fdb3666c50c2b6849617ca92f6782c56008cc46ac0d7007745206661d635",
+    "generator_launcher/repair.py": "48c3f74ad83175296340b81f5a510ee63fe3ecd8aa081537d8c9afdb0ef832f8",
+    "generator_launcher/resume.py": "c52a72076e56b4c6717dccc2d193c9a8cb22bf2290cbd3ceaa4e209c30679f57",
+    "generator_launcher/rosetta.py": "4ecdb70b8550db992018d73f37973a6185691674474ba01c1959c8fca59cad89",
+    "generator_launcher/runtime_setup.py": "6df8cc6dc40a5d7b11cc61403e9c6bb9ee949869f9452e4d8352bbcdfeabf5e2",
+    "generator_launcher/setup_dashboard.py": "4d75f16ab9aa91584623aa2e06ac049212a03863b85ab808c9e22008d94fb3e1",
+    "generator_launcher/setup_recipes.py": "cfe897f03720698d1a5fc3db640702686e935afe2a09344b03e85840aa7f241f",
+    "generator_launcher/text_reconstruction.py": "0688b88c1952470e97ffafde1e8dd26d520029173f3a69e9217972c39469140b",
+    "generator_launcher/ute_native_flac.py": "32b2e2c749a5a9fff0141dedae7a171e743e7542a5213b7bcd49779b70bb3f27",
+    "generator_launcher/ute_native_sbl.py": "9821a4c3728664982492cb55af1c19e96e19e4ad5699bfe9ab65fcb894a0fe4d",
+    "generator_launcher/ute_patch_compat.py": "ac7ebba94596215d430c87f6324eb59044b5eed9783d903d85058467ff83c6ad",
+    "generator_launcher/ute_xwma.py": "83734e4b021a912be855f0c6086e2fa1da8ac42cae0a63364a8582f5aa86e643",
+    "generator_launcher/version.py": "d1baa8c4d32ee472fb70dd04a3e516dd9ca9116d1f3cceb3634f2d118b4f67f9",
+    "generator_launcher/voice_choices.py": "a8f234ceaefe72e1ada73a1b5c66208602178ed52c18e070426f4ecdbb9d450e",
+    "mi1_patcher.py": "fd18a84a1696635408e056d6ca1d9323ce6e5eb85fa219425779d1e9672071d1",
+    "patch_review/__init__.py": "709fbde285e0b815f24fb4694af3760ee7c0c3053a2d1dd5a209e3bc8fca084f",
+    "patch_review/__main__.py": "4e85564dde558e725bfed3a7f99ae7b888b2d2cacbd715880e46ea610342a357",
+    "patch_review/app.js": "f7eacb10561dfbb3fae4f24c643be263a676ec56fb845544399e48fe392c88a2",
+    "patch_review/build.py": "027e5f69068f1c53e23c6438ead68e1f02057c09a74c3c47f64e1b63cfa64933",
+    "patch_review/evidence.py": "70e06b177b7aa199183ca838c745c92bbd26d8cf94e98a74cc21d8d4c2cc9819",
+    "patch_review/findings.py": "556e6eda37180203b278438cc73a57dee5bf654d60feb459f9f08529d4ec5c6e",
+    "patch_review/http.py": "a1495b425dc1e103a74c90e9c270678b216ab94a2aaf8ab82c3a44c90cb417fc",
+    "patch_review/index.html": "3188d5ce5b9725252f7464424f41a20323488a2a29859a9a32bec3741002f5cf",
+    "patch_review/render.py": "7efa11eda4ea259c73517deebf523454bcdf5a624a115c1c18b514092e94f44b",
+    "patch_review/service.py": "0034b416eec363f6d8eb73029f24eda52f9172008062eefcb5ccab8ea3ed3263",
+    "patch_review/stt_overlay.py": "863f9c045003c61a7a8a09d02680a5ac7f04d01fb9b78a304e9fd0ad32ab966d",
+    "patch_review/wizard.py": "4b779564dabb962d1e7384d92337e5e27f2d4e4755454910bf22e1719d6428a2",
+    "tools/patch_mi1_intro.py": "ed3cd0edb4c722ebc0cfce8ac05b38bce4e0c3d054bfe345cda7129bfb583276"
+  },
+  "dynamic_exception_sites": [
+    {
+      "source": "generator_launcher/contracts.py",
+      "line": 30,
+      "expression": "message"
+    },
+    {
+      "source": "generator_launcher/host.py",
+      "line": 575,
+      "expression": "PREPARATION_RESTART_REQUIRED"
+    },
+    {
+      "source": "generator_launcher/lifetime.py",
+      "line": 40,
+      "expression": "0"
+    },
+    {
+      "source": "generator_launcher/local_preparation.py",
+      "line": 476,
+      "expression": "PREPARATION_RESTART_REQUIRED"
+    },
+    {
+      "source": "generator_launcher/local_preparation.py",
+      "line": 361,
+      "expression": "receipt"
+    },
+    {
+      "source": "generator_launcher/local_preparation.py",
+      "line": 418,
+      "expression": "receipt"
+    },
+    {
+      "source": "generator_launcher/local_preparation.py",
+      "line": 453,
+      "expression": "message"
+    },
+    {
+      "source": "generator_launcher/local_preparation.py",
+      "line": 358,
+      "expression": "receipt"
+    },
+    {
+      "source": "generator_launcher/patch_interaction.py",
+      "line": 17,
+      "expression": "result"
+    },
+    {
+      "source": "generator_launcher/render.py",
+      "line": 1264,
+      "expression": "readiness['ready_reason']"
+    },
+    {
+      "source": "generator_launcher/repair.py",
+      "line": 628,
+      "expression": "str(s['reason'])"
+    },
+    {
+      "source": "generator_launcher/repair.py",
+      "line": 636,
+      "expression": "str(s['reason'])"
+    },
+    {
+      "source": "generator_launcher/repair.py",
+      "line": 552,
+      "expression": "s['reason']"
+    },
+    {
+      "source": "generator_launcher/setup_dashboard.py",
+      "line": 108,
+      "expression": "returncode"
+    },
+    {
+      "source": "generator_launcher/ute_native_flac.py",
+      "line": 194,
+      "expression": "process.returncode"
+    },
+    {
+      "source": "generator_launcher/ute_xwma.py",
+      "line": 32,
+      "expression": "message"
+    },
+    {
+      "source": "patch_review/__main__.py",
+      "line": 47,
+      "expression": "128 + signum"
+    },
+    {
+      "source": "patch_review/build.py",
+      "line": 364,
+      "expression": "availability['reason'] or 'Vollständige belegte Dialogauswahl fehlt'"
+    },
+    {
+      "source": "patch_review/build.py",
+      "line": 453,
+      "expression": "error"
+    },
+    {
+      "source": "patch_review/build.py",
+      "line": 398,
+      "expression": "busy.get('reason') or 'Renderer belegt'"
+    },
+    {
+      "source": "patch_review/service.py",
+      "line": 327,
+      "expression": "dialog_id"
+    },
+    {
+      "source": "patch_review/service.py",
+      "line": 1421,
+      "expression": "availability['reason'] or 'Renderer belegt; keine Warteschlange.'"
+    },
+    {
+      "source": "patch_review/service.py",
+      "line": 1469,
+      "expression": "CPU_WARNING"
+    },
+    {
+      "source": "patch_review/service.py",
+      "line": 1450,
+      "expression": "CPU_WARNING"
+    }
+  ],
+  "limits": [
+    "Meldungsextraktion: Python raise/_require/logger warning/error, statische JS-Error-Texte und native Alerttexte.",
+    "Dynamische OS-, Fremdtool- und Modellmeldungen werden über Diagnoseklassen erklärt; keine vollständige Liste möglicher externer Texte.",
+    "Bindings ordnen die lokal mitgelieferte Hilfe zu; dynamische Controls und native Dialoge benötigen zusätzliche Bedienprüfung."
+  ]
+}

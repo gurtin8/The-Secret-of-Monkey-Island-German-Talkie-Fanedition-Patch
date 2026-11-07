@@ -1,0 +1,80 @@
+{
+  "format": "mi1-isolated-gog-extractor/1",
+  "platform": "arm64",
+  "minimum_macos": "14.0",
+  "entrypoint": "innoextract/1.9_14/bin/innoextract",
+  "artifacts": [
+    {
+      "id": "gog-innoextract",
+      "formula": "innoextract",
+      "name": "innoextract-1.9_14.arm64_sonoma.bottle.tar.gz",
+      "version": "1.9_14",
+      "url": "https://ghcr.io/v2/homebrew/core/innoextract/blobs/sha256:9f8a39c109afe223626ba99ee2fb50362ccc999325cf1fa2835afc720b0a7338",
+      "sha256": "9f8a39c109afe223626ba99ee2fb50362ccc999325cf1fa2835afc720b0a7338",
+      "bytes": 196468,
+      "kind": "gog_tool",
+      "root": "innoextract/1.9_14",
+      "licenses": [
+        "LICENSE"
+      ],
+      "metadata_url": "https://raw.githubusercontent.com/Homebrew/homebrew-core/6f00f596009feb428265476fb2ba6c1b682f74df/Formula/i/innoextract.rb"
+    },
+    {
+      "id": "gog-boost",
+      "formula": "boost",
+      "name": "boost-1.92.0.arm64_sonoma.bottle.tar.gz",
+      "version": "1.92.0",
+      "url": "https://ghcr.io/v2/homebrew/core/boost/blobs/sha256:38f6e06f86998a21aae14d5279a50d134f325930bdc46fbf081f5d1a183cba4b",
+      "sha256": "38f6e06f86998a21aae14d5279a50d134f325930bdc46fbf081f5d1a183cba4b",
+      "bytes": 61602136,
+      "kind": "gog_tool",
+      "root": "boost/1.92.0",
+      "licenses": [],
+      "metadata_url": "https://raw.githubusercontent.com/Homebrew/homebrew-core/6f00f596009feb428265476fb2ba6c1b682f74df/Formula/b/boost.rb"
+    },
+    {
+      "id": "gog-zstd",
+      "formula": "zstd",
+      "name": "zstd-1.5.7_1.arm64_sonoma.bottle.tar.gz",
+      "version": "1.5.7_1",
+      "url": "https://ghcr.io/v2/homebrew/core/zstd/blobs/sha256:35b5150b27512a94ebaee7b4399aaa8adf42d247e6968319e4aeac3c05365281",
+      "sha256": "35b5150b27512a94ebaee7b4399aaa8adf42d247e6968319e4aeac3c05365281",
+      "bytes": 806449,
+      "kind": "gog_tool",
+      "root": "zstd/1.5.7_1",
+      "licenses": [
+        "LICENSE",
+        "COPYING"
+      ],
+      "metadata_url": "https://raw.githubusercontent.com/Homebrew/homebrew-core/6f00f596009feb428265476fb2ba6c1b682f74df/Formula/z/zstd.rb"
+    },
+    {
+      "id": "gog-xz",
+      "formula": "xz",
+      "name": "xz-5.8.1.arm64_sonoma.bottle.tar.gz",
+      "version": "5.8.1",
+      "url": "https://ghcr.io/v2/homebrew/core/xz/blobs/sha256:3bcdfeaa8b5bd910ac1cf1e7aec7e0fd82fd69f2f09c6ac682eca92725ad9e6c",
+      "sha256": "3bcdfeaa8b5bd910ac1cf1e7aec7e0fd82fd69f2f09c6ac682eca92725ad9e6c",
+      "bytes": 748132,
+      "kind": "gog_tool",
+      "root": "xz/5.8.1",
+      "licenses": [
+        "COPYING",
+        "COPYING.0BSD",
+        "COPYING.GPLv2",
+        "COPYING.GPLv3",
+        "COPYING.LGPLv2.1"
+      ],
+      "metadata_url": "https://raw.githubusercontent.com/Homebrew/homebrew-core/43cad045a4ea71a2d9bf08bcb272bd5f89f5ede2/Formula/x/xz.rb"
+    },
+    {
+      "id": "gog-boost-license",
+      "name": "boost-LICENSE_1_0.txt",
+      "url": "https://raw.githubusercontent.com/boostorg/boost/boost-1.92.0/LICENSE_1_0.txt",
+      "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566",
+      "bytes": 1338,
+      "kind": "gog_tool",
+      "formula": "boost-license"
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "id": "vox-combined-speed",
+  "format": "own-insertions-line-offsets-no-foreign-context",
+  "modification_notice": "Locally modified for The Secret of Monkey Island German Talkie Fanedition Patch: combined reference/prompt generation, persistent requests, feature cache and timings. See docs/UPSTREAM_CHANGES.md. Original copyright and license notices remain applicable.",
+  "notice_added": "2026-11-07",
+  "source_notices": [
+    {
+      "project": "llama.cpp-omni",
+      "authors": "tc-mb and the ggml authors",
+      "copyright": "Copyright (c) 2023-2026 The ggml authors",
+      "license": "MIT",
+      "license_file": "licenses/third-party/llama-cpp-omni-MIT.txt",
+      "revision": "64d092c60db4b4ee45768476bd752f03fdcc98ea",
+      "url": "https://github.com/tc-mb/llama.cpp-omni/tree/64d092c60db4b4ee45768476bd752f03fdcc98ea"
+    },
+    {
+      "project": "VoxCPM2",
+      "copyright": "Copyright OpenBMB",
+      "license": "Apache-2.0",
+      "license_file": "licenses/third-party/VoxCPM-Apache-2.0.txt",
+      "scope": "Parts of the combined-generation implementation follow the OpenBMB VoxCPM2 implementation; no exact OpenBMB source revision is asserted.",
+      "url": "https://github.com/OpenBMB/VoxCPM"
+    }
+  ],
+  "files": [
+    {
+      "path": "tools/omni/voxcpm2/voxcpm2_cli.cpp",
+      "input_sha256": "7fb9a8f26aa9282cfafb031a4126e2c546a958aa1f05f6cf9b4a77de83179c78",
+      "output_sha256": "6d91d82d0530e5b623d2d712de226d43f1be8c2cfd324b38bd215080a87539f5",
+      "operations": [
+        {
+          "start_line": 28,
+          "delete_lines": 0,
+          "insert": "#include <iostream>\n#include <sstream>\n#include <set>\n#include <limits>\n"
+        },
+        {
+          "start_line": 36,
+          "delete_lines": 0,
+          "insert": "    bool requests = false;\n    int feature_cache_mb = 0;\n"
+        },
+        {
+          "start_line": 40,
+          "delete_lines": 0,
+          "insert": "    bool prompt_wav_set = false;\n    bool prompt_text_set = false;\n"
+        },
+        {
+          "start_line": 65,
+          "delete_lines": 2,
+          "insert": "        \"  --prompt-wav PATH    Prompt WAV for continuation (pair with --prompt-text)\\n\"\n        \"  --prompt-text TEXT   Exact prompt transcript; add -r for combined cloning\\n\"\n        \"  --requests           Sequential hex-argv requests on stdin (no streaming)\\n\"\n        \"  --feature-cache-mb N  Session feature budget, 0 disables (max 256)\\n\"\n"
+        },
+        {
+          "start_line": 102,
+          "delete_lines": 0,
+          "insert": "            cfg.prompt_wav_set = true;\n"
+        },
+        {
+          "start_line": 104,
+          "delete_lines": 0,
+          "insert": "            cfg.prompt_text_set = true;\n"
+        },
+        {
+          "start_line": 105,
+          "delete_lines": 0,
+          "insert": "        } else if (arg == \"--requests\") {\n            cfg.requests = true;\n        } else if (arg == \"--feature-cache-mb\") {\n            if (++i < argc) cfg.feature_cache_mb = std::atoi(argv[i]);\n"
+        },
+        {
+          "start_line": 128,
+          "delete_lines": 0,
+          "insert": "    if (cfg.prompt_wav_set != cfg.prompt_text_set ||\n        ((cfg.prompt_wav_set || cfg.prompt_text_set) &&\n         (cfg.prompt_wav_path.empty() || cfg.prompt_text.empty()))) {\n        LOG_ERR(\"--prompt-wav and --prompt-text must both be provided and non-empty\\n\");\n        return false;\n    }\n\n"
+        },
+        {
+          "start_line": 132,
+          "delete_lines": 1,
+          "insert": "    if (cfg.feature_cache_mb < 0 || cfg.feature_cache_mb > 256 || (cfg.requests && cfg.streaming)) return false;\n    if (cfg.text.empty() && !cfg.requests) {\n"
+        },
+        {
+          "start_line": 139,
+          "delete_lines": 1,
+          "insert": "static bool write_wav(const std::string & path, const std::vector<float> & pcm, int sample_rate) {\n"
+        },
+        {
+          "start_line": 143,
+          "delete_lines": 1,
+          "insert": "        return false;\n"
+        },
+        {
+          "start_line": 160,
+          "delete_lines": 0,
+          "insert": "    f.close();\n    return bool(f);\n"
+        },
+        {
+          "start_line": 196,
+          "delete_lines": 1,
+          "insert": "    if (audio_format != 1 || data_size <= 0 || bits_per_sample != 16 || num_channels < 1 || sample_rate <= 0\n        || data_size % (2 * num_channels) != 0) {\n"
+        },
+        {
+          "start_line": 204,
+          "delete_lines": 0,
+          "insert": "    if (!f) return {};\n"
+        },
+        {
+          "start_line": 229,
+          "delete_lines": 1,
+          "insert": "template<class Runtime>\nstatic int run_request(Runtime & runtime, const CliConfig & cfg) {\n"
+        },
+        {
+          "start_line": 238,
+          "delete_lines": 6,
+          "insert": "    runtime.begin_request(static_cast<uint32_t>(cfg.seed));\n"
+        },
+        {
+          "start_line": 254,
+          "delete_lines": 1,
+          "insert": "    if (!cfg.reference_wav_path.empty() && !cfg.prompt_wav_path.empty()) {\n        int reference_sr = 0, prompt_sr = 0;\n        const auto reference_wav = load_wav_mono(cfg.reference_wav_path, reference_sr);\n        const auto prompt_wav = load_wav_mono(cfg.prompt_wav_path, prompt_sr);\n        if (reference_wav.empty() || prompt_wav.empty()) {\n            LOG_ERR(\"Combined cloning requires readable reference and prompt WAV files\\n\");\n            return 1;\n        }\n        LOG_INF(\"Generating (combined%s): reference=%d Hz, prompt=%d Hz\\n\",\n                cfg.streaming ? \" streaming\" : \"\", reference_sr, prompt_sr);\n        if (cfg.streaming) {\n            if (!runtime.generate_with_combined_streaming(\n                    cfg.text, cfg.prompt_text, reference_wav, reference_sr, prompt_wav, prompt_sr,\n                    [&wav](const std::vector<float> & chunk, bool is_final) {\n                        wav.insert(wav.end(), chunk.begin(), chunk.end());\n                        LOG_INF(\"  Chunk: %zu samples%s\\n\", chunk.size(), is_final ? \" (final)\" : \"\");\n                        return true;\n                    }, params)) {\n                LOG_ERR(\"Combined streaming failed: %s\\n\", runtime.last_error().c_str());\n                return 1;\n            }\n        } else {\n            wav = runtime.generate_with_combined(cfg.text, cfg.prompt_text, reference_wav, reference_sr,\n                                                 prompt_wav, prompt_sr, params);\n        }\n        if (wav.empty()) {\n            LOG_ERR(\"Combined cloning failed: %s\\n\", runtime.last_error().c_str());\n            return 1;\n        }\n    } else if (!cfg.prompt_wav_path.empty() && !cfg.prompt_text.empty()) {\n"
+        },
+        {
+          "start_line": 352,
+          "delete_lines": 1,
+          "insert": "    if (wav.empty() || !write_wav(cfg.output_path, wav, sample_rate)) return 1;\n    LOG_INF(\"MI1_TIMING request_generate_seconds=%.6f\\n\", elapsed);\n"
+        },
+        {
+          "start_line": 356,
+          "delete_lines": 0,
+          "insert": "}\n\nstatic bool decode_request(const std::string & line, const CliConfig & shared, CliConfig & cfg) {\n    if (line.empty() || line.size() > 1024 * 1024) return false;\n    std::vector<std::string> args{\"request\"};\n    std::istringstream input(line);\n    std::string hex;\n    auto digit = [](char c) -> int {\n        if (c >= '0' && c <= '9') return c - '0';\n        if (c >= 'a' && c <= 'f') return c - 'a' + 10;\n        return -1;\n    };\n    while (std::getline(input, hex, '\\t')) {\n        if (hex.size() % 2) return false;\n        std::string decoded;\n        for (size_t i = 0; i < hex.size(); i += 2) {\n            int a = digit(hex[i]), b = digit(hex[i+1]);\n            if (a < 0 || b < 0 || (a == 0 && b == 0)) return false;\n            decoded.push_back(char(a * 16 + b));\n        }\n        args.push_back(decoded);\n    }\n    const std::set<std::string> allowed{\"-t\", \"-o\", \"-r\", \"--prompt-wav\", \"--prompt-text\",\n        \"--seed\", \"--steps\", \"--timesteps\", \"--cfg\", \"--temperature\"};\n    std::set<std::string> seen;\n    if ((args.size() - 1) % 2) return false;\n    for (size_t i = 1; i < args.size(); i += 2) {\n        if (!allowed.count(args[i]) || !seen.insert(args[i]).second) return false;\n        if (args[i+1].empty()) return false;\n        if (args[i] == \"--seed\" || args[i] == \"--steps\" || args[i] == \"--timesteps\") {\n            char * end = nullptr;\n            const long n = std::strtol(args[i+1].c_str(), &end, 10);\n            if (!end || *end || n < 0 || n > std::numeric_limits<int>::max() ||\n                (args[i] != \"--seed\" && n == 0)) return false;\n        } else if (args[i] == \"--cfg\" || args[i] == \"--temperature\") {\n            char * end = nullptr;\n            const float v = std::strtof(args[i+1].c_str(), &end);\n            if (!end || *end || !std::isfinite(v) || v < 0) return false;\n        }\n    }\n    for (const char * flag : {\"-t\", \"-o\", \"--seed\", \"--steps\", \"--timesteps\", \"--cfg\", \"--temperature\"})\n        if (!seen.count(flag)) return false;\n    args.push_back(shared.base_lm_path); args.push_back(shared.acoustic_path);\n    std::vector<char *> argv;\n    for (auto & arg : args) argv.push_back(&arg[0]);\n    cfg = CliConfig{};\n    if (!parse_args(int(argv.size()), argv.data(), cfg)) return false;\n    cfg.use_gpu = shared.use_gpu;\n    cfg.n_gpu_layers = shared.n_gpu_layers;\n    return true;\n}\n\ntemplate<class Runtime>\nstatic bool initialize(Runtime & runtime, const CliConfig & cfg) {\n    const auto start = std::chrono::steady_clock::now();\n    if (!runtime.init(cfg.base_lm_path, cfg.acoustic_path, cfg.n_gpu_layers, cfg.use_gpu)) {\n        LOG_ERR(\"Failed to initialize VoxCPM2 runtime: %s\\n\", runtime.last_error().c_str());\n        return false;\n    }\n    runtime.set_feature_cache_limit(size_t(cfg.feature_cache_mb) * 1024 * 1024);\n    LOG_INF(\"MI1_TIMING initialization_seconds=%.6f\\n\",\n        std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count());\n    return true;\n}\n\ntemplate<class Runtime>\nstatic int run_requests(const CliConfig & shared, std::istream & input, std::ostream & reply) {\n    Runtime runtime;\n    bool loaded = false;\n    size_t index = 0;\n    std::string line;\n    // Bound each input line while reading, rather than allocating arbitrarily large lines.\n    while (input.peek() != std::char_traits<char>::eof()) {\n        line.clear();\n        char ch;\n        while (input.get(ch) && ch != '\\n') {\n            if (line.size() >= 1024 * 1024) return 1;\n            line.push_back(ch);\n        }\n        ++index;\n        CliConfig cfg;\n        int rc = 1;\n        if (decode_request(line, shared, cfg)) {\n            if (!loaded) { loaded = initialize(runtime, shared); }\n            if (loaded) rc = run_request(runtime, cfg);\n        }\n        common_log_flush(common_log_main());\n        std::fflush(stderr);\n        reply << \"MI1_REQUEST\\t\" << index << '\\t' << rc << '\\n' << std::flush;\n        if (rc) return rc; // fail-stop; no later request can conceal a failed one\n    }\n    return 0;\n}\n\nstatic int run_synthesis(const CliConfig & cfg) {\n    VoxCPM2Runtime runtime;\n    if (!initialize(runtime, cfg)) return 1;\n    return run_request(runtime, cfg);\n"
+        },
+        {
+          "start_line": 366,
+          "delete_lines": 1,
+          "insert": "    const int rc = cfg.requests ? run_requests<VoxCPM2Runtime>(cfg, std::cin, std::cout) : run_synthesis(cfg);\n"
+        }
+      ],
+      "modification_notice": "Combined reference/prompt CLI, persistent requests, seed/cache options and timings."
+    },
+    {
+      "path": "tools/omni/voxcpm2/voxcpm2_runtime.cpp",
+      "input_sha256": "877cdf6819268877669bfbf6837ed2fe85f009fb80b0bae502c35bb962d1e174",
+      "output_sha256": "de2c5f60269aedd435b58aabc2dac25b02f0b31e226241df121ad62eced9d9b1",
+      "operations": [
+        {
+          "start_line": 10,
+          "delete_lines": 0,
+          "insert": "#include <chrono>\n"
+        },
+        {
+          "start_line": 20,
+          "delete_lines": 0,
+          "insert": "struct MI1StageTimer {\n    const char * stage;\n    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();\n    explicit MI1StageTimer(const char * name) : stage(name) {}\n    ~MI1StageTimer() {\n        LOG_INF(\"MI1_TIMING %s_seconds=%.6f\\n\", stage,\n            std::chrono::duration<double>(std::chrono::steady_clock::now() - start).count());\n    }\n};\n"
+        },
+        {
+          "start_line": 791,
+          "delete_lines": 0,
+          "insert": "void VoxCPM2Runtime::begin_request(uint32_t seed) {\n    clear_error();\n    audio_vae.stream_end();\n    reset_state();\n    // seed=0 historically starts each fresh process with rng.seed(0).\n    rng.seed(seed);\n}\n\n"
+        },
+        {
+          "start_line": 813,
+          "delete_lines": 0,
+          "insert": "    MI1StageTimer timer(\"prefill\");\n"
+        },
+        {
+          "start_line": 1284,
+          "delete_lines": 0,
+          "insert": "    MI1StageTimer timer(\"synthesis_decode\");\n"
+        },
+        {
+          "start_line": 1385,
+          "delete_lines": 0,
+          "insert": "    MI1StageTimer timer(\"waveform_decode\");\n"
+        },
+        {
+          "start_line": 1460,
+          "delete_lines": 1,
+          "insert": "std::vector<float> VoxCPM2Runtime::encode_reference_audio(const std::vector<float> & reference_wav, int sample_rate,\n                                                       bool pad_left) {\n"
+        },
+        {
+          "start_line": 1472,
+          "delete_lines": 0,
+          "insert": "    const auto encoding_start = std::chrono::steady_clock::now();\n    const std::string feature_key = feature_cache.enabled() ? MI1FeatureCache::key(\n        reference_wav, actual_sample_rate, pad_left, audio_vae.config.sample_rate,\n        audio_vae.config.hop_length(), feat_dim(), patch_size()) : std::string();\n    std::vector<float> cached;\n    if (feature_cache.enabled() && feature_cache.get(feature_key, cached)) {\n        LOG_INF(\"MI1_TIMING encoding hit=1 pad_left=%d seconds=%.6f bytes=%zu\\n\", int(pad_left),\n            std::chrono::duration<double>(std::chrono::steady_clock::now() - encoding_start).count(), feature_cache.bytes());\n        return cached;\n    }\n"
+        },
+        {
+          "start_line": 1480,
+          "delete_lines": 1,
+          "insert": "    if (pad_left) {\n        audio.insert(audio.begin(), aligned - audio.size(), 0.0f);\n    } else {\n        audio.resize(aligned, 0.0f);\n    }\n"
+        },
+        {
+          "start_line": 1536,
+          "delete_lines": 0,
+          "insert": "    if (feature_cache.enabled()) feature_cache.put(feature_key, result);\n    LOG_INF(\"MI1_TIMING encoding hit=0 pad_left=%d seconds=%.6f bytes=%zu\\n\", int(pad_left),\n        std::chrono::duration<double>(std::chrono::steady_clock::now() - encoding_start).count(), feature_cache.bytes());\n"
+        },
+        {
+          "start_line": 1726,
+          "delete_lines": 0,
+          "insert": "}\n\nbool VoxCPM2Runtime::build_combined_prefill_inputs(const std::vector<int32_t> & text_token_ids,\n                                                   const std::vector<float> & reference_feat,\n                                                   const std::vector<float> & prompt_feat,\n                                                   bool append_audio_start,\n                                                   VoxCPM2PrefillInputs & inputs) {\n    // OpenBMB VoxCPM2: [ref_start, ref audio, ref_end, joined text,\n    // audio_start, prompt audio]. The two audio regions have complementary masks.\n    if (!build_reference_prefill_inputs(text_token_ids, reference_feat, append_audio_start, inputs)) {\n        return false;\n    }\n    const size_t stride = static_cast<size_t>(feat_dim()) * static_cast<size_t>(patch_size());\n    if (prompt_feat.empty() || prompt_feat.size() % stride != 0) {\n        inputs = {};\n        return fail(\"prompt features must contain whole VoxCPM2 latent patches\");\n    }\n    const size_t frames = prompt_feat.size() / stride;\n    inputs.token_ids.insert(inputs.token_ids.end(), frames, 0);\n    inputs.text_mask.insert(inputs.text_mask.end(), frames, 0);\n    inputs.feat_mask.insert(inputs.feat_mask.end(), frames, 1);\n    inputs.audio_feat.insert(inputs.audio_feat.end(), prompt_feat.begin(), prompt_feat.end());\n    return true;\n}\n\nbool VoxCPM2Runtime::validate_combined_context(size_t prefill_length, int max_steps, size_t capacity) {\n    if (max_steps <= 0) {\n        return fail(\"combined mode requires positive max_steps\");\n    }\n    if (prefill_length > capacity || static_cast<size_t>(max_steps) > capacity - prefill_length) {\n        return fail(\"combined reference, text, prompt and max_steps exceed the model context capacity\");\n    }\n    return true;\n}\n\nvoid VoxCPM2Runtime::seed_combined_decode_context(const VoxCPM2PrefillInputs & inputs) {\n    const size_t stride = static_cast<size_t>(feat_dim()) * static_cast<size_t>(patch_size());\n    // Only the trailing prompt is contiguous with generated speech. For very\n    // short prompts, stop at the text boundary instead of entering ref audio.\n    for (size_t i = inputs.feat_mask.size(); i-- > 0 && output_pool.size() < 3;) {\n        if (!inputs.feat_mask[i]) {\n            break;\n        }\n        output_pool.insert(output_pool.begin(), std::vector<float>(\n            inputs.audio_feat.begin() + i * stride, inputs.audio_feat.begin() + (i + 1) * stride));\n    }\n}\n\nbool VoxCPM2Runtime::prepare_combined(const std::string & target_text, const std::string & prompt_text,\n                                      const std::vector<float> & reference_wav, int reference_sr,\n                                      const std::vector<float> & prompt_wav, int prompt_sr,\n                                      const VoxCPM2GenerateParams & params, VoxCPM2PrefillInputs & inputs) {\n    clear_error();\n    if (target_text.empty() || prompt_text.empty() || reference_wav.empty() || prompt_wav.empty()) {\n        return fail(\"combined mode requires target text, prompt transcript and both WAV inputs\");\n    }\n    if (reference_sr <= 0 || prompt_sr <= 0) {\n        return fail(\"combined mode requires positive sample rates for both WAV inputs\");\n    }\n    // Tokenize once: tokenization at the join must match Python.\n    const auto tokens = tokenize_text(prompt_text + target_text, false, true);\n    if (tokens.empty()) {\n        return false;\n    }\n    const auto reference_feat = encode_reference_audio(reference_wav, reference_sr);\n    if (reference_feat.empty()) {\n        return false;\n    }\n    const auto prompt_feat = encode_reference_audio(prompt_wav, prompt_sr, true);\n    if (prompt_feat.empty()) {\n        return false;\n    }\n    const size_t stride = static_cast<size_t>(feat_dim()) * static_cast<size_t>(patch_size());\n    const size_t audio_start = params.append_audio_start && tokens.back() != kAudioStartToken ? 1 : 0;\n    const size_t prefill_length = 2 + reference_feat.size() / stride + tokens.size() + audio_start +\n                                  prompt_feat.size() / stride;\n    const size_t capacity = std::min(static_cast<size_t>(llama_n_ctx(base_lm.ctx)),\n                                     static_cast<size_t>(residual_lm.kv_cache.max_length));\n    if (!validate_combined_context(prefill_length, params.max_steps, capacity) ||\n        !build_combined_prefill_inputs(tokens, reference_feat, prompt_feat, params.append_audio_start, inputs)) {\n        return false;\n    }\n    if (params.seed != 0) {\n        rng.seed(params.seed);\n    }\n    return prefill(inputs);\n}\n\nstd::vector<float> VoxCPM2Runtime::generate_with_combined(const std::string & target_text,\n                                                         const std::string & prompt_text,\n                                                         const std::vector<float> & reference_wav, int reference_sr,\n                                                         const std::vector<float> & prompt_wav, int prompt_sr,\n                                                         const VoxCPM2GenerateParams & params) {\n    VoxCPM2PrefillInputs inputs;\n    if (!prepare_combined(target_text, prompt_text, reference_wav, reference_sr, prompt_wav, prompt_sr,\n                          params, inputs)) {\n        return {};\n    }\n    // Warm the causal VAE with up to three trailing prompt patches, then trim\n    // their waveform. These patches do not count as generated decode steps.\n    seed_combined_decode_context(inputs);\n    const size_t context_patches = output_pool.size();\n    decode_loop(params, nullptr);\n    if (!last_error_msg.empty()) {\n        return {};\n    }\n    if (output_pool.size() == context_patches) {\n        fail(\"combined generation produced no audio patches\");\n        return {};\n    }\n    auto wav = decode_to_waveform(params.target_sr);\n    if (wav.empty()) {\n        return {};\n    }\n    const size_t trim = context_patches * static_cast<size_t>(patch_size()) *\n                        static_cast<size_t>(audio_vae.config.decode_hop_length());\n    if (wav.size() <= trim) {\n        fail(\"combined waveform is shorter than its prompt context\");\n        return {};\n    }\n    wav.erase(wav.begin(), wav.begin() + trim);\n    return wav;\n}\n\nbool VoxCPM2Runtime::generate_with_combined_streaming(const std::string & target_text,\n                                                     const std::string & prompt_text,\n                                                     const std::vector<float> & reference_wav, int reference_sr,\n                                                     const std::vector<float> & prompt_wav, int prompt_sr,\n                                                     const VoxCPM2AudioChunkCallback & callback,\n                                                     const VoxCPM2GenerateParams & params) {\n    VoxCPM2PrefillInputs inputs;\n    if (!prepare_combined(target_text, prompt_text, reference_wav, reference_sr, prompt_wav, prompt_sr,\n                          params, inputs)) {\n        return false;\n    }\n    // Python streaming sends only newly predicted patches to the stateful VAE.\n    return decode_streaming_from_ready_state(params, callback);\n"
+        },
+        {
+          "start_line": 2013,
+          "delete_lines": 0,
+          "insert": "    feature_cache.clear();\n"
+        }
+      ],
+      "modification_notice": "Combined-generation implementation partly based on OpenBMB VoxCPM2, per-request reset, cache and timings."
+    },
+    {
+      "path": "tools/omni/voxcpm2/voxcpm2_runtime.h",
+      "input_sha256": "a5b18acade789b7f6a66271cd4c238429f76f6b6ffc9859e604184b7f07eb585",
+      "output_sha256": "5a2b173753a7698b243d75aa2bd1ed585ea908c481cea9852d14d8e2f3849892",
+      "operations": [
+        {
+          "start_line": 3,
+          "delete_lines": 0,
+          "insert": "#include \"mi1_feature_cache.h\"\n"
+        },
+        {
+          "start_line": 145,
+          "delete_lines": 1,
+          "insert": "    std::vector<float>   encode_reference_audio(const std::vector<float> & reference_wav, int sample_rate = 0,\n                                                  bool pad_left = false);\n"
+        },
+        {
+          "start_line": 156,
+          "delete_lines": 0,
+          "insert": "    // Combined reference isolation + transcript-guided continuation. Each WAV\n    // has its own source sample rate; the prompt is left-padded for alignment.\n    std::vector<float> generate_with_combined(const std::string & target_text,\n                                              const std::string & prompt_text,\n                                              const std::vector<float> & reference_wav, int reference_sr,\n                                              const std::vector<float> & prompt_wav, int prompt_sr,\n                                              const VoxCPM2GenerateParams & params = {});\n    bool generate_with_combined_streaming(const std::string & target_text,\n                                          const std::string & prompt_text,\n                                          const std::vector<float> & reference_wav, int reference_sr,\n                                          const std::vector<float> & prompt_wav, int prompt_sr,\n                                          const VoxCPM2AudioChunkCallback & callback,\n                                          const VoxCPM2GenerateParams & params = {});\n"
+        },
+        {
+          "start_line": 174,
+          "delete_lines": 0,
+          "insert": "    // Reset generation/RNG/stream state; retain only immutable encoder features.\n    void begin_request(uint32_t seed);\n    void set_feature_cache_limit(size_t bytes) { feature_cache.set_limit(bytes); }\n"
+        },
+        {
+          "start_line": 202,
+          "delete_lines": 0,
+          "insert": "    MI1FeatureCache feature_cache;\n"
+        },
+        {
+          "start_line": 253,
+          "delete_lines": 0,
+          "insert": "    friend struct VoxCPM2CombinedTest;\n    bool validate_combined_context(size_t prefill_length, int max_steps, size_t capacity);\n    void seed_combined_decode_context(const VoxCPM2PrefillInputs & inputs);\n    bool build_combined_prefill_inputs(const std::vector<int32_t> & text_token_ids,\n                                       const std::vector<float> & reference_feat,\n                                       const std::vector<float> & prompt_feat,\n                                       bool append_audio_start, VoxCPM2PrefillInputs & inputs);\n    bool prepare_combined(const std::string & target_text, const std::string & prompt_text,\n                          const std::vector<float> & reference_wav, int reference_sr,\n                          const std::vector<float> & prompt_wav, int prompt_sr,\n                          const VoxCPM2GenerateParams & params, VoxCPM2PrefillInputs & inputs);\n"
+        }
+      ],
+      "modification_notice": "Interfaces for combined generation, per-request state and cache."
+    },
+    {
+      "path": "tools/omni/voxcpm2/mi1_feature_cache.h",
+      "input_sha256": null,
+      "output_sha256": "0bdf1a74bae14b6817aac5ea53233c7b7be6ff7a43a5b84a5a0a3bf902be4c45",
+      "operations": [
+        {
+          "start_line": 0,
+          "delete_lines": 0,
+          "insert": "#pragma once\n#include <cstring>\n#include <list>\n#include <string>\n#include <vector>\n\n// Exact PCM-bit identity, no hash collisions. Each cache belongs to one loaded\n// runtime (immutable models/backend/encoder). Never stores KV or text context.\nclass MI1FeatureCache {\n    struct Entry { std::string key; std::vector<float> features; };\n    std::list<Entry> entries;\n    size_t used = 0, limit = 0;\n    static size_t cost(const std::string & key, size_t floats) {\n        return key.capacity() + 1 + floats * sizeof(float) + sizeof(Entry) + 2 * sizeof(void *);\n    }\npublic:\n    void clear() { entries.clear(); used = 0; }\n    void set_limit(size_t bytes) { clear(); limit = bytes; }\n    size_t bytes() const { return used; }\n    static std::string key(const std::vector<float> & pcm, int rate, bool pad_left,\n                           int encoder_rate, int hop, int dim, int patch) {\n        std::string result = \"mi1-encoder-features/1:mono-float32:\";\n        for (int v : {rate, int(pad_left), encoder_rate, hop, dim, patch}) {\n            result += std::to_string(v) + \":\";\n        }\n        result.append(reinterpret_cast<const char *>(pcm.data()), pcm.size() * sizeof(float));\n        return result;\n    }\n    bool get(const std::string & key, std::vector<float> & result) {\n        for (auto it = entries.begin(); it != entries.end(); ++it) {\n            if (it->key == key) {\n                result = it->features;\n                entries.splice(entries.begin(), entries, it);\n                return true;\n            }\n        }\n        return false;\n    }\n    void put(std::string key, const std::vector<float> & result) {\n        if (result.empty()) return;\n        const size_t entry_cost = cost(key, result.size());\n        if (entry_cost > limit) return;\n        for (auto it = entries.begin(); it != entries.end(); ++it) {\n            if (it->key == key) {\n                used -= cost(it->key, it->features.size());\n                entries.erase(it);\n                break;\n            }\n        }\n        while (used + entry_cost > limit && !entries.empty()) {\n            used -= cost(entries.back().key, entries.back().features.size());\n            entries.pop_back();\n        }\n        entries.push_front({std::move(key), result});\n        used += entry_cost;\n    }\n    bool enabled() const { return limit > 0; }\n};\n"
+        }
+      ],
+      "modification_notice": "New helper for the local feature cache."
+    }
+  ]
+}

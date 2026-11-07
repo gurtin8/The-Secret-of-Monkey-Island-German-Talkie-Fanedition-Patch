@@ -1,0 +1,65 @@
+{
+  "package": {
+    "filename": "voxcpmane2-0.1.3b1-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/c1/7f/50d8334bdd41bcab0d72ba72586a49dfd36528171c90d957377927a9e06f/voxcpmane2-0.1.3b1-py3-none-any.whl",
+    "sha256": "88998a020f67c6b4f6391da5112fb7dd56ceca42886ebea9e1ebca4274f42a59"
+  },
+  "files": [
+    {
+      "filename": "voxcpmane/__init__.py",
+      "sha256": "14ea4e146df513f3118781b10514045a7d3d0085ce9e1f3e1393b7fbdfb59eb8"
+    },
+    {
+      "filename": "voxcpmane/_coreml_utils.py",
+      "sha256": "26a8ca4d8a3c2aacee69ec8ab7dcccfadc4809bec90b052fa541279d1d444dbf"
+    },
+    {
+      "filename": "voxcpmane/audio_io.py",
+      "sha256": "4c0cf662fe4ae7592edc8b96095aa03139a651189164a086fe4c58681076e3a0"
+    },
+    {
+      "filename": "voxcpmane/audio_vae_decoder.py",
+      "sha256": "81a1b4368bf4ce8485e106e3e8891aa7b18589c7bf389cf314a43b30bd76137b"
+    },
+    {
+      "filename": "voxcpmane/audio_vae_encoder.py",
+      "sha256": "5b9a515a7650ec824435cc2f24ae2403c9a98dbc1d1191e93f1fd696d71158f3"
+    },
+    {
+      "filename": "voxcpmane/embeddings.py",
+      "sha256": "152802fbaa2cac92ddef9a594bdb9fa3241e0c6aa3621a6663ca12d02f3a9764"
+    },
+    {
+      "filename": "voxcpmane/feat_encoder.py",
+      "sha256": "4938fd8bbc583a4480380816ecaec2339415838a3f63cfbdf702c7d3b75924f9"
+    },
+    {
+      "filename": "voxcpmane/generator.py",
+      "sha256": "98e7a911592f9ef4302ad70633d379aaea7f08bd2fb55961e76b695ac7e4d05a"
+    },
+    {
+      "filename": "voxcpmane/lm.py",
+      "sha256": "6fdc47f0ab0ca28baf38a6bbd1291083806a8c8947bd8909e968499b31eca8d1"
+    },
+    {
+      "filename": "voxcpmane/locdit.py",
+      "sha256": "b1efbae04da9073829d7e3956954e4e7f45d3e81c012a90afa2734cdfa1b7366"
+    },
+    {
+      "filename": "voxcpmane/metrics.py",
+      "sha256": "68da13d3293f530bbd268c02716a762906e50896a991c54c92d2d949003487a3"
+    },
+    {
+      "filename": "voxcpmane/server.py",
+      "sha256": "ae146e8b4406e03bebec74ed34d15c695de0dbc596779e7361314f0b3443e161"
+    },
+    {
+      "filename": "voxcpmane/text_normalize.py",
+      "sha256": "e0c77ef69b01ab06b879f3f391275a6a98c0222c5731b13f4f318cc04b32fbf6"
+    },
+    {
+      "filename": "voxcpmane2-0.1.3b1.dist-info/METADATA",
+      "sha256": "503a3d81c7c13a410e7743be7e1b4e356894a14a8a123451590e36e40cf02ca8"
+    }
+  ]
+}

@@ -1,0 +1,795 @@
+#!/usr/bin/env python3
+"""Build an MI1 Ultimate Talkie dubbing reference from local game files.
+
+The SCUMM text is exported by ScummTR. This program reads that documented
+text export and the VCTL/VOC records in the uncompressed speech archive.
+"""
+
+import argparse
+import csv
+import hashlib
+import json
+import mmap
+import os
+import re
+import shutil
+import struct
+import subprocess
+import sys
+import tempfile
+from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from dataclasses import dataclass, replace
+from pathlib import Path
+from typing import Dict, List, Optional, Sequence, Tuple
+
+
+HEADER_RE = re.compile(
+    r"^\[(?P<room>\d+):(?P<resource>[A-Z0-9]+)#(?P<resource_id>\d+)\]"
+    r"\((?P<opcode>[0-9A-F_]+)(?::(?P<actor>EGO|VAR|A\d+))?\)(?P<body>.*)$"
+)
+ESCAPE_RE = re.compile(r"\\x([0-9A-Fa-f]{2})")
+VOICE_RE = re.compile(r"(?:\\xFF\\x0A(?:\\x[0-9A-Fa-f]{2}){2}){4}", re.I)
+VOC_MAGIC = b"Creative Voice File\x1a"
+SPEAKER_CODE_NAMES = {
+    "GUY": "Guybrush",
+    "STN": "Stan",
+    "STK": "Gemischtwarenhändler",
+    "OTS": "Otis",
+    "HRM": "Herman Toothrot",
+    "NA1": "Eingeborener 1",
+    "NA2": "Eingeborener 2",
+    "NA3": "Eingeborener 3",
+    "MTH": "Meathook",
+    "SMK": "Smirk",
+    "SWD": "Schwertmeisterin",
+    "BOB": "Bob",
+    "ELA": "Elaine Marley",
+    "SHF": "Sheriff Fester Shinetop",
+    "FOR": "Wahrsagerin",
+    "LKO": "Späher",
+    "LCH": "LeChuck",
+    "FB1": "Fettucini Brother 1",
+    "FB2": "Fettucini Brother 2",
+    "TRL": "Troll",
+    "PL1": "Wichtiger Pirat 1",
+    "PL2": "Wichtiger Pirat 2",
+    "PL3": "Wichtiger Pirat 3",
+    "NAR": "Erzähler",
+    "DOG": "Hund",
+    "COK": "Koch",
+    "BOU": "Türsteher",
+    "MAN": "Mann",
+    "MKY": "Affe",
+    "Rat": "Ratte",
+}
+
+
+@dataclass(frozen=True)
+class Sample:
+    speech_id: int  # Byte offset of the VCTL block in monster.sou.
+    archive_offset: int
+    archive_size: int
+    voc_offset: int
+    voc_size: int
+    vctl_size: int
+
+
+@dataclass(frozen=True)
+class Dialogue:
+    speech_id: int
+    sequence: int
+    text: str
+    room_id: int
+    resource_type: str
+    resource_id: int
+    script_id: str
+    opcode: str
+    actor_tag: str
+    speaker_opcode: str
+    speaker_actor_tag: str
+    control_codes: str
+    source_line: int
+    dynamic: bool
+    unknown_control: bool
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def write_json(path: Path, value: object) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + ".partial")
+    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    os.replace(str(temporary), str(path))
+
+
+def write_csv(path: Path, columns: Sequence[str], rows: Sequence[dict]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + ".partial")
+    with temporary.open("w", newline="", encoding="utf-8-sig") as stream:
+        writer = csv.DictWriter(stream, fieldnames=columns, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+    os.replace(str(temporary), str(path))
+
+
+def required_file(directory: Path, name: str) -> Path:
+    path = directory / name
+    if not path.is_file():
+        raise FileNotFoundError("Required input missing: {}".format(path))
+    return path
+
+
+def make_inventory(en_dir: Path, de_dir: Path) -> Tuple[Path, dict]:
+    files = {
+        "en_monkey_000": required_file(en_dir, "monkey.000"),
+        "en_monkey_001": required_file(en_dir, "monkey.001"),
+        "en_monster_sou": required_file(en_dir, "monster.sou"),
+        "de_monkey_000": required_file(de_dir, "monkey.000"),
+        "de_monkey_001": required_file(de_dir, "monkey.001"),
+        "de_monster_sou": required_file(de_dir, "monster.sou"),
+    }
+    inventory = {
+        key: {"path": str(path.resolve()), "size": path.stat().st_size, "sha256": sha256_file(path)}
+        for key, path in files.items()
+    }
+    if (inventory["en_monkey_000"]["sha256"] == inventory["de_monkey_000"]["sha256"]
+            and inventory["en_monkey_001"]["sha256"] == inventory["de_monkey_001"]["sha256"]):
+        raise ValueError("German game files are identical to the English files; apply the German patch first.")
+    if inventory["en_monster_sou"]["sha256"] != inventory["de_monster_sou"]["sha256"]:
+        raise ValueError("The German and English speech archives differ; technical offsets may not identify the same audio.")
+    return files["en_monster_sou"], inventory
+
+
+def scan_sou(source: Path) -> List[Sample]:
+    samples = []
+    with source.open("rb") as stream, mmap.mmap(stream.fileno(), 0, access=mmap.ACCESS_READ) as archive:
+        if archive[:4] != b"SOU ":
+            raise ValueError("Not an uncompressed SOU archive: {}".format(source))
+        positions = []
+        pos = 0
+        while True:
+            pos = archive.find(b"VCTL", pos)
+            if pos < 0:
+                break
+            positions.append(pos)
+            pos += 4
+        if not positions or positions[0] != 8:
+            raise ValueError("SOU archive has no VCTL blocks at the expected start offset")
+        for index, start in enumerate(positions):
+            end = positions[index + 1] if index + 1 < len(positions) else len(archive)
+            if start + 8 > end:
+                raise ValueError("Truncated VCTL block at {}".format(start))
+            vctl_size = struct.unpack_from(">I", archive, start + 4)[0]
+            voc_start = start + vctl_size
+            if vctl_size < 8 or voc_start + len(VOC_MAGIC) > end:
+                raise ValueError("Invalid VCTL length at {}".format(start))
+            if archive[voc_start:voc_start + len(VOC_MAGIC)] != VOC_MAGIC:
+                raise ValueError("Missing VOC header after VCTL block at {}".format(start))
+            samples.append(Sample(start, start, end - start, voc_start, end - voc_start, vctl_size))
+    if len({sample.speech_id for sample in samples}) != len(samples):
+        raise ValueError("Duplicate technical speech IDs")
+    return samples
+
+
+def parse_monster_table(path: Path, samples_by_id: Dict[int, Sample]) -> dict:
+    if not path.is_file():
+        print("Warning: original sample-name table missing: {}".format(path), file=sys.stderr)
+        return {}
+    names = {}
+    for number, line in enumerate(path.read_text(encoding="ascii").splitlines(), 1):
+        if len(line) < 9 or not re.fullmatch(r"[0-9A-Fa-f]{8}", line[:8]):
+            raise ValueError("Malformed monster.tbl line {}".format(number))
+        speech_id = int(line[:8], 16)
+        name = line[8:].strip()
+        if not name or speech_id in names:
+            raise ValueError("Empty or duplicate monster.tbl entry at line {}".format(number))
+        names[speech_id] = name
+    if set(names) != set(samples_by_id):
+        raise ValueError("monster.tbl speech IDs do not exactly match the English SOU archive")
+    return names
+
+
+def voice_values(token: str) -> Tuple[int, int]:
+    data = bytes.fromhex(token.replace("\\x", ""))
+    if len(data) != 16 or any(data[i:i + 2] != b"\xff\x0a" for i in (0, 4, 8, 12)):
+        raise ValueError("Malformed ScummTR voice control: {}".format(token))
+    offset = data[2] | (data[3] << 8) | (data[6] << 16) | (data[7] << 24)
+    vctl_size = data[10] | (data[11] << 8) | (data[14] << 16) | (data[15] << 24)
+    return offset, vctl_size
+
+
+def visible_text_and_controls(body: str) -> Tuple[str, str, bool, bool]:
+    """Render ScummTR's escaped text without dropping insertions silently."""
+    controls = []
+    body = VOICE_RE.sub("", body)
+    tokens = []
+    cursor = 0
+    for match in ESCAPE_RE.finditer(body):
+        tokens.extend(("literal", char) for char in body[cursor:match.start()])
+        tokens.append(("byte", int(match.group(1), 16)))
+        cursor = match.end()
+    tokens.extend(("literal", char) for char in body[cursor:])
+
+    out = []
+    dynamic = False
+    unknown = False
+    i = 0
+    while i < len(tokens):
+        kind, value = tokens[i]
+        if kind == "literal":
+            if value == "^":
+                controls.append("caret")
+                out.append(" ")
+            else:
+                out.append(value)
+            i += 1
+            continue
+
+        if value in (0xFF, 0xFE):
+            if i + 1 >= len(tokens) or tokens[i + 1][0] != "byte":
+                controls.append("{:02X}:missing-opcode".format(value))
+                unknown = True
+                i += 1
+                continue
+            opcode = tokens[i + 1][1]
+            arg_count = 2 if opcode in (4, 5, 6, 7, 12, 13, 14) else 0
+            if any(j >= len(tokens) or tokens[j][0] != "byte" for j in range(i + 2, i + 2 + arg_count)):
+                controls.append("{:02X}{:02X}:truncated".format(value, opcode))
+                unknown = True
+                i += 2
+                continue
+            raw = [value, opcode] + [tokens[j][1] for j in range(i + 2, i + 2 + arg_count)]
+            controls.append("".join("{:02X}".format(byte) for byte in raw))
+            if opcode in (4, 5, 6, 7):
+                number = raw[2] | (raw[3] << 8)
+                out.append("[{} 0x{:04X}]".format("string" if opcode == 7 else "variable", number))
+                dynamic = True
+            elif opcode in (1, 8):
+                out.append(" ")
+            elif opcode not in (2, 3, 12, 13, 14):
+                unknown = True
+            i += 2 + arg_count
+            continue
+
+        if value == 0x0F:
+            controls.append("0F")
+            out.append("™")
+        elif value == 0xFA:
+            controls.append("FA")
+            out.append(" ")
+        elif value >= 0x20:
+            out.append(bytes([value]).decode("cp1252", errors="replace"))
+        else:
+            controls.append("{:02X}".format(value))
+            if value in (8, 10, 13):
+                out.append(" ")
+            else:
+                unknown = True
+        i += 1
+
+    text = re.sub(r"\s+", " ", "".join(out)).strip()
+    return text, json.dumps(controls, ensure_ascii=False), dynamic, unknown
+
+
+def export_scummtr(scummtr: Path, game_dir: Path, path: Path) -> None:
+    command = [str(scummtr), "-g", "monkeycd", "-c", "-H", "-h", "-I", "-p", str(game_dir), "-o", "-f", str(path)]
+    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    if result.returncode != 0 or not path.is_file() or path.stat().st_size == 0:
+        raise RuntimeError("ScummTR export failed for {}: {} {}".format(game_dir, result.stdout, result.stderr))
+
+
+def parse_scummtr(path: Path, samples_by_id: Dict[int, Sample]) -> Tuple[List[Dialogue], List[dict], int]:
+    dialogues = []
+    bad = []
+    multi_sample_lines = 0
+    for line_number, line in enumerate(path.read_text(encoding="cp1252").splitlines(), 1):
+        if not line or line.startswith(";; ScummTR note:"):
+            continue
+        match = HEADER_RE.match(line)
+        if not match:
+            bad.append({"source_line": line_number, "reason": "unrecognized ScummTR line", "raw": line})
+            continue
+        body = match.group("body")
+        voice_matches = list(VOICE_RE.finditer(body))
+        masked = VOICE_RE.sub("", body)
+        if "\\XFF\\X0A" in masked.upper():
+            bad.append({"source_line": line_number, "reason": "incomplete voice control", "raw": line})
+            continue
+        if not voice_matches:
+            continue
+        if len(voice_matches) > 1:
+            multi_sample_lines += 1
+        text, other_controls, dynamic, unknown = visible_text_and_controls(body)
+        room = int(match.group("room"))
+        resource_type = match.group("resource")
+        resource_id = int(match.group("resource_id"))
+        script_id = str(resource_id) if resource_type in ("SCRP", "LSCR") else ""
+        for sequence, voice in enumerate(voice_matches, 1):
+            speech_id, vctl_size = voice_values(voice.group())
+            sample = samples_by_id.get(speech_id)
+            if sample is None:
+                bad.append({"source_line": line_number, "speech_id": speech_id, "reason": "voice offset missing from SOU", "raw": line})
+                continue
+            elif vctl_size != sample.vctl_size:
+                bad.append({"source_line": line_number, "speech_id": speech_id, "reason": "voice VCTL length mismatch", "raw": line})
+                continue
+            controls = json.loads(other_controls)
+            controls.insert(0, "voice:{}:VCTL{}".format(speech_id, vctl_size))
+            dialogues.append(Dialogue(speech_id, sequence, text, room, resource_type,
+                                      resource_id, script_id, match.group("opcode"),
+                                      match.group("actor") or "", match.group("opcode"),
+                                      match.group("actor") or "",
+                                      json.dumps(controls, ensure_ascii=False), line_number,
+                                      dynamic, unknown))
+    return dialogues, bad, multi_sample_lines
+
+
+def actor_names_from_export(path: Path) -> Tuple[dict, dict, dict]:
+    room_names = defaultdict(set)
+    global_names = defaultdict(set)
+    for line in path.read_text(encoding="cp1252").splitlines():
+        match = HEADER_RE.match(line)
+        if not match or match.group("opcode") not in ("13", "53", "93", "D3"):
+            continue
+        actor_tag = match.group("actor") or ""
+        if not actor_tag.startswith("A"):
+            continue
+        name, _, dynamic, unknown = visible_text_and_controls(match.group("body"))
+        if name and not dynamic and not unknown and "@" not in name:
+            actor_id = int(actor_tag[1:])
+            room = int(match.group("room"))
+            room_names[(room, actor_id)].add(name)
+            global_names[actor_id].add(name)
+    name_users = defaultdict(set)
+    for (room, actor_id), names in room_names.items():
+        for name in names:
+            name_users[(room, name)].add(actor_id)
+    return room_names, global_names, name_users
+
+
+def speaker_for_dialogue(item: Dialogue, room_names: dict, global_names: dict,
+                         name_users: dict) -> Tuple[str, str, str]:
+    if item.speaker_actor_tag == "EGO":
+        return "Guybrush", "1", "English printEgo"
+    if item.speaker_opcode in ("FA", "7A"):
+        return "Guybrush", "1", "English dialogue choice (verbOps)"
+    if item.speaker_actor_tag == "VAR":
+        return "", "variable", "print actor from variable"
+    if not item.speaker_actor_tag.startswith("A"):
+        return "", "", "no actor encoded in source string"
+
+    actor_id = int(item.speaker_actor_tag[1:])
+    if actor_id >= 254:
+        return "", str(actor_id), "special print actor without character identity"
+    names = room_names.get((item.room_id, actor_id), set())
+    if names == {"Otis", "Gefangener"}:
+        name = "Otis"
+        method = "actor name in room (alias)"
+    elif len(names) == 1:
+        name = next(iter(names))
+        method = "actor name in room"
+    elif len(global_names.get(actor_id, set())) == 1:
+        name = next(iter(global_names[actor_id]))
+        method = "unique actor name in game"
+    else:
+        return "Actor {} (Raum {})".format(actor_id, item.room_id), str(actor_id), "actor ID only"
+    if len(name_users.get((item.room_id, name), set())) > 1:
+        name = "{} (Actor {})".format(name, actor_id)
+    return name, str(actor_id), method
+
+
+def probe_audio(path: Path, ffprobe: str) -> dict:
+    command = [ffprobe, "-v", "error", "-show_entries",
+               "format=duration,bit_rate:stream=codec_name,sample_rate,channels",
+               "-of", "json", str(path)]
+    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    if result.returncode != 0:
+        raise RuntimeError("ffprobe could not read {}: {}".format(path, result.stderr.strip()))
+    meta = json.loads(result.stdout)
+    stream = next((item for item in meta.get("streams", []) if item.get("codec_name") == "vorbis"), None)
+    if not stream:
+        raise RuntimeError("No Vorbis stream in {}".format(path))
+    duration = float(meta.get("format", {}).get("duration", 0))
+    if duration <= 0 or path.stat().st_size <= 0:
+        raise RuntimeError("Empty or durationless OGG file: {}".format(path))
+    return {
+        "duration_ms": round(duration * 1000),
+        "codec": stream.get("codec_name", ""),
+        "sample_rate": stream.get("sample_rate", ""),
+        "channels": stream.get("channels", ""),
+        "bitrate": meta.get("format", {}).get("bit_rate", ""),
+    }
+
+
+def encode_sample(sample: Sample, source: Path, audio_dir: Path, temp_dir: Path,
+                  ffmpeg: str, ffprobe: str, reuse_audio: bool) -> dict:
+    destination = audio_dir / "{}.ogg".format(sample.speech_id)
+    if destination.exists():
+        if not reuse_audio:
+            raise FileExistsError("Existing OGG would be overwritten: {} (use --reuse-audio to validate and reuse)".format(destination))
+        meta = probe_audio(destination, ffprobe)
+    else:
+        with tempfile.NamedTemporaryFile(dir=str(temp_dir), suffix=".voc", delete=False) as temp:
+            voc_path = Path(temp.name)
+            with source.open("rb") as archive:
+                archive.seek(sample.voc_offset)
+                remaining = sample.voc_size
+                while remaining:
+                    chunk = archive.read(min(1024 * 1024, remaining))
+                    if not chunk:
+                        raise RuntimeError("Truncated SOU sample at {}".format(sample.speech_id))
+                    temp.write(chunk)
+                    remaining -= len(chunk)
+        ogg_path = temp_dir / "{}.partial.ogg".format(sample.speech_id)
+        try:
+            command = [ffmpeg, "-hide_banner", "-loglevel", "error", "-nostdin", "-y",
+                       "-i", str(voc_path), "-c:a", "vorbis", "-strict", "-2",
+                       "-q:a", "5", "-ac", "2", "-threads", "1", str(ogg_path)]
+            result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            if result.returncode != 0:
+                raise RuntimeError("ffmpeg failed for speech ID {}: {}".format(sample.speech_id, result.stderr.strip()))
+            meta = probe_audio(ogg_path, ffprobe)
+            os.link(str(ogg_path), str(destination))  # Fails instead of overwriting an existing sample.
+        finally:
+            voc_path.unlink(missing_ok=True)
+            ogg_path.unlink(missing_ok=True)
+    return {
+        "speech_id": sample.speech_id,
+        "archive_index": 0,
+        "archive_offset": sample.archive_offset,
+        "archive_size": sample.archive_size,
+        "voc_offset": sample.voc_offset,
+        "voc_size": sample.voc_size,
+        "output_file": "english_speech/{}.ogg".format(sample.speech_id),
+        "duration_ms": meta["duration_ms"],
+        "sample_rate": meta["sample_rate"],
+        "channels": meta["channels"],
+        "codec": meta["codec"],
+        "bitrate": meta["bitrate"],
+        "sha256": sha256_file(destination),
+        "original_sample_name": "",
+    }
+
+
+def audio_manifest(samples: List[Sample], source: Path, output_dir: Path, work_dir: Path,
+                   ffmpeg: str, ffprobe: str, jobs: int, reuse_audio: bool,
+                   original_names: dict) -> List[dict]:
+    audio_dir = output_dir / "english_speech"
+    temp_dir = work_dir / "tmp_audio"
+    audio_dir.mkdir(parents=True, exist_ok=True)
+    temp_dir.mkdir(parents=True, exist_ok=True)
+    rows = []
+    with ThreadPoolExecutor(max_workers=jobs) as executor:
+        futures = [executor.submit(encode_sample, sample, source, audio_dir, temp_dir,
+                                   ffmpeg, ffprobe, reuse_audio) for sample in samples]
+        for count, future in enumerate(as_completed(futures), 1):
+            rows.append(future.result())
+            if count % 250 == 0 or count == len(samples):
+                print("Encoded/validated {}/{} audio samples".format(count, len(samples)), flush=True)
+    rows.sort(key=lambda row: row["speech_id"])
+    for row in rows:
+        row["original_sample_name"] = original_names.get(row["speech_id"], "")
+    expected_names = {"{}.ogg".format(sample.speech_id) for sample in samples}
+    extra_names = {path.name for path in audio_dir.glob("*.ogg")} - expected_names
+    if extra_names:
+        raise RuntimeError("Unexpected OGG files in output/english_speech: {}".format(", ".join(sorted(extra_names)[:10])))
+    write_csv(work_dir / "speech_manifest.csv", [
+        "speech_id", "archive_index", "archive_offset", "archive_size", "voc_offset",
+        "voc_size", "output_file", "duration_ms", "sample_rate", "channels", "codec",
+        "bitrate", "sha256", "original_sample_name"], rows)
+    return rows
+
+
+def dialogue_csv_rows(dialogues: List[Dialogue], room_names: dict, global_names: dict,
+                      name_users: dict) -> List[dict]:
+    rows = []
+    for item in dialogues:
+        speaker, actor_id, evidence = speaker_for_dialogue(item, room_names, global_names, name_users)
+        rows.append({
+            "speech_id": item.speech_id, "sequence": item.sequence,
+            "german_text": item.text, "room_id": item.room_id,
+            "resource_type": item.resource_type, "resource_id": item.resource_id,
+            "script_id": item.script_id, "opcode": item.opcode,
+            "actor_tag": item.actor_tag,
+            "speaker_opcode": item.speaker_opcode,
+            "speaker_actor_tag": item.speaker_actor_tag,
+            "speaker": speaker, "speaker_actor_id": actor_id,
+            "speaker_evidence": evidence,
+            "control_codes": item.control_codes, "source_line": item.source_line,
+            "dynamic": int(item.dynamic), "unknown_control": int(item.unknown_control),
+        })
+    return rows
+
+
+def build_reference(manifest: List[dict], german: List[Dialogue], output_dir: Path,
+                    work_dir: Path, german_bad: List[dict], english_bad: List[dict],
+                    multi_sample_lines: int, room_names: dict, global_names: dict,
+                    name_users: dict) -> dict:
+    by_id = defaultdict(list)
+    for item in german:
+        by_id[item.speech_id].append(item)
+    main_rows = []
+    unmatched_rows = []
+    ambiguous_rows = []
+    speaker_review_rows = []
+    status_by_id = {}
+    for audio in manifest:
+        speech_id = audio["speech_id"]
+        candidates = by_id.get(speech_id, [])
+        texts = sorted({item.text for item in candidates if item.text})
+        has_dynamic = any(item.dynamic for item in candidates)
+        has_unknown = any(item.unknown_control for item in candidates)
+        if len(texts) > 1 or has_dynamic or has_unknown:
+            status = "ambiguous"
+            german_text = ""
+            reason = "multiple German texts" if len(texts) > 1 else "dynamic or unknown text control"
+            ambiguous_rows.append({
+                "speech_id": speech_id, "reason": reason,
+                "candidate_texts": json.dumps(texts, ensure_ascii=False),
+                "source_lines": ";".join(str(item.source_line) for item in candidates),
+                "control_codes": json.dumps([item.control_codes for item in candidates], ensure_ascii=False),
+            })
+        elif len(texts) == 1:
+            status = "todo"
+            german_text = texts[0]
+            reason = "reused in {} script locations".format(len(candidates)) if len(candidates) > 1 else ""
+        else:
+            status = "unmatched"
+            german_text = ""
+            reason = "no German voice reference" if not candidates else "voice reference has no literal German text"
+            unmatched_rows.append({
+                "kind": "audio_without_german_text", "speech_id": speech_id,
+                "german_text": "", "reason": reason,
+                "original_sample_name": audio["original_sample_name"],
+                "source_lines": ";".join(str(item.source_line) for item in candidates),
+            })
+        status_by_id[speech_id] = status
+        first = candidates[0] if candidates else None
+        speaker_details = [speaker_for_dialogue(item, room_names, global_names, name_users)
+                           for item in candidates]
+        speaker_labels = {detail[0] for detail in speaker_details if detail[0]}
+        if not candidates or not all(detail[0] for detail in speaker_details):
+            script_speaker = ""
+            script_speaker_status = "unresolved"
+        elif len(speaker_labels) > 1:
+            script_speaker = ""
+            script_speaker_status = "conflict"
+        else:
+            script_speaker = next(iter(speaker_labels))
+            script_speaker_status = "technical" if any(detail[2] == "actor ID only" for detail in speaker_details) else "named"
+        actor_ids = sorted({detail[1] for detail in speaker_details if detail[1]})
+        original_sample_name = audio["original_sample_name"]
+        speaker_code = original_sample_name.split("_", 1)[0] if original_sample_name else ""
+        if original_sample_name and speaker_code and speaker_code[0].isalpha():
+            speaker = SPEAKER_CODE_NAMES.get(speaker_code, speaker_code)
+            speaker_status = "named" if speaker_code in SPEAKER_CODE_NAMES else "coded"
+            speaker_evidence = "Ultimate Talkie monster.tbl sample code {}".format(speaker_code)
+        elif original_sample_name:
+            speaker = ""
+            speaker_status = "unclassified_audio"
+            speaker_evidence = "Ultimate Talkie monster.tbl has no speaker code"
+        else:
+            speaker = script_speaker
+            speaker_status = script_speaker_status
+            speaker_evidence = ";".join(sorted({detail[2] for detail in speaker_details if detail[2]}))
+        if speaker_status != "named" or script_speaker_status == "conflict":
+            speaker_review_rows.append({
+                "speech_id": speech_id, "german_text": german_text,
+                "speaker_status": speaker_status,
+                "speaker": speaker, "speaker_code": speaker_code,
+                "original_sample_name": original_sample_name,
+                "script_speaker_status": script_speaker_status,
+                "script_speaker_candidates": json.dumps(sorted(speaker_labels), ensure_ascii=False),
+                "speaker_actor_ids": ";".join(actor_ids),
+                "source_lines": ";".join(str(item.source_line) for item in candidates),
+            })
+        audio_path = output_dir / audio["output_file"]
+        if not audio_path.is_file() or audio_path.stat().st_size <= 0:
+            raise RuntimeError("Referenced audio file is missing or empty: {}".format(audio_path))
+        main_rows.append({
+            "speech_id": speech_id,
+            "sequence": first.sequence if first else "",
+            "speaker": speaker,
+            "speaker_code": speaker_code,
+            "original_sample_name": original_sample_name,
+            "speaker_actor_id": ";".join(actor_ids),
+            "speaker_status": speaker_status,
+            "speaker_evidence": speaker_evidence,
+            "script_speaker": script_speaker,
+            "script_speaker_status": script_speaker_status,
+            "german_text": german_text,
+            "english_audio_file": audio["output_file"],
+            "duration_ms": audio["duration_ms"],
+            "room_id": ";".join(str(x) for x in sorted({item.room_id for item in candidates})),
+            "script_id": ";".join(str(x) for x in sorted({item.script_id for item in candidates if item.script_id})),
+            "status": status,
+            "notes": reason,
+        })
+    audio_ids = set(status_by_id)
+    for item in german:
+        if item.speech_id not in audio_ids:
+            unmatched_rows.append({
+                "kind": "german_reference_without_audio", "speech_id": item.speech_id,
+                "german_text": item.text, "reason": "speech ID absent from SOU",
+                "source_lines": str(item.source_line),
+            })
+    for issue in german_bad:
+        unmatched_rows.append({
+            "kind": "german_export_problem", "speech_id": issue.get("speech_id", ""),
+            "german_text": "", "reason": issue["reason"], "source_lines": issue["source_line"],
+        })
+    for issue in english_bad:
+        unmatched_rows.append({
+            "kind": "english_export_problem", "speech_id": issue.get("speech_id", ""),
+            "german_text": "", "reason": issue["reason"], "source_lines": issue["source_line"],
+        })
+    write_csv(output_dir / "dubbing_reference.csv", [
+        "speech_id", "sequence", "speaker", "speaker_code", "speaker_status",
+        "speaker_evidence", "original_sample_name", "speaker_actor_id",
+        "script_speaker", "script_speaker_status", "german_text", "english_audio_file",
+        "duration_ms", "room_id", "script_id", "status", "notes"], main_rows)
+    write_csv(output_dir / "unmatched.csv", [
+        "kind", "speech_id", "german_text", "reason", "original_sample_name",
+        "source_lines"], unmatched_rows)
+    write_csv(output_dir / "ambiguous.csv", [
+        "speech_id", "reason", "candidate_texts", "source_lines", "control_codes"], ambiguous_rows)
+    write_csv(work_dir / "speaker_review.csv", [
+        "speech_id", "german_text", "speaker", "speaker_code", "speaker_status",
+        "original_sample_name", "script_speaker_status", "script_speaker_candidates",
+        "speaker_actor_ids", "source_lines"], speaker_review_rows)
+    codes = defaultdict(list)
+    for row in main_rows:
+        codes[row["speaker_code"]].append(row)
+    write_csv(work_dir / "speaker_codes.csv", [
+        "speaker_code", "speaker", "sample_count", "speaker_status", "example_sample_name"], [
+        {"speaker_code": code, "speaker": rows[0]["speaker"],
+         "sample_count": len(rows), "speaker_status": rows[0]["speaker_status"],
+         "example_sample_name": rows[0]["original_sample_name"]}
+        for code, rows in sorted(codes.items())])
+
+    matched_ids = {speech_id for speech_id, status in status_by_id.items() if status == "todo"}
+    matched_entries = sum(item.speech_id in matched_ids and bool(item.text) for item in german)
+    stats = {
+        "extracted_speech_samples": len(manifest),
+        "german_voiced_text_entries": len(german),
+        "matched_audio_samples": len(matched_ids),
+        "matched_german_entries": matched_entries,
+        "unmatched_german_texts": sum(item.speech_id not in audio_ids for item in german),
+        "unmatched_audio_samples": sum(status == "unmatched" for status in status_by_id.values()),
+        "ambiguous_mappings": len(ambiguous_rows),
+        "multi_sample_dialogue_lines": multi_sample_lines,
+        "german_voice_refs_without_literal_text": sum(not item.text for item in german),
+        "coverage_german_entries": matched_entries / len(german) if german else 0,
+        "coverage_audio_samples": len(matched_ids) / len(manifest) if manifest else 0,
+        "named_speaker_samples": sum(row["speaker_status"] == "named" for row in main_rows),
+        "coded_speaker_samples": sum(row["speaker_status"] == "coded" for row in main_rows),
+        "unclassified_audio_samples": sum(row["speaker_status"] == "unclassified_audio" for row in main_rows),
+        "script_speaker_conflicts": sum(row["script_speaker_status"] == "conflict" for row in main_rows),
+    }
+    write_json(work_dir / "stats.json", stats)
+    return stats
+
+
+def resolve_executable(value: str) -> str:
+    path = shutil.which(value)
+    if path is None:
+        raise FileNotFoundError("Executable not found: {}".format(value))
+    return path
+
+
+def main(argv: Optional[Sequence[str]] = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--english-dir", type=Path, default=Path("input/ute_en"))
+    parser.add_argument("--german-dir", type=Path, default=Path("input/ute_de"))
+    parser.add_argument("--output-dir", type=Path, default=Path("output"))
+    parser.add_argument("--work-dir", type=Path, default=Path("work"))
+    parser.add_argument("--scummtr", default="work/vendor/scummtr/build/bin/scummtr")
+    parser.add_argument("--ffmpeg", default="ffmpeg")
+    parser.add_argument("--ffprobe", default="ffprobe")
+    parser.add_argument("--monster-table", type=Path,
+                        default=Path("work/vendor/scummkit/third_party/ultimate-talkie/mi1/monster.tbl"))
+    parser.add_argument("--jobs", type=int, default=4)
+    parser.add_argument("--reuse-audio", action="store_true", help="validate and reuse existing OGGs")
+    args = parser.parse_args(argv)
+    if args.jobs < 1:
+        parser.error("--jobs must be at least 1")
+    en_dir = args.english_dir.resolve()
+    de_dir = args.german_dir.resolve()
+    output_dir = args.output_dir.resolve()
+    work_dir = args.work_dir.resolve()
+    work_dir.mkdir(parents=True, exist_ok=True)
+    previous_inventory_path = work_dir / "inventory.json"
+    previous_inventory = json.loads(previous_inventory_path.read_text(encoding="utf-8")) if previous_inventory_path.is_file() else None
+    source, inventory = make_inventory(en_dir, de_dir)
+    audio_dir = output_dir / "english_speech"
+    if args.reuse_audio and audio_dir.is_dir() and any(audio_dir.glob("*.ogg")):
+        old_hash = ((previous_inventory or {}).get("en_monster_sou") or {}).get("sha256")
+        if old_hash != inventory["en_monster_sou"]["sha256"]:
+            raise ValueError("Existing OGGs cannot be reused with a changed or unrecorded English speech archive.")
+    write_json(previous_inventory_path, inventory)
+    samples = scan_sou(source)
+    samples_by_id = {sample.speech_id: sample for sample in samples}
+    table_path = args.monster_table.resolve()
+    original_names = parse_monster_table(table_path, samples_by_id)
+    if original_names:
+        inventory["monster_table"] = {
+            "path": str(table_path), "size": table_path.stat().st_size,
+            "sha256": sha256_file(table_path),
+        }
+        write_json(previous_inventory_path, inventory)
+    scummtr = Path(resolve_executable(args.scummtr)).resolve()
+    ffmpeg = resolve_executable(args.ffmpeg)
+    ffprobe = resolve_executable(args.ffprobe)
+    english_export = work_dir / "english_scummtr.txt"
+    german_export = work_dir / "german_scummtr.txt"
+    export_scummtr(scummtr, en_dir, english_export)
+    export_scummtr(scummtr, de_dir, german_export)
+    english_refs, english_bad, _ = parse_scummtr(english_export, samples_by_id)
+    german_refs, german_bad, multi_sample_lines = parse_scummtr(german_export, samples_by_id)
+    if not any(item.actor_tag for item in german_refs):
+        raise RuntimeError("ScummTR does not export actor IDs; build the bundled annotated ScummTR source.")
+    if len(english_refs) != len(german_refs):
+        raise RuntimeError("English and German voice reference counts differ; speaker contexts cannot be paired safely.")
+    paired = []
+    for english_item, german_item in zip(english_refs, german_refs):
+        english_key = (english_item.speech_id, english_item.room_id, english_item.resource_type,
+                       english_item.resource_id, english_item.sequence)
+        german_key = (german_item.speech_id, german_item.room_id, german_item.resource_type,
+                      german_item.resource_id, german_item.sequence)
+        if english_key != german_key:
+            raise RuntimeError("English and German voice contexts differ at speech ID {}".format(german_item.speech_id))
+        paired.append(replace(german_item, speaker_opcode=english_item.opcode,
+                              speaker_actor_tag=english_item.actor_tag))
+    german_refs = paired
+    room_names, global_names, name_users = actor_names_from_export(german_export)
+    english_ids = {item.speech_id for item in english_refs}
+    if not english_refs or not german_refs:
+        raise RuntimeError("No voice references found in a ScummTR export")
+    if english_ids != set(samples_by_id):
+        print("Warning: English text references {} of {} SOU blocks".format(len(english_ids), len(samples)), file=sys.stderr)
+    if english_bad or german_bad:
+        print("Warning: ScummTR export issues: English {}, German {}".format(len(english_bad), len(german_bad)), file=sys.stderr)
+    write_csv(work_dir / "actor_names.csv", ["room_id", "actor_id", "names"], [
+        {"room_id": room, "actor_id": actor_id,
+         "names": json.dumps(sorted(names), ensure_ascii=False)}
+        for (room, actor_id), names in sorted(room_names.items())])
+    write_csv(work_dir / "german_dialogue.csv", [
+        "speech_id", "sequence", "german_text", "room_id", "resource_type",
+        "resource_id", "script_id", "opcode", "actor_tag", "speaker_opcode",
+        "speaker_actor_tag", "speaker",
+        "speaker_actor_id", "speaker_evidence", "control_codes", "source_line",
+        "dynamic", "unknown_control"],
+        dialogue_csv_rows(german_refs, room_names, global_names, name_users))
+    manifest = audio_manifest(samples, source, output_dir, work_dir, ffmpeg, ffprobe,
+                              args.jobs, args.reuse_audio, original_names)
+    stats = build_reference(manifest, german_refs, output_dir, work_dir,
+                            german_bad, english_bad, multi_sample_lines,
+                            room_names, global_names, name_users)
+    print("Extracted speech samples: {}".format(stats["extracted_speech_samples"]))
+    print("German voiced text entries: {}".format(stats["german_voiced_text_entries"]))
+    print("Matched: {}".format(stats["matched_audio_samples"]))
+    print("Unmatched German texts: {}".format(stats["unmatched_german_texts"]))
+    print("Unmatched audio samples: {}".format(stats["unmatched_audio_samples"]))
+    print("Ambiguous mappings: {}".format(stats["ambiguous_mappings"]))
+    print("Multi-sample dialogue lines: {}".format(stats["multi_sample_dialogue_lines"]))
+    print("Coverage of German entries: {:.2%}".format(stats["coverage_german_entries"]))
+    print("Coverage of audio samples: {:.2%}".format(stats["coverage_audio_samples"]))
+    print("Named speakers: {}".format(stats["named_speaker_samples"]))
+    print("Speaker codes without expanded name: {}".format(stats["coded_speaker_samples"]))
+    print("Audio without speaker code: {}".format(stats["unclassified_audio_samples"]))
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        sys.exit(main())
+    except (FileNotFoundError, ValueError, RuntimeError) as error:
+        print("Error: {}".format(error), file=sys.stderr)
+        sys.exit(1)

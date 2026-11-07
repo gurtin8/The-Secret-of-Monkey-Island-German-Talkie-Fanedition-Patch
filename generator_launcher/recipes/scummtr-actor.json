@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "id": "scummtr-actor",
+  "format": "own-insertions-line-offsets-no-foreign-context",
+  "modification_notice": "Locally modified for The Secret of Monkey Island German Talkie Fanedition Patch: retain and export actor identifiers with speech lines. See docs/UPSTREAM_CHANGES.md. Original MIT copyright and permission notices remain applicable.",
+  "notice_added": "2026-11-07",
+  "source_notices": [
+    {
+      "project": "ScummTR / ScummRP",
+      "authors": "Thomas Combeleran and Donovan Watteau",
+      "copyright": "Copyright (c) 2003-2006 Thomas Combeleran; Copyright (c) 2020-2026 Donovan Watteau",
+      "license": "MIT",
+      "license_file": "licenses/third-party/ScummTR-MIT.txt",
+      "revision": "a50c6f4bf03566721b3f2c00df257a41a82e22ed",
+      "url": "https://github.com/dwatteau/scummtr/tree/a50c6f4bf03566721b3f2c00df257a41a82e22ed"
+    }
+  ],
+  "files": [
+    {
+      "path": "src/ScummTr/script.cpp",
+      "input_sha256": "928b0a05a6ed1b1cfd86f0b1f34ca46490c247925d6819192ab99bff0804f855",
+      "output_sha256": "e26b7bfd48ccbc28bf88cbc95373fc3ba04380aa467c728d92f39ff87ebc51b3",
+      "operations": [
+        {
+          "start_line": 161,
+          "delete_lines": 1,
+          "insert": "\t\toutput.addLine(s, i->type, i->opcode, i->actorId);\n"
+        },
+        {
+          "start_line": 403,
+          "delete_lines": 1,
+          "insert": "int32 Script::_eatString(Text::LineType stringType, byte opcode, int32 actorId)\n"
+        },
+        {
+          "start_line": 410,
+          "delete_lines": 1,
+          "insert": "\t\t_text.push_back(StringRef(start, length + 1, stringType, opcode, actorId));\n"
+        },
+        {
+          "start_line": 1940,
+          "delete_lines": 1,
+          "insert": "\t\t\t\t\tl = _eatString(Text::LT_RSC, mainOpcode, actor);\n"
+        },
+        {
+          "start_line": 1994,
+          "delete_lines": 2,
+          "insert": ""
+        },
+        {
+          "start_line": 1997,
+          "delete_lines": 0,
+          "insert": "\t\t{\n\t\t\tint32 speakerActor = mainOpcode == 0xD8 ? -2 : _eatByteOrVar(mainOpcode & 0x80);\n\t\t\tif (mainOpcode == 0x94)\n\t\t\t\tspeakerActor = -3;\n"
+        },
+        {
+          "start_line": 2028,
+          "delete_lines": 1,
+          "insert": "\t\t\t\t_eatString(Text::LT_MSG, mainOpcode, speakerActor);\n"
+        },
+        {
+          "start_line": 2035,
+          "delete_lines": 0,
+          "insert": "\t\t}\n"
+        }
+      ],
+      "modification_notice": "Retain the actor identifier when processing speech lines."
+    },
+    {
+      "path": "src/ScummTr/script.hpp",
+      "input_sha256": "b4e095d9b623bbc8d7ebc393f8f82a4e30f58463359eeb80d940bcf9f26b2334",
+      "output_sha256": "1007aeb72bc37d5e41b5b1bd37ff6dc643bfdea62ff0d655a1a5eb78be31fa6c",
+      "operations": [
+        {
+          "start_line": 65,
+          "delete_lines": 0,
+          "insert": "\t\tint32 actorId;\n"
+        },
+        {
+          "start_line": 66,
+          "delete_lines": 3,
+          "insert": "\t\tStringRef(int32 o, int32 l, Text::LineType t, byte op, int32 actor = -1) :\n\t\t\toffset(o), length(l), type(t), opcode(op), padding(0), actorId(actor) { }\n\t\tStringRef() : offset(0), length(0), type(Text::LT_PLAIN), opcode(0), padding(0), actorId(-1) { }\n"
+        },
+        {
+          "start_line": 112,
+          "delete_lines": 1,
+          "insert": "\tint32 _eatString(Text::LineType stringType, byte opcode, int32 actorId = -1);\n"
+        }
+      ],
+      "modification_notice": "Extend speech/actor data and interfaces."
+    },
+    {
+      "path": "src/ScummTr/text.cpp",
+      "input_sha256": "b6d1e6781b800bef8ba77217d1b2fce773f01e5793b92188deb6e19df1d11412",
+      "output_sha256": "f891fed8bf1387141c899a1c55cc17582ddf3d490fa884477520328d3a3b1fdc",
+      "operations": [
+        {
+          "start_line": 959,
+          "delete_lines": 1,
+          "insert": "void Text::addLine(std::string s, Text::LineType lineType, int op, int32 actorId)\n"
+        },
+        {
+          "start_line": 981,
+          "delete_lines": 1,
+          "insert": "\t\t\tif (op >= 0 && actorId >= 0)\n\t\t\t\t_file.write(xsprintf(\"(%.2X:A%i)\", op, actorId));\n\t\t\telse if (op >= 0 && actorId == -2)\n\t\t\t\t_file.write(xsprintf(\"(%.2X:EGO)\", op));\n\t\t\telse if (op >= 0 && actorId == -3)\n\t\t\t\t_file.write(xsprintf(\"(%.2X:VAR)\", op));\n\t\t\telse if (op >= 0)\n"
+        }
+      ],
+      "modification_notice": "Export actor identifiers with speech lines."
+    },
+    {
+      "path": "src/ScummTr/text.hpp",
+      "input_sha256": "d5c53fb50a9776ec571ea3b03175afe6c550f0bd86e5d2cdd371c3b06b7b3fde",
+      "output_sha256": "920277c810c328fa8e00d968a8649226575e39510659217f74c828eee667d20d",
+      "operations": [
+        {
+          "start_line": 142,
+          "delete_lines": 1,
+          "insert": "\tvoid addLine(std::string s, Text::LineType lineType, int op = -1, int32 actorId = -1);\n"
+        }
+      ],
+      "modification_notice": "Extend the corresponding text-export interface."
+    }
+  ]
+}

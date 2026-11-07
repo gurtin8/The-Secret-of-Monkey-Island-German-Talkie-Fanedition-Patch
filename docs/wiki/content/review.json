@@ -1,0 +1,1102 @@
+{
+  "topics": [
+    {
+      "id": "review.workflow",
+      "title": "Dialoge anhören, verbessern und ins Spiel übernehmen",
+      "category": "Review",
+      "summary": "Höre die erzeugten Stimmen durch, verbessere auffällige Stellen und wähle bewusst die Aufnahmen für dein Spiel.",
+      "body": [
+        "In der Review hörst du die erzeugte Sprachausgabe an und verbesserst auffällige Stellen. Die [automatische Prüfung](review.qa) hilft dir dabei; ob eine Aufnahme verständlich klingt und zur Figur passt, entscheidest du selbst.",
+        "Beginne in der [Arbeitsliste „Offen“](review.status-signs). Mit dem Statusfilter „Warnungen“ findest du auffällige Dialoge. Vergleiche sie mit dem Text und der englischen Sprachausgabe. Die [Aussprachehilfe](review.pronunciation) zeigt passende Korrekturen; [Notizen](review.note) halten offene Fragen fest.",
+        "Höre eine neue Vorschau vollständig an und wähle „Vorschau als gut bestätigen“, wenn sie passt. Eine gute aktuelle Ausgabe bestätigst du mit „Aktuelle Ausgabe als gut bestätigen“. Aus den gewählten Aufnahmen erstellst du anschließend die [spielbare Fassung](review.build).",
+        "Texte, Notizen, Einstellungen und Reviewentscheidungen werden [automatisch gespeichert](review.direct-save). Öffnest du dieselbe [Fassung](launcher.render-list) im bisherigen Arbeitsordner erneut, lädt die Review deinen Stand. Ein [Rezept](review.recipe) speichert davon getrennt Texte und Einstellungen zum Weitergeben, ohne Audiodaten.",
+        "Während eine andere Fassung rendert, kannst du lesen und anhören. Änderungen, neue Vorschauen und Exporte sind bis zum Auftragsende gesperrt."
+      ],
+      "related": [
+        "review.status-signs",
+        "review.pronunciation",
+        "review.text",
+        "review.audition",
+        "review.adopt",
+        "review.build"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "#patch-review"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-row]"
+        }
+      ],
+      "steps": [],
+      "navigation_order": 7,
+      "sources": [
+        "docs/launcher/fassungen-workflow.md"
+      ]
+    },
+    {
+      "id": "review.pronunciation",
+      "title": "Aussprache und Stimmklang gezielt verbessern",
+      "category": "Review",
+      "summary": "Wähle den nächsten Hörversuch danach, ob Akzent, Stimmklang, einzelne Wörter oder die Betonung stören.",
+      "body": [
+        "Höre zuerst die auffällige Stelle an und vergleiche sie mit dem gewünschten Text. Ändere für den ersten Vergleich möglichst nur eine Einstellung und nutze „Vorschau mit gleichem [Seed](review.seed)“. So lässt sich ihre Wirkung besser beurteilen. Wenn der einzelne Versuch nicht reicht, kannst du die Einstellungen anschließend bewusst kombinieren. Ist eine vorgeschlagene Kombination bereits eingestellt und klingt noch nicht gut, geh zum nächsten Versuch über. Entscheidend ist jeweils, ob sich die Aufnahme für dich verbessert."
+      ],
+      "sections": [
+        {
+          "title": "Deutscher Text klingt mit englischem Akzent",
+          "body": [
+            "Stelle zuerst „Prewarm“ auf „An“ und lass „Stimmanker“ auf „Beibehalten“. Erzeuge mit „Vorschau mit gleichem Seed“ eine Aufnahme und höre, ob der deutsche Sprachklang besser passt. Der [Prewarm](review.prewarm) gibt der KI ein kurzes deutsches Sprachbeispiel mit.",
+            "Bleibt der Akzent, lass „Prewarm: An“ stehen und aktiviere zusätzlich „Stimmanker: An“. Vergleiche erneut mit gleichem Seed. Erst danach probierst du bei unveränderten Einstellungen „Vorschau mit neuem Seed“, um eine andere Sprechweise zu erhalten. Auch eine andere Referenzaufnahme derselben Stimme kann helfen; dafür gilt der unten beschriebene Weg über die Stimmenwahl."
+          ]
+        },
+        {
+          "title": "Ein kurzer Satz klingt nach einer anderen Stimme",
+          "body": [
+            "Bei erzeugten Sätzen unter drei Sekunden kann der Stimmklang leichter wechseln. Stelle zunächst „Stimmanker“ auf „An“, lass „Prewarm“ auf „Beibehalten“ und vergleiche mit gleichem Seed. Die Referenzaufnahme soll der KI helfen, die Stimme der Figur gleich zu halten. Die drei Sekunden beziehen sich hier auf die erzeugte Spielzeile, nicht auf die Mindestlänge deiner Sprechprobe.",
+            "Hörst du zugleich einen englischen Akzent, teste bewusst „Stimmanker: An“ zusammen mit „Prewarm: An“, weiterhin mit gleichem Seed. Passt das Ergebnis noch nicht, lass beide Einstellungen stehen und versuche anschließend einen neuen Seed."
+          ]
+        },
+        {
+          "title": "Ein Name oder einzelnes Wort wird falsch gesprochen",
+          "body": [
+            "Prüfe zuerst, ob das Wort im [Sprachausgabetext](review.text) richtig steht. Ist die Schreibweise korrekt, die Aussprache aber falsch, nähere die Schreibweise gezielt dem gewünschten Klang an, etwa bei einem englischen Namen. Behalte die Bedeutung des Satzes bei und ändere nicht mehrere Wörter auf einmal.",
+            "Erzeuge die Vorschau mit gleichem Seed und höre die ganze Zeile an: Die Korrektur soll das Wort verbessern, ohne den Satz unnatürlich zu machen. Wird ein richtig geschriebenes Wort nur in diesem Versuch verschluckt, kann stattdessen ein neuer Seed genügen."
+          ]
+        },
+        {
+          "title": "Die Wörter stimmen, aber die Betonung passt nicht",
+          "body": [
+            "Wenn die Figur die richtigen Wörter sagt, der Satz aber nicht zur Szene passt, lass Text, Stimmanker und Prewarm zunächst unverändert und wähle „Vorschau mit neuem Seed“. Damit probierst du eine andere Sprechweise, ohne die Aussage des Dialogs zu verändern. Soll zum Beispiel „Da liegt der Schatz!“ überrascht statt beiläufig klingen, höre besonders auf den Ausruf. Bleibt die Betonung unpassend, prüfe die Zeichensetzung im Sprachausgabetext und vergleiche eine gezielte Änderung wieder mit gleichem Seed."
+          ]
+        },
+        {
+          "title": "Eine andere Referenz derselben Stimme verwenden",
+          "body": [
+            "„Stimmanker: An“ aktiviert die vorhandene Aufnahme; in der Review gibt es keinen separaten Dateiwähler für eine andere Referenz. In der [Stimmenwahl](launcher.voices) kannst du bei einer eigenen Stimme „Diese Datei als zweite Probe hinzufügen“ nutzen. Diese zweite Aufnahme derselben Stimme steht dem ausdrücklich gestarteten [automatischen Reparaturversuch](launcher.repair-workflow) zur Verfügung.",
+            "Die Hauptprobe wird dagegen je Rolle gewählt. Sie zu ersetzen ist eine Änderung der Rollenstimme und kein eigener Stimmwechselknopf für diese eine Reviewzeile. Wenn du nur eine weitere Referenz für Reparaturversuche bereitstellen möchtest, verwende deshalb die optionale zweite Probe."
+          ]
+        },
+        {
+          "title": "Die passende Aufnahme festhalten",
+          "body": [
+            "Höre eine gelungene Vorschau vollständig an und wähle „Vorschau als gut bestätigen“. Erst damit wird sie zur [aktuellen Auswahl](review.adopt). Du kannst gute Verbesserungen als [Rezept speichern](review.recipe), damit andere sie lokal ausprobieren und weiter verbessern können."
+          ]
+        }
+      ],
+      "related": [
+        "review.workflow",
+        "review.seed",
+        "review.text",
+        "review.anchor",
+        "review.prewarm",
+        "launcher.voices",
+        "launcher.repair-workflow",
+        "review.recipe"
+      ],
+      "bindings": [],
+      "navigation_order": 7.5
+    },
+    {
+      "id": "review.seed",
+      "title": "Mit gleichem oder neuem Seed vergleichen",
+      "category": "Review",
+      "summary": "Behalte für einen gezielten Vergleich den Seed bei oder probiere eine andere Sprechweise aus.",
+      "body": [
+        "Der Seed ist die Startzahl der Spracherzeugung. Mit „Vorschau mit gleichem Seed“ behältst du sie bei und kannst die Wirkung einer einzelnen Änderung besser hören. Wenn ein Name falsch klingt, ändere zum Beispiel nur seine Schreibweise im [Sprachausgabetext](review.text) und vergleiche anschließend die beiden Aufnahmen.",
+        "Passen Text und Einstellungen bereits, aber die Figur betont den Satz ungeschickt oder verschluckt ein Wort, wähle „Vorschau mit neuem Seed“. Damit erhältst du einen anderen Versuch. Der Knopf ändert die Startzahl für diese Vorschau; deine gespeicherte Seedvorgabe bleibt bestehen.",
+        "Lass bei solchen Vergleichen auch die [Rechenmethode](review.backend) gleich, denn sie kann den Klang ebenfalls verändern. Unter [Aussprache und Stimmklang](review.pronunciation) findest du passende Versuche für die häufigsten Hörprobleme."
+      ],
+      "related": [
+        "review.audition",
+        "review.recipe-seed",
+        "review.pronunciation"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-new-seed]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-seed-value"
+        }
+      ]
+    },
+    {
+      "id": "review.audition",
+      "title": "Eine Vorschau erzeugen und anhören",
+      "category": "Review",
+      "summary": "Teste einen Dialog, bevor du seine aktuelle Ausgabe ersetzt.",
+      "body": [
+        "Wenn du eine Änderung hören möchtest, wähle am Dialog „Vorschau mit gleichem Seed“ oder „Vorschau mit neuem Seed“. Welche Variante sich für deinen Vergleich eignet, erklärt die [Seed-Hilfe](review.seed). Der Patch speichert zuerst deine Eingaben, erzeugt die Aufnahme und prüft anschließend, welchen Text die Spracherkennung darin versteht.",
+        "Das Ergebnis und mögliche Hinweise erscheinen direkt am Dialog. Höre die Vorschau an und vergleiche sie mit der aktuellen Ausgabe, bevor du sie [übernimmst](review.adopt). Im Patch kannst du in der integrierten Konsole außerdem die laufende Phase sowie Warnungen und Fehler verfolgen.",
+        "Bleibt der Startknopf gesperrt, lies den Hinweis daneben. Vielleicht läuft noch ein Auftrag oder die Spracherzeugung ist gerade nicht verfügbar. Für einen Versuch mit der ungetesteten [CPU-Rechenmethode](review.backend) setzt du zuerst die Bestätigung an diesem Dialog."
+      ],
+      "related": [
+        "review.seed",
+        "review.candidate",
+        "review.backend",
+        "review.queue"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-audition]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-audition-cpu]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-rendering"
+        }
+      ]
+    },
+    {
+      "id": "review.candidate",
+      "title": "Vorschau und aktuelle Ausgabe",
+      "category": "Review",
+      "summary": "Vergleiche einen neuen Versuch mit der Aufnahme, die bisher für das Spiel ausgewählt ist.",
+      "body": [
+        "Die aktuelle Ausgabe ist die Aufnahme, die der Dialog in der späteren Spielfassung verwendet. Ein neuer Versuch erscheint unterhalb der Einstellungen und Vorschautasten. Seine Taste „Abspielen“ steht rechts im Vorschaubereich. Mit „Abspielen“ startest du die jeweilige Aufnahme direkt am Dialog; dieselbe Taste zeigt beim Anhören „Pause“. Klingt die Vorschau besser, kannst du sie [als gut bestätigen und auswählen](review.adopt). Frühere Versuche bleiben im Verlauf mit eigener Hörtaste erreichbar.",
+        "Solange du die Vorschau nicht übernimmst, bleibt die bisherige Aufnahme ausgewählt und behält ihre Gutbestätigung. Auch die Hinweise gehören jeweils zur betreffenden Fassung: Eine Warnung an der Vorschau muss daher nicht für die aktuelle Ausgabe gelten."
+      ],
+      "related": [
+        "review.adopt",
+        "review.audio",
+        "review.status-signs"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-output]"
+        }
+      ]
+    },
+    {
+      "id": "review.adopt",
+      "title": "Eine Vorschau übernehmen",
+      "category": "Review",
+      "summary": "Mache eine passende Vorschau zur aktuellen Ausgabe des Dialogs.",
+      "body": [
+        "Wenn dir eine Vorschau gefällt, höre sie noch einmal vollständig an und wähle „Vorschau als gut bestätigen“. Damit hältst du deine Prüfung fest und machst die Aufnahme zur aktuellen Auswahl für die spätere Spielfassung. Holst du einen Versuch aus dem Verlauf zurück, heißt der Knopf „Diese Fassung als gut bestätigen“. Den Spielordner erstellst du anschließend separat über [„Patch fertigstellen“](review.build).",
+        "Lies vor dem Bestätigen auch die [Warnungen](review.warnings). Mit dem Knopf gibst du diese Fassung samt ihrer Warnungen bewusst frei. Die Audiodatei selbst muss bereits erfolgreich geprüft sein; solange diese Prüfung fehlt oder die Datei ungültig ist, bleibt die Bestätigung gesperrt."
+      ],
+      "related": [
+        "review.warnings",
+        "review.good",
+        "review.build"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-release]"
+        }
+      ]
+    },
+    {
+      "id": "review.warnings",
+      "title": "Eine Vorschau trotz Warnung übernehmen",
+      "category": "Review",
+      "summary": "Prüfe den Warnungsgrund und entscheide bewusst über die Aufnahme.",
+      "body": [
+        "Eine Warnung ist ein Anlass zum Nachhören. Lies ihren Grund und vergleiche die betroffene Stelle mit dem gewünschten Text. Die [automatische Texterkennung](review.qa) kann sich zum Beispiel bei einem Namen irren, obwohl die Figur ihn richtig ausspricht.",
+        "Klingt die Aufnahme für dich passend, wähle „Vorschau als gut bestätigen“ oder bei einem früheren Versuch „Diese Fassung als gut bestätigen“. So wählst du genau die gehörte Fassung trotz ihrer Warnungen aus. Eine ungültige oder noch nicht geprüfte Audiodatei lässt sich damit nicht freigeben."
+      ],
+      "related": [
+        "review.qa",
+        "review.adopt"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-ignore]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-experimental"
+        }
+      ]
+    },
+    {
+      "id": "review.good",
+      "title": "Eine gehörte Ausgabe als gut bestätigen",
+      "category": "Review",
+      "summary": "Halte fest, dass du die aktuell ausgewählte Aufnahme geprüft hast.",
+      "body": [
+        "Hast du die ausgewählte Aufnahme vollständig gehört und bist zufrieden, wähle „Aktuelle Ausgabe als gut bestätigen“. Ihr [grünes Häkchen](review.status-signs) hält diese Entscheidung fest. Es gehört zu genau dieser Audiofassung; eine später ausgewählte Aufnahme braucht ihre eigene Bestätigung.",
+        "Sind keine Text- oder Einstellungsänderungen mehr vorgemerkt, findest du den Dialog danach unter „Manuell bestätigt“. Mit „Anzeigen“ in der Rückmeldung springst du direkt dorthin. Wartet noch eine Änderung auf ihre Umsetzung, bleibt der Dialog unter „Offen“, auch wenn seine vorhandene Aufnahme bereits bestätigt ist."
+      ],
+      "related": [
+        "review.status-signs",
+        "review.candidate",
+        "review.restore"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-good]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-show-confirmed"
+        }
+      ],
+      "messages": [
+        "Aktuelle Ausgabe als gut bestätigt.",
+        "Aktuelle Ausgabe als gut bestätigt. Eine andere Vorschau ist noch nicht übernommen."
+      ]
+    },
+    {
+      "id": "review.restore",
+      "title": "Zur letzten Auswahl zurückkehren",
+      "category": "Review",
+      "summary": "Hole die Auswahl zurück, die du unmittelbar vor der jetzigen verwendet hast.",
+      "body": [
+        "War die vorherige Fassung doch passender, wähle „Zurück zur letzten Version“. Der Patch stellt diese Auswahl zusammen mit ihrem Text, ihren Einstellungen und ihrem [Seed](review.seed) wieder her. Er erzeugt dabei keine neue Aufnahme. Eine zwischenzeitliche Vorschau verschiebt dieses Rückkehrziel nicht.",
+        "Höre die zurückgeholte Fassung erneut an und lies ihre Hinweise. Vorhandene [Warnungen](review.warnings) und Gründe, die eine Übernahme verhindern, gelten weiterhin."
+      ],
+      "related": [
+        "review.candidate",
+        "review.warnings"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-restore-previous]"
+        }
+      ]
+    },
+    {
+      "id": "review.text",
+      "title": "Den Sprachausgabetext ändern",
+      "category": "Review",
+      "summary": "Ändere den Sprachausgabetext, wenn die nächste Aufnahme anders gesprochen werden soll.",
+      "body": [
+        "Im Feld „Sprachausgabetext für den nächsten Versuch“ legst du fest, was die KI sprechen soll. Für einen falsch ausgesprochenen Namen reicht oft eine vorsichtig angepasste Schreibweise. Behalte die Bedeutung bei. „Englischer Untertitel“ und „Deutscher Untertitel“ bleiben zum Vergleich sichtbar.",
+        "Erzeuge eine Vorschau mit [gleichem Seed](review.seed), um die Änderung zu hören. Die vorhandene Aufnahme bleibt ausgewählt, bis du einen neuen Versuch [übernimmst](review.adopt).",
+        "Das Feld darf bis zu 4000 Zeichen enthalten und nicht leer sein. Änderungen werden beim Tippen gespeichert; warte vor dem Verlassen auf „Gespeichert“. Bei einem [Speicherfehler](review.direct-save) bleibt deine Eingabe erhalten."
+      ],
+      "related": [
+        "review.audition",
+        "review.direct-save",
+        "review.note",
+        "review.pronunciation"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-tts]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-save-status]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-original-text"
+        }
+      ]
+    },
+    {
+      "id": "review.note",
+      "title": "Notizen zu einem Dialog",
+      "category": "Review",
+      "summary": "Merke dir, was du gehört hast oder noch verbessern möchtest.",
+      "body": [
+        "Wenn du eine Stelle später noch einmal prüfen möchtest, schreibe dir etwa „Letztes Wort zu leise“ oder „Betonung mit Original vergleichen“ auf. Der Patch speichert deine Notiz beim Tippen; auf die Spracherzeugung hat sie keinen Einfluss. Du hast Platz für 2000 Zeichen. Möchtest du die Notiz entfernen, leere das Feld.",
+        "Im Notizverlauf kannst du frühere Einträge nachlesen. Achte dabei auf den Hinweis, wenn eine Notiz zu einer älteren Aufnahme gehört: Die inzwischen gewählte Fassung kann bereits anders klingen. Was die Speicheranzeige bedeutet, erklärt [„Änderungen speichern“](review.direct-save)."
+      ],
+      "related": [
+        "review.direct-save",
+        "review.binding"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-note]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-note-history"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-note-editor > summary"
+        }
+      ]
+    },
+    {
+      "id": "review.anchor",
+      "title": "Den Stimmanker für einen Versuch ändern",
+      "category": "Review",
+      "summary": "Nutze die vorhandene Referenzaufnahme, wenn die Figur ihren Stimmklang nicht hält.",
+      "body": [
+        "Ein Stimmanker gibt der KI eine Aufnahme der gewünschten Stimme als Orientierung mit. Besonders bei erzeugten Spielzeilen unter drei Sekunden kann das helfen, den Klang der Figur gleich zu halten. Wähle für den nächsten Versuch „An“, um den vorhandenen [Stimmanker](launcher.anchor) einzusetzen. „Aus“ lässt ihn weg; „Beibehalten“ übernimmt die bisherige Einstellung. Vergleiche zunächst mit gleichem [Seed](review.seed).",
+        "Der Schalter wählt keine andere Referenzdatei. Möchtest du für ausdrücklich gestartete [automatische Reparaturversuche](launcher.repair-workflow) eine weitere Aufnahme derselben eigenen Stimme anbieten, füge sie in der [Stimmenwahl](launcher.voices) als zweite Probe hinzu. Für Originalstimmen brauchst du die erforderliche [Einwilligung](launcher.original-voice). Wie du Stimmanker, Prewarm und Seed sinnvoll kombinierst, zeigt die [Aussprachehilfe](review.pronunciation)."
+      ],
+      "related": [
+        "review.seed",
+        "review.prewarm",
+        "launcher.custom-audio",
+        "launcher.original-voice",
+        "review.pronunciation"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-anchor]"
+        }
+      ]
+    },
+    {
+      "id": "review.prewarm",
+      "title": "Prewarm für einen Versuch ändern",
+      "category": "Review",
+      "summary": "Gib der KI ein kurzes deutsches Sprachbeispiel mit, wenn ein englischer Akzent stört.",
+      "body": [
+        "Klingt ein deutscher Satz mit englischem Akzent, stelle „Prewarm“ für den nächsten Versuch auf „An“. Die KI erhält dadurch ein kurzes deutsches Sprachbeispiel zur Orientierung. Dessen Text wird nicht an den Spielsatz angehängt. Lass beim ersten Vergleich den Stimmanker unverändert und erzeuge die Vorschau mit gleichem [Seed](review.seed), damit du die Wirkung besser beurteilen kannst.",
+        "Mit „Beibehalten“ nutzt du die bisherige Einstellung, mit „Aus“ lässt du das Sprachbeispiel weg. Bleibt der Akzent oder schwankt zusätzlich der Stimmklang, führt dich die [Aussprachehilfe](review.pronunciation) durch weitere Kombinationen. Wie der Patch das Beispiel vorbereitet, erklärt [„Was der Prewarm praktisch bewirkt“](launcher.prewarm)."
+      ],
+      "related": [
+        "review.anchor",
+        "review.audition",
+        "review.pronunciation"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-prewarm]"
+        }
+      ]
+    },
+    {
+      "id": "review.backend",
+      "title": "Den Rendermodus für einen Dialog wählen",
+      "category": "Review",
+      "summary": "Der Rendermodus legt fest, welche Hardware die Sprache erzeugt.",
+      "body": [
+        "Im Feld „Rendermodus“ wählst du, welche Hardware diesen Dialog erzeugt. GPU steht für den Grafikprozessor; ANE ist Apples Neural Engine für KI-Berechnungen. Mit „Stapel“ übernimmst du die gemeinsame Wahl für den Verarbeitungslauf. Wählst du am Dialog eine eigene Rechenmethode, hat sie Vorrang.",
+        "Ein Wechsel kann Tempo, Aussprache und Betonung verändern. Höre deshalb eine [Vorschau](review.audition) an, bevor du dich entscheidest. Wenn du gerade eine Textkorrektur oder den Stimmanker vergleichst, lass den Rendermodus zunächst gleich. Die [Rendermodi](launcher.render-mode) erklären die Wahl für einen ganzen Lauf; bei [geteilten Rezepten](review.recipe) hilft diese Angabe anderen, dein Ergebnis einzuordnen.",
+        "CPU verwendet den Hauptprozessor und ist experimentell und ungetestet. Möchtest du sie ausprobieren, bestätige diese Wahl für eine Einzelvorschau direkt am Dialog. Für [mehrere ausgewählte Dialoge](review.batch) steht die Bestätigung im Stapelbereich."
+      ],
+      "related": [
+        "review.batch",
+        "review.audition",
+        "review.status"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-backend]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-confirm-cpu"
+        }
+      ]
+    },
+    {
+      "id": "review.mode",
+      "title": "Deutsche Stimme oder Originalton wählen",
+      "category": "Review",
+      "summary": "Lege fest, welche Art von Aufnahme der nächste Verarbeitungslauf verwenden soll.",
+      "body": [
+        "Soll die nächste Verarbeitung eine neue deutsche Stimme erzeugen, wähle unter „Ausgabe“ die Option „Deutsch“. Möchtest du stattdessen die vorhandene Originalaufnahme einsetzen, wähle „Originalton verwenden“. Damit merkst du die gewünschte Änderung vor; wirksam wird sie erst, wenn du den Dialog [verarbeitest](review.batch).",
+        "Die Originalaufnahme lässt sich nur wählen, wenn der Patch sie erfolgreich prüfen konnte. Zum Übernehmen dieses Tons braucht er kein Sprachmodell. Den genauen Ablauf erklärt [„Den Originalton verwenden“](review.original)."
+      ],
+      "related": [
+        "review.batch",
+        "review.original"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-generation-mode]"
+        }
+      ]
+    },
+    {
+      "id": "review.probe",
+      "title": "Eine übernommene Probe weiterverwenden",
+      "category": "Review",
+      "summary": "Eine passende Probe muss beim nächsten Verarbeitungslauf nicht nochmals erzeugt werden.",
+      "body": [
+        "Hast du bereits eine Vorschau übernommen, kann der Patch diese Aufnahme im nächsten Lauf wiederverwenden. Der Hinweis am Dialog sagt dir, ob die angenommene Probe noch zu den aktuellen Einstellungen passt. Änderst du etwa den Text oder den [Rendermodus](review.backend), kann eine neue Aufnahme nötig werden.",
+        "Dafür musst du nichts eigens einschalten: Beim [Verarbeiten](review.batch) nutzt der Patch eine passende freigegebene Probe automatisch weiter. Passt sie nicht mehr, erzeugt der Lauf den Dialog neu."
+      ],
+      "related": [
+        "review.batch",
+        "review.adopt"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-probe-status]"
+        }
+      ]
+    },
+    {
+      "id": "review.audio",
+      "title": "Aufnahmen anhören und vergleichen",
+      "category": "Review",
+      "summary": "Vergleiche die englische Sprachausgabe, deine aktuelle Ausgabe und neue Versuche.",
+      "body": [
+        "Mit „Abspielen“ hörst du die jeweilige Aufnahme, mit „Pause“ hältst du sie an. Erneutes Abspielen setzt sie an derselben Stelle fort; eine beendete Aufnahme startet von vorn. Wählst du eine andere Hörtaste, endet die bisherige Wiedergabe.",
+        "„Englische Sprachausgabe“ spielt die vorhandene englische Aufnahme ab. Daneben kannst du deine aktuelle Ausgabe und die Versuche im Verlauf hören. Anhören allein ändert die Auswahl für das Spiel nicht. Höre eine Vorschau vollständig an, bevor du sie [als gut bestätigst](review.adopt).",
+        "Die [Details](review.binding) jeder Aufnahme zeigen ihren Sprachausgabetext, ihre Einstellungen und ihre [Prüfergebnisse](review.qa). Auch nach Suchen, Filtern oder Blättern zeigt die Hörtaste den Zustand der laufenden Aufnahme.",
+        "Beim Verlassen der Review oder beim Wechsel zu „Patch fertigstellen“ endet die Wiedergabe. Ein Wiedergabefehler erscheint direkt an der Hörtaste; mit „Abspielen“ versuchst du es erneut."
+      ],
+      "related": [
+        "review.qa",
+        "review.candidate",
+        "review.binding"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-original-audio"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-audio-players"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-preview]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-current-inspection > summary"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-hear]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-player-key]"
+        }
+      ],
+      "sources": [
+        "docs/launcher/fassungen-workflow.md"
+      ]
+    },
+    {
+      "id": "review.queue",
+      "title": "Mehrere Vorschauen nacheinander erzeugen",
+      "category": "Review",
+      "summary": "Sammle bis zu acht Dialoge in der Vorschau-Warteliste, falls sie in deiner Umgebung angeboten wird.",
+      "body": [
+        "Wenn du mehrere Versuche vorbereiten möchtest, wähle an den betreffenden Dialogen „Zur Warteliste hinzufügen“. Sobald deine Liste steht, starte „Vorschau-Warteliste rendern“. Der Patch erzeugt erst die Aufnahmen und prüft danach deren Texte. Anschließend hörst du die Ergebnisse einzeln an und entscheidest, welche [Vorschauen du übernimmst](review.adopt).",
+        "Du kannst einzelne Dialoge vor dem Start wieder aus der Liste entfernen oder sie mit „Leeren“ ganz zurücksetzen. Die Warteliste wird nur in bestimmten Umgebungen angeboten und fasst höchstens acht Dialoge. Ist ein Knopf gesperrt, hilft [„Warum die Warteliste gesperrt ist“](review.queue-limits)."
+      ],
+      "related": [
+        "review.queue-limits",
+        "review.adopt",
+        "review.backend"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-audition-queue]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-queue-remove]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-queue-clear]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-audition-queue-start"
+        }
+      ],
+      "messages": [
+        "Die Vorschau-Warteliste wurde gestartet. Ergebnisse bleiben Vorschauen."
+      ]
+    },
+    {
+      "id": "review.batch",
+      "title": "Ausgewählte Dialoge verarbeiten",
+      "category": "Review",
+      "summary": "Verarbeite einen Dialog oder mehrere markierte Dialoge in einem Lauf.",
+      "body": [
+        "Markiere die gewünschten Dialoge mit dem Kästchen im Dialogkopf. Für eine größere Auswahl nutzt du „Alle Treffer auswählen“: Das erfasst sämtliche gefilterten Treffer, auch auf anderen Seiten. Mit „Auswahl löschen“ hebst du die Markierungen wieder auf. Wenn die Auswahl passt, starte „Ausgewählte Dialoge verarbeiten“. Der Patch speichert vorher offene Text- und Einstellungsänderungen.",
+        "Bei einem einzelnen Dialog verarbeitet der Patch die gewählte Ausgabeart. Bei mehreren berücksichtigt er Dialoge mit einem offenen Auftrag sowie Dialoge mit einer [passenden angenommenen Probe](review.probe). Einträge, auf die beides nicht zutrifft, überspringt er. Eine passende Probe wird wiederverwendet, statt sie erneut zu erzeugen.",
+        "Der „Rendermodus für die Auswahl“ bestimmt die gemeinsame [Rechenmethode](review.backend). Hast du direkt an einem Dialog etwas anderes gewählt, gilt dort diese eigene Wahl."
+      ],
+      "related": [
+        "review.mode",
+        "review.backend",
+        "review.probe",
+        "review.build"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-select]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-select-matches"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-clear-selection"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-batch-backend"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-start"
+        }
+      ]
+    },
+    {
+      "id": "review.status-signs",
+      "title": "Review-Statuszeichen und Arbeitslisten",
+      "category": "Review",
+      "summary": "Das Zeichen oben rechts bewertet die aktuelle Aufnahme; die Arbeitsliste zeigt, wo noch Arbeit wartet.",
+      "body": [
+        "{{review-status:manual}} „Manuell bestätigt“ heißt: Du hast diese Fassung als gut bestätigt. {{review-status:clean}} „Automatisch unauffällig“ heißt: Die [automatische Prüfung](review.qa) hat keinen offenen Befund gefunden. {{review-status:repaired}} „Automatisch repariert“ kennzeichnet eine erfolgreiche Reparatur; höre diese Fassung für dein eigenes Urteil noch an.",
+        "{{review-status:open}} Eine offene oder noch nicht bewertete Aufnahme. {{review-status:warning}} Eine Warnung: Lies den Grund und höre die Stelle nach. {{review-status:invalid}} Ein Fehler oder eine ungültige Aufnahme. {{review-status:active}} Die Erzeugung oder Prüfung läuft noch.",
+        "Die Listen „Offen“, „Manuell bestätigt“, „Automatisch unauffällig“ und „Automatisch repariert“ teilen den Bestand auf; „Alle“ zeigt sämtliche Dialoge. Ein bestätigter Dialog bleibt unter „Offen“, solange eine Text- oder Einstellungsänderung auf ihre Umsetzung wartet.",
+        "Eine zusätzliche Vorschau hat ihren eigenen Hinweis. Nach einer Gutbestätigung führt dich „Anzeigen“ in der Rückmeldung zur passenden Liste.",
+        "Shift+Klick auf ein Statuszeichen öffnet diese Hilfe. Mit der Tastatur fokussierst du das Zeichen und drückst F1 oder ?. Ein gewöhnlicher Klick ändert keine Auswahl oder Bestätigung."
+      ],
+      "related": [
+        "review.good",
+        "review.filters",
+        "review.qa",
+        "review.candidate"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-review-status]"
+        }
+      ]
+    },
+    {
+      "id": "review.filters",
+      "title": "Dialoge suchen und filtern",
+      "category": "Review",
+      "summary": "Grenze die Liste auf die Dialoge ein, die du gerade bearbeiten möchtest.",
+      "body": [
+        "Suche nach einer Dialog-ID, einer Textstelle oder einem Begriff aus den Prüfergebnissen. Der Titel „Dialog 70905 · Guybrush“ zeigt zum Beispiel die feste Dialog-ID 70905 und die Figur. Die vollständige technische Kennung findest du in den Details. Auch der erkannte Text wird durchsucht. Mit einem Status wie „Warnungen“ oder „Nicht übernommene Vorschauen“ und einer Fehlerkategorie grenzt du die Treffer weiter ein.",
+        "Suche und Filter gelten innerhalb der gewählten [Arbeitsliste](review.status-signs). Findest du einen erwarteten Dialog nicht, wechsle zu „Alle“ und lockere die übrigen Filter. Deine Suche verändert nur die sichtbare Liste; der spätere Spielordner enthält weiterhin den gesamten Dialogbestand."
+      ],
+      "related": [
+        "review.status-signs",
+        "review.sort",
+        "review.navigation",
+        "review.batch"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-query"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-status"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-category]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-worklist]"
+        }
+      ]
+    },
+    {
+      "id": "review.sort",
+      "title": "Reihenfolge und Anzahl pro Seite ändern",
+      "category": "Review",
+      "summary": "Zeige zuerst die auffälligsten Dialoge oder bleibe bei der ursprünglichen Reihenfolge.",
+      "body": [
+        "Möchtest du zuerst die auffälligsten Dialoge hören, wähle unter „Fehler sortieren“ die Einstellung „Meiste Fehler zuerst“. „Wenigste Fehler zuerst“ kehrt diese Reihenfolge um. Mit „Reihenfolge der Dialogvorgaben“ gehst du nach der zugrunde liegenden Dialogliste vor.",
+        "Über „Pro Seite“ legst du fest, wie viele Dialoge du auf einmal sehen möchtest: 10, 25, 50 oder 100. Beides ordnet nur die Anzeige; die Dialoge und ihre Aufnahmen bleiben erhalten."
+      ],
+      "related": [
+        "review.filters",
+        "review.navigation"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-sort"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-pagesize"
+        }
+      ]
+    },
+    {
+      "id": "review.navigation",
+      "title": "In der Dialogliste blättern",
+      "category": "Review",
+      "summary": "Mit „Zurück“ und „Weiter“ wechselst du zwischen den Seiten deiner Treffer.",
+      "body": [
+        "Mit „Zurück“ und „Weiter“ blätterst du durch die Treffer deiner Suche und Filter. Du findest die Knöpfe oberhalb und unterhalb der Liste. Am Anfang beziehungsweise Ende ist die Richtung gesperrt, in der keine weitere Seite liegt.",
+        "Startest du eine Einzelvorschau, hält der Patch diesen Dialog vorübergehend sichtbar, damit du das Ergebnis wiederfindest. Das endet, sobald du Suche, Filter oder Arbeitsliste änderst. Die Trefferzahl bezieht sich währenddessen weiterhin auf die Dialoge, die zu deinen Filtern passen."
+      ],
+      "related": [
+        "review.filters",
+        "review.sort"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-prev"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-next"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-prev-bottom"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-next-bottom"
+        }
+      ]
+    },
+    {
+      "id": "review.status",
+      "title": "Fortschritt und Speicherhinweise verstehen",
+      "category": "Diagnose",
+      "summary": "Verfolge einen laufenden Auftrag und ordne Hinweise auf knappen Arbeitsspeicher ein.",
+      "body": [
+        "Wenn ein Auftrag läuft, zeigt dir der Status die aktuelle Phase, den bearbeiteten Dialog und die Zahl der bereits erledigten Dialoge. Ein einzelner Erzeugungs- oder Prüfschritt kann länger dauern. Schau zunächst auf diese Angaben, bevor du einen weiteren Start versuchst.",
+        "Der Speicherhinweis schätzt, ob für das Modell genug Arbeitsspeicher frei ist. Wird es knapp, kann die Erzeugung langsamer werden oder abbrechen. Für die weitere Fehlersuche ist dann die konkrete [Meldung](review.messages) entscheidend; die Speicherschätzung allein erklärt einen Abbruch noch nicht."
+      ],
+      "related": [
+        "review.messages",
+        "review.backend"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-job"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-job-progress]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[data-memory-advisory]"
+        }
+      ]
+    },
+    {
+      "id": "review.recipe",
+      "title": "Ein Rezept speichern",
+      "category": "Export",
+      "summary": "Speichere Texte und Einstellungen deiner ausgewählten Aufnahmen zum Weitergeben, ohne Audiodaten.",
+      "body": [
+        "„Rezept speichern“ erstellt eine Datei mit dem Sprachausgabetext, [Seed](review.seed), [Rendermodus](review.backend) sowie den Vorgaben zu [Stimmanker](launcher.anchor) und [Prewarm](launcher.prewarm) deiner ausgewählten Aufnahmen. Audiodaten, persönliche Gutbestätigungen und Einwilligungen zur Stimmnutzung gehören nicht dazu. Dein [automatisch gespeicherter Arbeitsstand](review.workstate) bleibt davon getrennt.",
+        "Rückmeldung und Konsole nennen den Speicherort; im Browser wird die Datei zusätzlich heruntergeladen. Gib die .json-Datei selbst weiter und beschreibe deine Verbesserungen. Nenne Patchversion, Ausgangsrezept, Rendermodus und Stimmenwahl, damit andere den Versuch einordnen können. Eine automatische Veröffentlichung gibt es nicht.",
+        "Mit „Rezept laden“ auf der Startseite oder in der Review übernimmst du die Einstellungen. Neue Aufnahmen entstehen erst, wenn du das Rendering oder [„Ausgewählte Dialoge verarbeiten“](review.batch) startest. Modelle und Referenzaufnahmen müssen lokal verfügbar sein; erforderliche Einwilligungen brauchst du unabhängig vom Rezept. Höre die Ergebnisse selbst an, da andere Stimmen und Hardware anders klingen können.",
+        "Die mitgelieferten Aussprachevorgaben sind auf GPU abgestimmt. [ANE + GPU](launcher.render-mode) ist am schnellsten, kann aber anders sprechen; speziell abgestimmte Vorgaben fehlen bislang. Geteilte Rezepte helfen dabei, Verbesserungen in anderen Umgebungen auszuprobieren."
+      ],
+      "related": [
+        "review.workflow",
+        "launcher.render-mode",
+        "review.backend",
+        "review.seed",
+        "review.batch",
+        "review.workstate"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-export-recipe"
+        }
+      ],
+      "steps": []
+    },
+    {
+      "id": "review.workstate",
+      "title": "Automatisch gespeicherte Arbeit fortsetzen",
+      "category": "Review",
+      "summary": "Der Patch speichert deine Bearbeitungen und Reviewentscheidungen im Arbeitsordner.",
+      "body": [
+        "Deine Bearbeitungen und Reviewentscheidungen werden automatisch im Arbeitsordner gespeichert. Öffne beim nächsten Start denselben Arbeitsordner und dieselbe Fassung über „Zur Review“, um weiterzuarbeiten. Achte vor dem Schließen auf die [Speicheranzeige](review.direct-save).",
+        "Ein [Rezept](review.recipe) dient getrennt davon zum Weitergeben der Texte und Erzeugungseinstellungen. Auch eine Arbeitsstandsdatei aus einer älteren Patchversion kannst du über „Rezept laden“ einlesen.",
+        "Rezepte und ältere Arbeitsstandsdateien enthalten keine Audiodaten. Für eine vollständige Sicherung oder den Umzug auf einen anderen Rechner bewahrst du den gesamten Arbeitsordner einschließlich seiner Aufnahmen auf."
+      ],
+      "related": [
+        "review.recipe",
+        "review.direct-save"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-import"
+        }
+      ]
+    },
+    {
+      "id": "review.export",
+      "title": "Prüfhinweise im Erstellungsbericht nachlesen",
+      "category": "Export",
+      "summary": "Der Erstellungsbericht hält die Prüfhinweise deiner exportierten Spielausgabe fest.",
+      "body": [
+        "Nach dem erfolgreichen Erstellen einer [Spielausgabe](review.build) kannst du mit „Erstellungsbericht herunterladen“ die Angaben zum Export aufbewahren. Der Bericht hält auch vorhandene Warnungen fest.",
+        "Wenn du eine Aussprache verbessern möchtest, kehre zur [Review](review.workflow) zurück. Mit [„Rezept speichern“](review.recipe) bewahrst du die tatsächlich verwendeten Einstellungen deiner ausgewählten Aufnahmen in einer Datei auf."
+      ],
+      "related": [
+        "review.qa",
+        "review.build"
+      ],
+      "bindings": []
+    },
+    {
+      "id": "review.build",
+      "title": "Die spielbare Fassung erstellen",
+      "category": "Export",
+      "summary": "Wähle den Speicherort und erstelle einen eigenen Spielordner mit allen aktuellen Dialogaufnahmen.",
+      "body": [
+        "Öffne oben „Patch fertigstellen“. Wähle unter „Speicherort für den fertigen Spielordner“ über „Ordner wählen …“ dein Ziel oder gib den Pfad ein. Darunter siehst du den Namen des neuen Spielordners mit Datum und Uhrzeit.",
+        "Klicke auf „Spielordner erstellen“ und verfolge den Fortschritt. Gibt es dort bereits eigene Spielausgaben, kannst du eine weitere erstellen oder eine vorhandene ersetzen. Beim Ersetzen bleibt die bisherige Ausgabe erhalten, bis die neue erfolgreich erstellt ist.",
+        "Nur wenn die vorbereitete Spielbasis nicht gefunden wird, erscheint „Quellspielordner“. Wähle dort deine vorbereitete deutsche Ultimate Talkie Edition 1.02. Eine Meldung nennt dir fehlende Dateien oder andere Hindernisse.",
+        "Nach dem Erfolg kannst du den [fertigen Spielordner öffnen](review.finish). Den Erstellungsbericht erhältst du über „Erstellungsbericht herunterladen“."
+      ],
+      "related": [
+        "review.finish",
+        "review.adopt",
+        "review.qa"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-build-game-root"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-choose-game-root"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-build-output-root"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-choose-output-root"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-export-dialog-title"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-replace-output"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-export-cancel"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-export-replace"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "#pr-export-new"
+        },
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-action-footer"
+        },
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-review-actions"
+        },
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-completion-actions"
+        },
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-finish-global"
+        },
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-build-start"
+        }
+      ],
+      "messages": [
+        "Gepatchte Spielfassung erstellen"
+      ],
+      "navigation_order": 8,
+      "sources": [
+        "docs/launcher/fassungen-workflow.md"
+      ]
+    },
+    {
+      "id": "review.finish",
+      "title": "Die fertige Ausgabe öffnen",
+      "category": "Export",
+      "summary": "In „Patch fertigstellen“ siehst du Fortschritt, Zielordner und Ergebnis der Spielerstellung.",
+      "body": [
+        "Nach erfolgreicher Erstellung zeigt der Patch „Patch erfolgreich erstellt“ und den fertigen Spielordner. Mit „Erstellungsbericht herunterladen“ kannst du den Bericht aufbewahren.",
+        "Mit „Spielordner öffnen und Patch beenden“ oben im Fenster öffnest du das Ergebnis im Finder und beendest den Patch. „Patch beenden“ schließt ihn direkt. Zum Weiterhören führt „Zurück zur Review“ zur Dialogliste.",
+        "Zum Spielen benötigst du [ScummVM](https://www.scummvm.org/). Füge dort den erzeugten Spielordner als Spiel hinzu und wähle in seinen Spieleinstellungen Deutsch. Für die vorbereitete Musik setzt du unter Spiel bearbeiten → Pfade den Extra-Pfad auf den gewünschten Musikordner. Die Datei MUSIK.txt im Spielordner erklärt die Auswahl."
+      ],
+      "related": [
+        "review.build",
+        "review.exit-navigation"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-success-actions"
+        },
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-open-output-quit"
+        },
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-quit-app"
+        },
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-success-back-review"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "a[download]"
+        }
+      ],
+      "sources": [
+        "docs/launcher/fassungen-workflow.md"
+      ]
+    },
+    {
+      "id": "review.diagnostics",
+      "title": "Verzögerungen der Oberfläche untersuchen",
+      "category": "Diagnose",
+      "summary": "Die UI-Diagnose hilft, stockende Bedienung während einer Vorschau einzugrenzen.",
+      "body": [
+        "Reagieren Schaltflächen oder Audioplayer während einer Vorschau auffällig spät, kann die UI-Diagnose helfen. UI meint hier die Bedienoberfläche. Beim Start einer Vorschau erfasst der Patch automatisch deren Laufzeiten und Zähler. Nach dem Abschluss läuft die Aufzeichnung kurz weiter, damit auch verspätete Reaktionen erfasst werden.",
+        "Dafür musst du keine weitere Aufnahme erzeugen. Ist dagegen der Sprachauftrag selbst fehlgeschlagen, lies zuerst die Meldung am Dialog oder im [Auftragsstatus](review.status). Sie nennt den Ausgangspunkt für die weitere Suche."
+      ],
+      "related": [
+        "review.messages",
+        "review.status"
+      ],
+      "bindings": []
+    },
+    {
+      "id": "review.recipe-seed",
+      "title": "Seed aus einem Rezept erkennen",
+      "category": "Review",
+      "summary": "Die Anzeige unterscheidet den Rezeptvorschlag von der bereits übernommenen Aufnahme.",
+      "body": [
+        "Nach dem Laden eines [Rezepts](review.recipe) kann für den nächsten Versuch ein anderer [Seed](review.seed) vorgesehen sein als für die vorhandene Aufnahme. Der Seed ist die Startzahl der Spracherzeugung. Weichen die Werte voneinander ab, zeigt die Review beide an: die Vorgabe aus dem Rezept und den Seed der bereits angenommenen Fassung.",
+        "So kannst du vor dem nächsten Versuch prüfen, welcher Wert verwendet werden soll. Möchtest du unabhängig davon eine andere Sprechweise ausprobieren, wähle „Vorschau mit neuem Seed“."
+      ],
+      "related": [
+        "review.seed",
+        "review.recipe"
+      ],
+      "bindings": []
+    },
+    {
+      "id": "review.queue-limits",
+      "title": "Warum die Warteliste gesperrt ist",
+      "category": "Review",
+      "summary": "Prüfe Platz, laufende Aufträge und Voraussetzungen, wenn sich die Warteliste nicht starten lässt.",
+      "body": [
+        "Die optionale Warteliste wird nur in dafür eingerichteten Umgebungen mit höchstens 8 GiB Arbeitsspeicher angeboten. Sie fasst acht Dialoge. Ist sie voll, entferne einen Eintrag, bevor du den nächsten hinzufügst.",
+        "Läuft bereits ein Auftrag zur Spracherzeugung, warte auf seinen Abschluss: In dieser Zeit kannst du die Warteliste weder ändern noch starten. Für den Start muss die Spracherzeugung verfügbar sein. Bei CPU-Versuchen brauchst du außerdem die [Bestätigung an jedem betroffenen Dialog](review.backend).",
+        "Nach dem Lauf verschwinden erfolgreiche Einträge aus der Liste. Bleibt ein Problem, lies die Meldung am jeweiligen Dialog; sie zeigt dir, was vor einem weiteren Versuch fehlt."
+      ],
+      "related": [
+        "review.queue",
+        "review.backend",
+        "review.messages"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-audition-queue"
+        }
+      ]
+    },
+    {
+      "id": "review.messages",
+      "title": "Bei einer Fehlermeldung weiterarbeiten",
+      "category": "Diagnose",
+      "summary": "Lies den konkreten Grund am Dialog oder im Auftragsstatus, bevor du erneut startest.",
+      "body": [
+        "Beginne mit der Meldung direkt am Dialog oder im [Auftragsstatus](review.status). Sie sagt dir, welche Voraussetzung fehlt. Läuft etwa schon eine Spracherzeugung, warte deren Abschluss ab. Bei einer fehlenden Audiodatei, einer [nicht mehr passenden Probe](review.probe) oder einer fehlenden [CPU-Bestätigung](review.backend) kümmere dich zuerst um den genannten Grund und starte erst danach erneut.",
+        "Meldet der Patch einen Konflikt, weil sich der Arbeitsstand inzwischen geändert hat, lädt die Review die aktuellen Dialogdaten neu. Vergleiche danach die sichtbaren Eingaben und Einstellungen mit dem, was du vorhattest. Bei „Speicherfehler“ findest du den nächsten Schritt unter [„Änderungen speichern“](review.direct-save)."
+      ],
+      "related": [
+        "review.status",
+        "review.direct-save",
+        "review.probe",
+        "review.backend"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": "[role=\"status\"]"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": "[role=\"alert\"]"
+        }
+      ]
+    },
+    {
+      "id": "review.original",
+      "title": "Den Originalton verwenden",
+      "category": "Review",
+      "summary": "Behalte für einen Dialog die vorhandene Originalaufnahme.",
+      "body": [
+        "Möchtest du für einen Dialog die vorhandene Originalaufnahme verwenden, wähle unter „Ausgabe“ die Option „Originalton verwenden“ und [verarbeite den Dialog](review.batch). Der Patch kopiert die geprüfte Originalaufnahme. Dafür braucht er weder ein Sprachmodell noch einen [Seed](review.seed).",
+        "Wird daneben eine frühere deutsche Ausgabe angezeigt, kannst du sie weiterhin zum Vergleich anhören. Ihre alten Prüfergebnisse gehören zu dieser deutschen Fassung; sie bewerten nicht den nun gewählten Originalton."
+      ],
+      "related": [
+        "review.mode",
+        "review.batch",
+        "review.audio"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-previous-german"
+        }
+      ]
+    },
+    {
+      "id": "review.qa",
+      "title": "Automatische Text- und Audioprüfung",
+      "category": "Review",
+      "summary": "Die Prüfdetails helfen dir, auffällige Aufnahmen gezielt anzuhören.",
+      "body": [
+        "Vergleiche in den Prüfdetails den erkannten mit dem erwarteten Text. Die Spracherkennung schreibt auf, was sie in der Aufnahme verstanden hat. Ein Unterschied kann auf ein fehlendes oder falsch gesprochenes Wort hinweisen; höre nach, denn auch die Erkennung kann sich irren.",
+        "Die erste und die zweite Spracherkennungsprüfung zeigen ihre Ergebnisse getrennt. Erkennt die zweite denselben Text wie die erste, steht dort „Stimmt mit der ersten Spracherkennungsprüfung überein.“ Ist keine zweite Prüfung nötig, wird das ausdrücklich angegeben.",
+        "Die Details nennen auch ausstehende oder fehlgeschlagene Prüfungen. Ein unauffälliger Befund bewertet weder Stimmklang noch Betonung. Klingt die Aufnahme trotz Warnung passend, kannst du sie nach dem Anhören [als gut bestätigen](review.warnings)."
+      ],
+      "related": [
+        "review.audio",
+        "review.warnings",
+        "review.status-signs"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-output-details"
+        },
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-version-evidence"
+        }
+      ]
+    },
+    {
+      "id": "review.direct-save",
+      "title": "Änderungen speichern",
+      "category": "Review",
+      "summary": "Text, Notizen und Einstellungen werden automatisch gespeichert.",
+      "body": [
+        "Bevor du die Review verlässt, achte auf „Gespeichert“. Steht dort „Wird gespeichert …“, wartet der Patch noch auf die Bestätigung. Auch vor einer [Vorschau](review.audition), der [Verarbeitung ausgewählter Dialoge](review.batch) und einem Dateiexport wartet er auf offene Speicherungen. Scheitert das Speichern, startet der davon abhängige Auftrag nicht.",
+        "Bei „Speicherfehler“ bleibt deine Eingabe im Editor erhalten. Lies die Meldung und bearbeite das betroffene Feld erneut, um einen weiteren Speicherversuch auszulösen. Sobald die Änderung gespeichert ist, steht sie für den nächsten Versuch bereit. Eine neue Aufnahme entsteht erst durch die Verarbeitung; eine Vorschau wählst du anschließend selbst aus."
+      ],
+      "related": [
+        "review.text",
+        "review.note",
+        "review.audition"
+      ],
+      "bindings": []
+    },
+    {
+      "id": "review.list-counts",
+      "title": "Die Zahlen an den Arbeitslisten lesen",
+      "category": "Review",
+      "summary": "Unterscheide die Größe einer Arbeitsliste von den gerade sichtbaren Treffern.",
+      "body": [
+        "Die Zahl neben einer Arbeitsliste sagt dir, wie viele Dialoge dort eingeordnet sind. Die vier Listen teilen den Bestand auf; „Alle“ nennt die Gesamtzahl. Hast du eine Suche, einen Statusfilter oder eine Fehlerkategorie gesetzt, siehst du innerhalb der gewählten Liste nur die dazu passenden Treffer. Deshalb können weniger Dialoge erscheinen, als die Listenzahl vermuten lässt.",
+        "Wie die Einordnung zustande kommt und weshalb ein bestätigter Dialog noch unter „Offen“ stehen kann, erklärt [„Review-Statuszeichen und Arbeitslisten“](review.status-signs)."
+      ],
+      "related": [
+        "review.status-signs",
+        "review.filters"
+      ],
+      "bindings": []
+    },
+    {
+      "id": "review.binding",
+      "title": "Welche Details zu welcher Aufnahme gehören",
+      "category": "Diagnose",
+      "summary": "Text und Prüfergebnisse im Verlauf beziehen sich auf die jeweilige Audiofassung.",
+      "body": [
+        "Möchtest du herausfinden, warum eine frühere Aufnahme anders klingt, öffne ihre Details im Verlauf. Dort findest du den Text und die Einstellungen, mit denen genau diese Fassung erzeugt wurde. Auch ihre damaligen Prüfergebnisse bleiben bei ihr.",
+        "Ein später geänderter Sprachausgabetext ändert diese Aufnahme nicht nachträglich. Um die neue Schreibweise zu hören, erzeuge einen weiteren Versuch und [bestätige dessen Vorschau als gut](review.adopt), wenn sie dich überzeugt."
+      ],
+      "related": [
+        "review.audio",
+        "review.text",
+        "review.adopt"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/app.js",
+          "selector": ".pr-history"
+        }
+      ]
+    },
+    {
+      "id": "review.exit-navigation",
+      "title": "Zur Review oder zum vorherigen Schritt zurückkehren",
+      "category": "Review",
+      "summary": "Wechsle vom Abschluss zurück zu den Dialogen oder im geführten Ablauf zur Stimmenwahl.",
+      "body": [
+        "Ab der Review findest du die Navigationstasten oben im Fenster, auch beim Fertigstellen und nach erfolgreicher Spielerstellung. Nach dem Export führt „Zurück zur Review“ zur Dialogliste. Dort kannst du über „Patch fertigstellen“ erneut den Speicherort wählen und einen Spielordner erstellen. Im geführten Ablauf führt „Zurück zu Stimmen & Rendern“ zur Fassungswahl; offene bearbeitbare Revieweingaben werden zuvor gespeichert.",
+        "Eine andere Fassung wählst du bei „Sprachausgabe rendern“. Die Auswahl startet keine neue Arbeit. Zum Ausprobieren einer fertigen Spielausgabe verwendest du in der Abschlussansicht „Spielordner öffnen und Patch beenden“."
+      ],
+      "related": [
+        "review.workflow",
+        "review.finish",
+        "review.direct-save"
+      ],
+      "bindings": [
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-back-render"
+        },
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-back-review"
+        },
+        {
+          "source": "patch_review/index.html",
+          "selector": "#pr-success-back-review"
+        }
+      ],
+      "sources": [
+        "docs/launcher/fassungen-workflow.md"
+      ]
+    }
+  ]
+}

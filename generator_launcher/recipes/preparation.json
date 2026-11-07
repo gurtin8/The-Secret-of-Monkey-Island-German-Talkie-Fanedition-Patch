@@ -1,0 +1,492 @@
+{
+  "schema_version": 1,
+  "state": "source_ready",
+  "executable": false,
+  "route": [
+    "Native UTE 1.02 audio preparation with Wine resource helpers",
+    "German v1.01 patch for UTE 1.02 in Wine"
+  ],
+  "user_supplied_inputs": [
+    "PC Special Edition only"
+  ],
+  "third_party_delivery": "automatic direct primary-source downloads; no foreign files embedded in release",
+  "builder": {
+    "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+    "sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+    "bytes": 3670218,
+    "package_version": "1.02",
+    "keep_complete_package": true,
+    "usage": "Pinned UTE 1.02 recipe sources and original resource helpers for native preparation"
+  },
+  "german_patch": {
+    "url": "https://www.la-patches.de/downloads/mi1ute102_us_zu_de_v101.zip",
+    "source_page": "https://www.la-patches.de/p_mi1_ute_us-de.php",
+    "sha256": "2b14646cf4c7bd6f853e5bcc33379eb9f5e46023d8835ea9e014d1435b853b0a",
+    "bytes": 288893,
+    "exe_sha256": "b813f6d2424b983322941b4f88d5c41bbcf2ae851e4fc9f6a650510af8bb3a29",
+    "version_evidence": "Author page and byte-identical Liesmich v1.01; PE internal version not established",
+    "input_files": [
+      "MONKEY.000",
+      "MONKEY.001"
+    ],
+    "dos_only_input": "MONKEY.EXE",
+    "approved": true,
+    "local_use_permission_evidence": "Author publicly offers this exact patch and instructs local UTE1.02 conversion on primary page and readme. No separate automation license required; no foreign payload redistribution in our release.",
+    "download_and_intended_local_use_confirmed": true,
+    "approved_for_direct_fetch_and_documented_local_use": true,
+    "approval_scope": "Primary-source fetch/documented local use only; execution not performed by P01"
+  },
+  "wine": {
+    "url": "https://github.com/Gcenx/macOS_Wine_builds/releases/download/11.18/wine-devel-11.18-osx64.tar.xz",
+    "revision": "11.18",
+    "sha256": "aa0ea4c82e636ae7bca2076387cb0a5affa26509ad13f119ecd0d62bd7ba6f82",
+    "hash_evidence": "Fresh exact 190974384-byte release archive inspection matches API and historical download",
+    "bundle": [
+      "wine-gecko 2.47.4",
+      "wine-mono 11.3.0"
+    ],
+    "architecture_evidence": "Original bundle architecture preserved; x86_64 Wine CLI uses Rosetta on Apple Silicon",
+    "apple_silicon_start": "Rosetta required for these Intel binaries on Apple Silicon; Apple support102527 binds native OS prompt or interactive softwareupdate --install-rosetta. No present installation performed.",
+    "approved": true,
+    "rosetta": {
+      "provider": "Apple operating system",
+      "primary_url": "https://support.apple.com/en-us/102527",
+      "user_action": "If absent, native Rosetta install dialog with OS credentials/terms; do not --agree-to-license automatically",
+      "artifact_delivery": "OS-managed installation; no foreign Rosetta files embedded in generator",
+      "binary_architecture_proven": true,
+      "future_os_limit": "Apple page says general Intel-app translation through macOS27; do not claim this Wine route for macOS28 without new evidence"
+    },
+    "portability_contract": {
+      "wine_bundle": "Keep original .app bundle layout under chosen tool root; relative @loader_path/../lib for wineserver, archive originals unchanged",
+      "prefix": "Separate mutable local WINEPREFIX; no winetricks/.NET/VC install inferred",
+      "evidence": "work/license-inventory/preparation-sources/wine-static-linkage.json",
+      "runtime_start": "NOT_RUN; P09/P15 verify actual path and start, not claimed by static P01"
+    },
+    "bundle_verified_in_archive": [
+      "wine-gecko-2.47.4-x86",
+      "wine-gecko-2.47.4-x86_64",
+      "wine-mono-11.3.0"
+    ],
+    "license_sources": [
+      {
+        "url": "https://raw.githubusercontent.com/wine-mirror/wine/wine-11.18/LICENSE",
+        "revision": "wine-11.18",
+        "sha256": "ae025f125a5d639f0f7abe5146efa1e3d7453cc10b744b2910806fa3f46626ef",
+        "license": "LGPL2.1-or-later for Wine, not all bundled libraries"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/wine-mono/wine-mono/wine-mono-11.3.0/COPYING",
+        "revision": "wine-mono-11.3.0",
+        "sha256": "0265443ffc97c9450dbcf402c2430bf9fe87d7a6c92d5d7684fcecfe749bf75d",
+        "license": "Mixed LGPL/MIT/GPL-with-exception/MSPL/zlib etc. per constituent list; no global Mono MIT inferred"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/KhronosGroup/MoltenVK/v1.4.0/LICENSE",
+        "revision": "v1.4.0",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "license": "Apache2; exact packaged build version not independently fully tied by binary version"
+      }
+    ],
+    "approval_scope": "Primary source and guided original setup contract only; execution not approved/performed by P01",
+    "launch_policy": "Direct original Wine CLI for German patch, as retained on 2026-09-25. No additional multimedia framework download, installer or prerequisite check."
+  },
+  "helpers": [
+    {
+      "component": "UTE LogicDeLuxe builder",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/install.bat",
+      "sha256": "ae3423d3484519fcd9eca292c0ea6b97947ea242cedea16ba6361b225e8829ae",
+      "license_path": "work/license-inventory/preparation-sources/ute/MI1_Ultimate_Talkie_Edition_Builder/licenses/This Package.txt",
+      "license_sha256": "4a4b9bfd44763c16780476ba11ae1c3901cff5868eb5f809c724b19255606ebf",
+      "license_evidence": "Noncommercial gratis distribution of listed files only as complete package; README forbids resulting-game redistribution",
+      "call_evidence": "install_flac.bat -> install.bat flac",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    },
+    {
+      "component": "sox.exe",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/sox.exe",
+      "sha256": "9bf1ed9cfce4092a1b14c442acdb0ea59d3bc1eef32e209e577daf1c23a1ce08",
+      "license_path": "work/license-inventory/preparation-sources/ute/MI1_Ultimate_Talkie_Edition_Builder/licenses/sox.txt",
+      "license_sha256": "9f2e250993c6206fac643824e05e5a0d7d3e0895d9e09a5ce4b12bc2610afc11",
+      "license_evidence": "Exact official 14.3.1 Windows release includes GPL text and README stating executable GPL, library dualGPL/LGPL; README identifies Ogg Vorbis/FLAC/libsndfile/WavPack/PNG, full constituent-license mapping not complete.",
+      "call_evidence": "voice.bat, sbl.bat, flac.bat, cdaudio.bat",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified",
+      "original_distribution": {
+        "url": "https://downloads.sourceforge.net/project/sox/sox/14.3.1/sox-14.3.1-win32.zip",
+        "sha256": "c937511a72bf5c2317edf7e2e9dd16073481ab8058e9531fc8607c208bbbf402",
+        "revision": "14.3.1",
+        "exact_binary_match": true,
+        "original_readme_sha256": "346e4ec38f540a261720d54422beac330868c056d5c899bd3e02bec432b68ee1",
+        "scope": "Local complete-original-package tool use; no binary redistribution in generator"
+      },
+      "version_evidence": "Static ASCII14.3.1 plus exact original release byte match"
+    },
+    {
+      "component": "scummpacker.exe",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/scummpacker.exe",
+      "sha256": "22b24ef0696a652ef264eed2d8ed8432d470cd036cd3b7043e8e418811d06d6d",
+      "license_path": null,
+      "license_sha256": "7d2213293f476f11d8872ab7b1e4e8223f5593ae08691b4842390e12b429fc1d",
+      "license_evidence": "PublicDomain author history + original builder README. Author v2r2 sources saved; original binary EXE differs but library.zip identical, no binary replacement.",
+      "call_evidence": "sbl.bat -e/-c -g MI1",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified",
+      "version_evidence": "PE FileVersion2.2; author source history v2r2 before v3 PublicDomain→MIT switch",
+      "license_url": "https://www.jestarjokin.net/apps/scummpacker/"
+    },
+    {
+      "component": "BSPATCH.EXE",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/BSPATCH.EXE",
+      "sha256": "32a4664e367a5c6bc7316d2213e60086d2813c21db3d407350e4aca61c1b16a1",
+      "license_path": "work/license-inventory/preparation-sources/ute/MI1_Ultimate_Talkie_Edition_Builder/licenses/bspatch.txt",
+      "license_sha256": "0af2a39b2cb31f540a1178f176367761751454779431be92a73a62f87df91440",
+      "license_evidence": "BSD Protection License; no separate bzip2 notice found",
+      "call_evidence": "install.bat monkey1.000/.001",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    },
+    {
+      "component": "extract_classic.exe",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/extract_classic.exe",
+      "sha256": "d2412d4cac8d3eec1a4dd0d158cc1e3765bb0fcb48e7f521c8a4a42cf61c3a80",
+      "license_path": "work/license-inventory/preparation-sources/ute/MI1_Ultimate_Talkie_Edition_Builder/licenses/extract_classic.txt",
+      "license_sha256": "47281aa057ea0289e2a87ec759e5c3621a98eb429d27adc48d0e1ad7c426f1ad",
+      "license_evidence": "MIT 2011 jott, LogicDeLuxe",
+      "call_evidence": "install.bat",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    },
+    {
+      "component": "unxwb.exe",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/unxwb.exe",
+      "sha256": "17fa27b102832a4b21d796394b0b257e7a4f233defd13148d79ec72fbeec323d",
+      "license_path": "work/license-inventory/preparation-sources/ute/MI1_Ultimate_Talkie_Edition_Builder/licenses/unxwb.txt",
+      "license_sha256": "9f2e250993c6206fac643824e05e5a0d7d3e0895d9e09a5ce4b12bc2610afc11",
+      "license_evidence": "GPL v2 text; zlib1.dll notice not supplied",
+      "call_evidence": "voice.bat and cdaudio.bat",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    },
+    {
+      "component": "7z.exe",
+      "required_for_flac_route": false,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/7z.exe",
+      "sha256": "b1871b6e3151265f86b42ec9f43eeaa07239b06229eff4b344298fd9d93602d3",
+      "license_path": "work/license-inventory/preparation-sources/ute/MI1_Ultimate_Talkie_Edition_Builder/licenses/7z.txt",
+      "license_sha256": "2d8543c36ae06cfdc87b9f93ebe2df3055abe967ac0e3cf5e9b25e6dc4fa25a7",
+      "license_evidence": "LGPL2.1-or-later; DLL additionally unRAR restriction",
+      "call_evidence": "only install.bat wav DOS branch",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    },
+    {
+      "component": "7z.dll",
+      "required_for_flac_route": false,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/7z.dll",
+      "sha256": "e3aa420a244988270352611629188be6a2b5e9e5808d5cd4d430e26dc70238ce",
+      "license_path": "work/license-inventory/preparation-sources/ute/MI1_Ultimate_Talkie_Edition_Builder/licenses/7z.txt",
+      "license_sha256": "2d8543c36ae06cfdc87b9f93ebe2df3055abe967ac0e3cf5e9b25e6dc4fa25a7",
+      "license_evidence": "LGPL2.1-or-later plus unRAR restriction",
+      "call_evidence": "7z.exe DOS branch",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    },
+    {
+      "component": "build_monster.exe",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/build_monster.exe",
+      "sha256": "dcece18584c8bd12ce3c4b64a4bc242848b089f33b6a96e1ca470b17e2e658c1",
+      "license_path": "work/license-inventory/preparation-sources/ute/MI1_Ultimate_Talkie_Edition_Builder/licenses/This Package.txt",
+      "license_sha256": "4a4b9bfd44763c16780476ba11ae1c3901cff5868eb5f809c724b19255606ebf",
+      "license_evidence": "LogicDeLuxe package terms",
+      "call_evidence": "flac.bat build_monster flac",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    },
+    {
+      "component": "wav2sbl.exe",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/wav2sbl.exe",
+      "sha256": "4089a01aba62c22ada6950bab5c0b41d751099ee9d3111dbacd5c15b61f80ec8",
+      "license_path": "work/license-inventory/preparation-sources/ute/MI1_Ultimate_Talkie_Edition_Builder/licenses/This Package.txt",
+      "license_sha256": "4a4b9bfd44763c16780476ba11ae1c3901cff5868eb5f809c724b19255606ebf",
+      "license_evidence": "LogicDeLuxe package terms",
+      "call_evidence": "sbl.bat",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    },
+    {
+      "component": "MSVCR71.dll",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/MSVCR71.dll",
+      "sha256": "745726378a64dacb84e97807fe5b49c61bbc06f268b9d97735a6762c41716807",
+      "license_path": "work/license-inventory/preparation-sources/ute/MI1_Ultimate_Talkie_Edition_Builder/licenses/vs2003EULA.txt",
+      "license_sha256": "551dc64d2e382d8cace9cecbfc8efc9ac1633e0276bfdb9457f795c926d7b946",
+      "license_evidence": "Included Visual Studio .NET 2003 EULA; redistributable identity/conditions not completely bound",
+      "call_evidence": "bundled helper runtime, static linkage check remains",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    },
+    {
+      "component": "python25.dll",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/python25.dll",
+      "sha256": "8afdab69094da8cd4de507ea87d9292c8648f8e34c0da11752f808990fb0a102",
+      "license_path": "work/license-inventory/preparation-sources/python-2.5.4-LICENSE.txt",
+      "license_sha256": "d7e55eb310561c8b6a74b43f96cf6b9e8047c2d1c94b6b24086edb847ae1c4aa",
+      "license_evidence": "Version-matched original CPython2.5.4 LICENSE includes PSF/BeOpen/CNRI/CWI terms; all accompanying copyright notices retained in local downloaded tool package",
+      "call_evidence": "bundled scummpacker runtime, not a standalone download",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified",
+      "version_evidence": "PE FileVersion2.5.4, ProductVersion2.5.4",
+      "license_url": "https://raw.githubusercontent.com/python/cpython/v2.5.4/LICENSE"
+    },
+    {
+      "component": "library.zip",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/library.zip",
+      "sha256": "bd86ee72f9eb659f701053ed72768869c684c00befdc1eda4758bcbd2effb426",
+      "license_path": null,
+      "license_sha256": null,
+      "license_evidence": "Part of original scummpacker v2r2/Python2.5.4 package; basic PublicDomain/CPython terms documented, internal bundled-library notices retained as nonblocking inventory limit",
+      "call_evidence": "bundled scummpacker library",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    },
+    {
+      "component": "libgomp-1.dll",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/libgomp-1.dll",
+      "sha256": "287804ff69730b3f5830fb488ea7640fdd52a27250275aca1052adff37c8c25c",
+      "license_path": null,
+      "license_sha256": null,
+      "license_evidence": "Exact filehash and GCC4.4.2 FedoraMinGW strings bind GPLv3 + GCC Runtime Library Exception3.1 family; narrower source revision remains nonblocking inventory limit",
+      "call_evidence": "bundled helper library",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified",
+      "original_distribution": {
+        "url": "https://downloads.sourceforge.net/project/sox/sox/14.3.1/sox-14.3.1-win32.zip",
+        "sha256": "c937511a72bf5c2317edf7e2e9dd16073481ab8058e9531fc8607c208bbbf402",
+        "revision": "14.3.1",
+        "exact_binary_match": true,
+        "original_readme_sha256": "346e4ec38f540a261720d54422beac330868c056d5c899bd3e02bec432b68ee1",
+        "scope": "Local complete-original-package tool use; no binary redistribution in generator"
+      }
+    },
+    {
+      "component": "pthreadgc2.dll",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/pthreadgc2.dll",
+      "sha256": "cf14602bb18e7670ea6dc89e577d473b9d65b98f926c998aa40614d671adf98e",
+      "license_path": null,
+      "license_sha256": null,
+      "license_evidence": "Exact filehash and pthread-win32 GNU/no-SEH family bind LGPL2.1 with project exceptions; exact release remains nonblocking inventory limit",
+      "call_evidence": "bundled helper library",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified",
+      "original_distribution": {
+        "url": "https://downloads.sourceforge.net/project/sox/sox/14.3.1/sox-14.3.1-win32.zip",
+        "sha256": "c937511a72bf5c2317edf7e2e9dd16073481ab8058e9531fc8607c208bbbf402",
+        "revision": "14.3.1",
+        "exact_binary_match": true,
+        "original_readme_sha256": "346e4ec38f540a261720d54422beac330868c056d5c899bd3e02bec432b68ee1",
+        "scope": "Local complete-original-package tool use; no binary redistribution in generator"
+      }
+    },
+    {
+      "component": "zlib1.dll",
+      "required_for_flac_route": true,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/zlib1.dll",
+      "sha256": "2ff8a0abf8220e350a229dd3be5f2a0f18fa0d62b588c589c6c47d8c593cf14c",
+      "license_path": null,
+      "license_sha256": null,
+      "license_evidence": "Exact filehash/version1.2.3 bound to zlib license family",
+      "call_evidence": "bundled helper library",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified",
+      "original_distribution": {
+        "url": "https://downloads.sourceforge.net/project/sox/sox/14.3.1/sox-14.3.1-win32.zip",
+        "sha256": "c937511a72bf5c2317edf7e2e9dd16073481ab8058e9531fc8607c208bbbf402",
+        "revision": "14.3.1",
+        "exact_binary_match": true,
+        "original_readme_sha256": "346e4ec38f540a261720d54422beac330868c056d5c899bd3e02bec432b68ee1",
+        "scope": "Local complete-original-package tool use; no binary redistribution in generator"
+      }
+    },
+    {
+      "component": "fatecd.exe",
+      "required_for_flac_route": false,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/fatecd.exe",
+      "sha256": "1f8c324264663ed980c77d163b4953bc4972df358053340621dcf5c762303e79",
+      "license_path": null,
+      "license_sha256": null,
+      "license_evidence": "Historical proprietary LucasArts support patch; no grant proved",
+      "call_evidence": "install.bat wav DOS branch only",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    },
+    {
+      "component": "dottcd.exe",
+      "required_for_flac_route": false,
+      "url": "https://www.gratissaugen.de/ultimatetalkies/files/MI1_Ultimate_Talkie_Edition_1.02.zip",
+      "revision": "UTE package 1.02; install.bat banner 1.0 (not package version)",
+      "archive_sha256": "f9ef67e070872e326e20e0a14c9af406e50fbbdfa3ed610762e1508150d15a20",
+      "path_in_archive": "MI1_Ultimate_Talkie_Edition_Builder/tools/dottcd.exe",
+      "sha256": "cf8268065bd142c80b337f9de2cfb7a651584c77f30b3dea987f5b8834cff766",
+      "license_path": null,
+      "license_sha256": null,
+      "license_evidence": "Historical proprietary LucasArts support patch; no grant proved",
+      "call_evidence": "install.bat wav DOS branch only",
+      "user_action": "Read package terms; noncommercial use; no generated game redistribution",
+      "status": "pinned_binary_not_execution_verified"
+    }
+  ],
+  "music": {
+    "unchanged_requirement_satisfied": true,
+    "evidence": [
+      "The native preparation follows the pinned cdaudio.bat recipe for FLAC",
+      "XWMA is decoded natively. CD tracks are trimmed and padded. SE tracks use the original gain, trim, ambience mixing and companding."
+    ],
+    "source_files_preserved_claim": "Author page says original files unaltered; that is different from unchanged derived music",
+    "input_validation_gate": false,
+    "scope": "Music outputs from native preparation remain unchanged through the German patch and game build",
+    "builder_modification_allowed": false,
+    "decision": {
+      "date": "2026-10-08",
+      "user_decision": "ok. der builder soll so arbeiten wie er vorgesehen ist. wir greifen hier nicht ein.",
+      "rule": "Die native Spielvorbereitung übernimmt die vorgesehene Musikbearbeitung der UTE-Rezeptur. Der deutsche Patch und der anschließende Spielbuild übernehmen die fertigen Musikdateien unverändert."
+    }
+  },
+  "blockers": [],
+  "evidence_inventory": "work/license-inventory/preparation-sources/artifact-hashes.json",
+  "resolved_blockers": [
+    {
+      "id": "HELPER_COMPONENT_LICENSE_BINDINGS",
+      "component": "Original complete UTE package/SoX14.3.1 and BSPATCH",
+      "kind": "required evidence incomplete; no local-use prohibition found",
+      "missing_evidence": "SoX14.3.1 codec constituent versions/notices (OggVorbis, FLAC, libsndfile, WavPack, PNG), pthreadGC2 exact release/notice revision, BSPATCH embedded bzip2 version/notice remain unbound. zlib1.2.3 and libgomp GCC4.4.2/Runtime Exception3.1 families now bound to exact hashes. No local-use prohibition demonstrated.",
+      "affected_plans": [
+        "P08",
+        "P09",
+        "P16"
+      ],
+      "next": "Only version-bound original SoX codec/pthread notices or static original BSPATCH bzip2 provenance can close these gaps. Official UPX5.2.1/3.95 have no macOS binary; no sourcebuild/install or helper replacement.",
+      "resolution": "2026-10-08 user scope clarification: retained as nonblocking inventory limit, NOT factually solved"
+    },
+    {
+      "id": "WINE_COMPONENT_LICENSE_BINDINGS",
+      "component": "Exact GcenxWine11.18 runtime bundle",
+      "kind": "required evidence incomplete; no system-install preference or local-use prohibition",
+      "missing_evidence": "All40 regular Wine top-level dylib members now mapped to producer metadata; Gecko2.47.4 package/sourcechecksums and MPL family bound. Mixed constituent notice-to-binary bindings remain incomplete: Gecko MPL revision/third-party notices, LegacySupport APSL2.0/MIT/per-source terms, mixed-declaration runtime components. Cerbero1.28.5 linked Core/Base/GLib/proxy-libintl route bound; optional plugins are inventory, not an additional mandatory install gate. Package identity/source snapshot not asserted to prove exact newer-source binary build. No local-use prohibition.",
+      "affected_plans": [
+        "P08",
+        "P09",
+        "P16"
+      ],
+      "next": "Obtain notices attributable to the exact original runtime/package members for mixed constituents; preserve original installer. Do not require every internal buildflag or optional plugin, repeat protected Gecko page, or impose redistribution terms on user-direct local use.",
+      "resolution": "2026-10-08 user scope clarification: retained as nonblocking inventory limit, NOT factually solved"
+    }
+  ],
+  "inventory_limits": [
+    {
+      "id": "DE_PATCH_TERMS",
+      "kind": "not a local-use prohibition",
+      "description": "No OSS or broader payload redistribution license; author-offered direct download for documented local use confirmed; irrelevant to embedding because foreign patch stays external."
+    },
+    {
+      "id": "HELPER_COMPONENT_LICENSE_BINDINGS",
+      "detail": "SoX14.3.1 codec constituent versions/notices (OggVorbis, FLAC, libsndfile, WavPack, PNG), pthreadGC2 exact release/notice revision, BSPATCH embedded bzip2 version/notice remain unbound. zlib1.2.3 and libgomp GCC4.4.2/Runtime Exception3.1 families now bound to exact hashes. No local-use prohibition demonstrated.",
+      "blocking": false,
+      "status": "UNKNOWN / NOT_RESOLVED",
+      "reason": "Embedded original-distribution constituent inventory beyond user-limited direct-tool source gate"
+    },
+    {
+      "id": "WINE_COMPONENT_LICENSE_BINDINGS",
+      "detail": "All40 regular Wine top-level dylib members now mapped to producer metadata; Gecko2.47.4 package/sourcechecksums and MPL family bound. Mixed constituent notice-to-binary bindings remain incomplete: Gecko MPL revision/third-party notices, LegacySupport APSL2.0/MIT/per-source terms, mixed-declaration runtime components. Cerbero1.28.5 linked Core/Base/GLib/proxy-libintl route bound; optional plugins are inventory, not an additional mandatory install gate. Package identity/source snapshot not asserted to prove exact newer-source binary build. No local-use prohibition.",
+      "blocking": false,
+      "status": "UNKNOWN / NOT_RESOLVED",
+      "reason": "Embedded original-distribution constituent inventory beyond user-limited direct-tool source gate"
+    }
+  ],
+  "component_evidence_continued": {
+    "wine_matrix": "work/license-inventory/preparation-sources/wine-notices-continued/component-matrix.json",
+    "wine_findings": "work/license-inventory/preparation-sources/wine-notices-continued/findings.md",
+    "helper_findings": "work/license-inventory/preparation-sources/helper-notices-continued/helper-findings.md",
+    "used_models": [
+      "gpt-6.1-sol/medium",
+      "gpt-6-luna/medium"
+    ],
+    "result": "Producer identity mapping retained; detailed constituent inventory incomplete and nonblocking under explicit user scope",
+    "new_helper_bindings": {
+      "zlib1.dll": "Exact hash/version1.2.3 and zlib license family bound",
+      "libgomp-1.dll": "Exact hash/GCC4.4.2 FedoraMinGW strings; GPLv3+GCC Runtime Library Exception3.1 family; sourcecommit unknown",
+      "pthreadgc2.dll": "Exact hash/GNU no-SEH pthread-win32 family with LGPL2.1/exceptions; exact release unknown",
+      "BSPATCH.EXE": "Exact hash/package BSD Protection Notice; embedded bzip2 revision unbound; no official macOS UPX binary in2 bounded release checks"
+    }
+  },
+  "source_gate": "PASS",
+  "source_gate_scope": "2026-10-08 user-limited primary packages, versions/hashes, basic tool terms and EULA/OS consent; not recursive constituent forensics",
+  "user_scope_decision": {
+    "date": "2026-10-08",
+    "decision": "Nutzer: Lizenzprüfung geht zu weit; Grundlizenzen/Nutzungsbedingungen direkt verwendeter Originalwerkzeuge prüfen, keine rekursive Binneninventarisierung als Umsetzungsgate",
+    "foreign_delivery": "Unchanged complete original author downloads for local tool use; no foreign payload in own release"
+  }
+}
